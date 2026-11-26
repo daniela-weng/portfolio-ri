@@ -1230,6 +1230,18 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
 #steering-more .own { display: block; }
 #steering-more .own i { position: static !important; transform: none !important; display: inline-block; margin-top: 10px; }
 #steering-more .fig .tile { overflow: visible; }
+/* v100: breathing room between caption blocks and the next section */
+#review .trio { margin-top: clamp(30px, 5vh, 52px) !important; }
+#review .row .cap { margin-top: clamp(8px, 1.2vh, 14px); }
+#steering-more .ck .ownp { margin-left: .8em; padding: .35em .7em; border-radius: 999px; background: #006F99; color: #fff; font-size: .9em; letter-spacing: .06em; white-space: nowrap; }
+#steering-more .cap { margin-top: clamp(10px, 1.6vh, 18px); }
+/* 05: figures are plain columns so captions push the principles down instead of overflowing */
+#review .row.c2 { grid-template-rows: auto !important; align-items: start !important; }
+#review .row.c2 > .fig { display: flex !important; flex-direction: column; grid-row: auto !important; }
+#review .row.c2 > .fig > .tile { flex: none; }
+#review .sb.stack { align-self: start !important; height: auto !important; }
+#review .sb.stack > * { min-height: auto !important; }
+#review .row.c2 { min-height: auto !important; }
 </style>
 
 <main>
@@ -1383,7 +1395,7 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
     </header>
     <div class="sb row c3" style="--img-h: 50vh">
       <figure class="fig"><p class="ck">Analysis</p><div class="tile"><img src="img/echo-analysis.webp" alt="Cohort overlap UpSet plot and cohort profile" width="1400" height="1317"></div><figcaption class="cap"><b>Detail of C:</b> overlap (top) and profile (bottom). Do alternative definitions capture different patients?</figcaption></figure>
-      <figure class="fig"><p class="ck">Build</p><div class="tile"><span class="own"><img class="svg" src="img/echo-viz-architecture.svg" alt="Echo system architecture"><i>Frontend · designed &amp; built by me</i></span></div><figcaption class="cap"><b>Architecture.</b> I led the design and implementation of the interactive frontend, including the criteria graph, SQL inspection, coordinated visualizations, and user workflows. Collaborators developed the backend services, Text-to-SQL agent, and OMOP data infrastructure.</figcaption></figure>
+      <figure class="fig"><p class="ck">Build <span class="ownp">Frontend · designed &amp; built by me</span></p><div class="tile"><span class="own"><img class="svg" src="img/echo-viz-architecture.svg" alt="Echo system architecture"></span></div><figcaption class="cap"><b>Architecture.</b> I led the design and implementation of the interactive frontend, including the criteria graph, SQL inspection, coordinated visualizations, and user workflows. Collaborators developed the backend services, Text-to-SQL agent, and OMOP data infrastructure.</figcaption></figure>
       <div class="side textcol">
         <p class="ck">Evaluation</p>
         <div><h3>Expert evaluation</h3><ul><li>Two domain experts</li><li>90-minute sessions</li><li>Task-based cohort construction and comparison</li><li>Synthetic MIMIC-IV data in OMOP CDM</li></ul></div>
