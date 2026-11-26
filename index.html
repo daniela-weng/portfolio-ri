@@ -1134,11 +1134,15 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
 .slide :is(.ck, .grp, .mlabel, .goal, .figl, .url, .cred, .cr, .thw, .lbl span, .cap .cred) { font-size: max(14px, 1em); }
 #review .pin i { width: 24px; height: 24px; font-size: 13px; }
 @media (max-height: 760px) {
-  .echo .cpx .tile img, .echo .cpx .tile img.app { height: 108px !important; }
   #steering .points { gap: 10px; }
   #steering .points p { margin-top: 0; }
   #steering .tile img { max-height: calc(100vh - 300px); }
 }
+/* v93: slide 03, screenshots sized to the real space (script), one-line pipeline and answers */
+.echo .pipe { font-size: max(14px, calc(var(--fs-mono) * .8)); flex-wrap: nowrap; }
+.echo .cpx .tile img, .echo .cpx .tile img.app { height: var(--eh, 260px) !important; width: auto; max-width: 100%; }
+.echo .cp2 { row-gap: clamp(6px, 1vh, 12px); }
+.echo .cpx dl { row-gap: .3vh; }
 </style>
 
 <main>
@@ -1240,9 +1244,9 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
         <div class="tile"><img class="app" src="img/echo-steering.webp" alt="Checkpoint 1: visual steering" width="2000" height="1090"></div>
         <p class="cpq">Is the cohort logic right?</p>
         <dl>
-          <dt>The AI</dt><dd>Translates each eligibility criterion into an SQL query against the OMOP CDM.</dd>
-          <dt>The risk</dt><dd>A single monolithic query obscures criterion-level errors, and any revision requires full regeneration.</dd>
-          <dt>My design</dt><dd>An editable criteria graph with live cohort counts and inspectable, criterion-level SQL.</dd>
+          <dt>The AI</dt><dd>Translates each criterion into SQL on the OMOP CDM.</dd>
+          <dt>The risk</dt><dd>One monolithic query hides criterion-level errors.</dd>
+          <dt>My design</dt><dd>Editable criteria graph, live counts, per-node SQL.</dd>
         </dl>
       </article>
       <article class="cpx">
@@ -1250,9 +1254,9 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
         <div class="tile"><img class="app" src="img/review-cover.webp" alt="Checkpoint 2: chart review" width="2000" height="1049"></div>
         <p class="cpq">Is each patient’s evidence right?</p>
         <dl>
-          <dt>The AI</dt><dd>Extracts study variables from each patient’s record, with a confidence level for every answer.</dd>
-          <dt>The risk</dt><dd>Uniform visual emphasis makes low-confidence results hard to spot.</dd>
-          <dt>My design</dt><dd>A neutral review table that flags only uncertain results and keeps source evidence in view.</dd>
+          <dt>The AI</dt><dd>Extracts study variables, with a confidence per answer.</dd>
+          <dt>The risk</dt><dd>Uniform emphasis hides low-confidence results.</dd>
+          <dt>My design</dt><dd>Neutral table that flags only uncertain results.</dd>
         </dl>
       </article>
     </div>
@@ -2686,6 +2690,28 @@ HoloMosaic(document.querySelector('#fibers .hm-bg'), document.querySelector('#fi
     const pTop = pager ? sr.height - (innerHeight - pager.getBoundingClientRect().top) : sr.height - 90;
     const avail = pTop - 18 - (ir.top - sr.top) - below;
     row.style.setProperty('--Hfit', Math.max(160, Math.floor(avail)) + 'px'); sb.style.alignSelf = '';
+  };
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
+  window.addEventListener('resize', () => requestAnimationFrame(fit));
+})();
+</script>
+<script>
+/* Fit slide 03 screenshots to the space left above the pager (measured, not guessed) */
+(function fitEcho() {
+  const slide = document.getElementById('echo'); if (!slide) return;
+  const pager = document.querySelector('.pager');
+  const fit = () => {
+    const imgs = [...slide.querySelectorAll('.cpx .tile img')]; if (!imgs.length) return;
+    slide.style.setProperty('--eh', '200px');
+    const sr = slide.getBoundingClientRect();
+    const cols = [...slide.querySelectorAll('.cpx')];
+    const ir = imgs[0].getBoundingClientRect();
+    const below = Math.max(...cols.map(c => c.getBoundingClientRect().bottom)) - ir.bottom;
+    const limit = pager ? sr.height - (innerHeight - pager.getBoundingClientRect().top) - 14 : sr.height - 80;
+    const avail = limit - (ir.top - sr.top) - below;
+    const colW = cols[0].getBoundingClientRect().width;
+    const maxByWidth = (colW - 12) / 1.907 + 32;
+    slide.style.setProperty('--eh', Math.max(140, Math.floor(Math.min(avail, maxByWidth))) + 'px');
   };
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
   window.addEventListener('resize', () => requestAnimationFrame(fit));
