@@ -1153,6 +1153,66 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
 .tix { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr) auto; }
 #threads .tix .tt .thw { font-size: max(14px, calc(var(--fs-mono) * .9)) !important; margin-top: .8vh; }
 #threads .tix .tt h3 { font-size: calc(var(--fs-h3) * .9); }
+/* v96: content round from review: users line, rationale copy, analytical captions, two-product slide 06 */
+.echo .sh .users { margin: .8vh 0 0; font-size: var(--fs-small); color: var(--body); }
+.echo .sh .users b, #cde .sh .lead b { margin-right: .7em; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #006F99; }
+#steering .points p:not(.goal):not(.cred) { font-size: var(--fs-small); line-height: 1.4; }
+#steering .points { gap: clamp(10px, 2vh, 24px); }
+#review .row .cap { font-size: calc(var(--fs-small) * .92); line-height: 1.4; }
+#review .trio h3 .k3 { background: #1C2433; }
+#review .trio .ev { line-height: 1.4; }
+#cde .cd { display: grid; grid-template-columns: max-content 1fr; column-gap: 1em; row-gap: .4vh; margin: .6vh 0 0; font-size: var(--fs-small); line-height: 1.4; }
+#cde .cd dt { font: 500 calc(var(--fs-mono) * .85)/1.6 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #3E6E86; }
+#cde .cd dd { margin: 0; color: var(--body); }
+#cde .cde-row .ck { margin-bottom: .3vh; color: #006F99; }
+#cde .ft { margin-bottom: .6vh; }
+#medviz .wl b { margin-bottom: .1vh; }
+#medviz .wl li { line-height: 1.35; }
+#stories .sh .lead, #review-more .sh .lead, #steering .sh .lead { margin-top: .8vh; }
+/* v96b: slide 08b, AITC grant platform showcase */
+#aitc-gp .sl { container-type: inline-size; }
+#aitc-gp .gp { display: grid; grid-template-rows: auto auto auto; align-content: start; gap: clamp(12px, 2.4vh, 28px); }
+#aitc-gp .gpipe { font: 500 var(--fs-small)/1.3 var(--text); letter-spacing: 0; text-transform: none; color: var(--body); flex-wrap: nowrap; }
+#aitc-gp .gpipe li { flex-direction: column; align-items: flex-start; padding: .6em .95em; border-radius: 12px; background: #EEF7FB; }
+#aitc-gp .gpipe li b { font: 600 calc(var(--fs-mono) * .85)/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #006F99; margin-bottom: .25em; }
+#aitc-gp .gshots { --g: clamp(20px, 2vw, 32px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--g); }
+#aitc-gp .gshots figure { margin: 0; min-width: 0; }
+#aitc-gp .ck { margin: 0 0 .5vh; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #006F99; }
+#aitc-gp .tile { height: auto; padding: 0; display: block; }
+#aitc-gp .tile img { display: block; width: 100%; height: auto; max-height: none; }
+#aitc-gp .cap { margin-top: .6vh; font-size: calc(var(--fs-small) * .92); line-height: 1.4; }
+#aitc-gp .role { margin: 0; font-size: var(--fs-small); color: var(--body); }
+#aitc-gp .role b { margin-right: .7em; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #3E6E86; }
+#consortia .rl4 p { font-size: calc(var(--fs-small) * .95); }
+#steering .s-main { grid-template-columns: 1.45fr 1fr; }
+#steering .points h3 { font-size: calc(var(--fs-h3) * .9); margin-bottom: .3vh; }
+#steering .points .goal { margin-bottom: .3vh; }
+/* v96c: short-window caps (normal browser window on a 14" MacBook) */
+#review-more .row.c3 { --H: min(calc((100cqi - 2 * var(--cg) - 36px) / 2.504 + 12px), calc(100vh - 455px)) !important; }
+#steering .tile img { max-height: calc(100vh - 470px); width: auto; max-width: 100%; }
+#consortia .sites { --H: min(calc((100cqi - 36px - 2 * var(--g)) / 5.004 + 32px), calc(100vh - 640px)) !important; }
+#aitc-gp .tile img { width: auto; max-width: 100%; max-height: calc(100vh - 615px); }
+@media (max-height: 940px) { #steering .points .goal { display: none; } #steering .points { gap: clamp(8px, 1.6vh, 18px); } }
+#cde .cde-row { grid-template-rows: repeat(4, auto) !important; }
+#cde .cde-row > .fig { grid-row: span 4 !important; }
+#cde .cap .cred { white-space: normal !important; }
+#cde .sh h2 { font-size: calc(var(--fs-h2, 1em) * 1); }
+#cde .cde-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important; justify-content: stretch !important; column-gap: clamp(32px, 3vw, 52px) !important; }
+#cde .cde-row .tile img { height: auto !important; width: auto !important; max-width: 100% !important; max-height: var(--Hfit, 34vh) !important; }
+#cde .cd { grid-template-columns: 1fr; row-gap: 0; }
+#cde .cd dt { margin-top: .6vh; }
+#cde .cd dd { margin-bottom: .2vh; }
+/* v96d: slide 06 as two product rows: text left, screenshot right */
+#cde .cde-row { display: flex !important; flex-direction: column; row-gap: clamp(14px, 2.6vh, 30px); height: auto; }
+#cde .cde-row > .fig { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto 1fr; column-gap: clamp(28px, 3vw, 48px); align-items: start; grid-row: auto !important; height: var(--Hfit); }
+#cde .cde-row > .fig > .ck { grid-column: 1; grid-row: 1; }
+#cde .cde-row > .fig > .ft { grid-column: 1; grid-row: 2; }
+#cde .cde-row > .fig > .cap { grid-column: 1; grid-row: 3; margin-top: 0; }
+#cde .cde-row > .fig > .tile { grid-column: 2; grid-row: 1 / span 3; align-self: start; }
+#cde .cde-row .tile img { height: var(--Hfit) !important; width: auto !important; max-width: 62cqi !important; max-height: none !important; }
+#cde .cd { grid-template-columns: max-content 1fr; column-gap: 1em; }
+#cde .cd dt { margin-top: 0; }
+#cde .sb.cde-sb { align-self: start; padding-bottom: 0; }
 </style>
 
 <main>
@@ -1241,7 +1301,8 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
     <header class="sh">
       <p class="eyebrow"><b>03</b> / Echo · AI-assisted clinical trial matching · Dr. Hua Xu’s lab</p>
       <h2>When AI builds the cohort, <em>who checks it?</em></h2>
-      <p class="lead">Echo’s LLMs draft both the cohort and the evidence. I designed a human checkpoint for each stage.</p>
+      <p class="lead">Echo uses LLMs to support cohort definition and clinical evidence extraction. I designed two human-in-the-loop checkpoints that allow researchers to inspect, refine, and verify AI-generated results.</p>
+      <p class="users"><b>Designed for</b>Clinical researchers, informaticians, and study teams working with electronic health record data.</p>
     </header>
     <div class="sb echo-sb">
     <ol class="pipe" aria-label="Echo pipeline">
@@ -1279,6 +1340,7 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
     <header class="sh">
       <p class="eyebrow"><b>04</b> / Echo · Checkpoint 1 · Visual steering · IEEE VIS 2026</p>
       <h2>Make the <em>cohort logic</em> inspectable</h2>
+      <p class="lead">One interconnected research workflow: each view updates the others as criteria change.</p>
     </header>
     <div class="sb split s-main">
       <div class="figcol">
@@ -1286,10 +1348,10 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
         <p class="cap">Four alternative cohorts · synthetic EHR data</p>
       </div>
       <div class="points">
-        <div><p class="goal">Goal · Inspectable</p><h3><span class="k">A</span>Graph, not checklist</h3><p>Criteria flow down from the dataset, with patient counts on every node.</p></div>
-        <div><p class="goal">Goal · Refinable</p><h3><span class="k">B</span>SQL beside every node</h3><p>The LLM drafts it. The researcher’s edit becomes the source of truth.</p></div>
-        <div><p class="goal">Goal · Comparable</p><h3><span class="k">C</span>Compare in lockstep</h3><p>Overlap, profile, and insights all follow the graph.</p></div>
-        <div class="role"><p class="cred">Co-equal first author · IEEE VIS 2026</p><p><b>My role</b>End-to-end research, design, frontend, and evaluation. Collaborators built the backend and SQL agent.</p></div>
+        <div><p class="goal">Goal · Inspectable</p><h3><span class="k">A</span>Criteria graph</h3><p>Visualizing eligibility criteria as a graph helps researchers understand logical dependencies and identify where patient populations change.</p></div>
+        <div><p class="goal">Goal · Refinable</p><h3><span class="k">B</span>Criterion-level SQL inspection</h3><p>Connecting SQL to individual criteria allows researchers to inspect and correct AI-generated logic without navigating an entire query.</p></div>
+        <div><p class="goal">Goal · Comparable</p><h3><span class="k">C</span>Coordinated cohort comparison</h3><p>Linking cohort composition, overlap, and patient characteristics helps researchers understand the consequences of changing eligibility criteria.</p></div>
+        <div class="role"><p class="cred">Co-equal first author · IEEE VIS 2026</p><p><b>My role</b>Formative research, interaction architecture, visual encoding, UX/UI design, frontend development, and expert evaluation, in collaboration with clinical researchers and backend engineers.</p></div>
       </div>
     </div>
   </div>
@@ -1304,11 +1366,11 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
     </header>
     <div class="sb row c3" style="--img-h: 50vh">
       <figure class="fig"><p class="ck">Analysis</p><div class="tile"><img src="img/echo-analysis.webp" alt="Cohort overlap UpSet plot and cohort profile" width="1400" height="1317"></div><figcaption class="cap"><b>Detail of C:</b> overlap (top) and profile (bottom). Do alternative definitions capture different patients?</figcaption></figure>
-      <figure class="fig"><p class="ck">Build</p><div class="tile"><span class="own"><img class="svg" src="img/echo-viz-architecture.svg" alt="Echo system architecture"><i>Frontend · designed &amp; built by me</i></span></div><figcaption class="cap"><b>Architecture.</b> I designed and built everything except the data layer. Collaborators built the backend, Text-to-SQL agent, and OMOP databases.</figcaption></figure>
+      <figure class="fig"><p class="ck">Build</p><div class="tile"><span class="own"><img class="svg" src="img/echo-viz-architecture.svg" alt="Echo system architecture"><i>Frontend · designed &amp; built by me</i></span></div><figcaption class="cap"><b>Architecture.</b> I led the design and implementation of the interactive frontend, including the criteria graph, SQL inspection, coordinated visualizations, and user workflows. Collaborators developed the backend services, Text-to-SQL agent, and OMOP data infrastructure.</figcaption></figure>
       <div class="side textcol">
         <p class="ck">Evaluation</p>
-        <div><p class="stat">2 experts</p><p class="lead" style="margin-top:.6vh">90-minute sessions</p><p class="small" style="margin-top:1vh">Clinical oncology faculty and a clinical-trials data scientist, on synthetic MIMIC-IV in OMOP CDM. Both built and compared cohorts.</p></div>
-        <div><h3>Limits we found</h3><ul><li>Concept mappings still need human checks</li><li>Splitting criteria into nodes is manual</li><li>Complex queries run slowly</li></ul></div>
+        <div><h3>Expert evaluation</h3><ul><li>Two domain experts</li><li>90-minute sessions</li><li>Task-based cohort construction and comparison</li><li>Synthetic MIMIC-IV data in OMOP CDM</li></ul></div>
+        <div><h3>Opportunities for further iteration</h3><ul><li>Improve concept-mapping verification.</li><li>Reduce manual effort in criteria decomposition.</li><li>Optimize the responsiveness of complex queries.</li></ul></div>
       </div>
     </div>
   </div>
@@ -1319,19 +1381,19 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
   <div class="sl">
     <header class="sh">
       <p class="eyebrow"><b>05</b> / Echo · Checkpoint 2 · Study variable chart review</p>
-      <h2>Make <em>patient evidence</em> reviewable</h2>
+      <h2>Designing for attention, <em>uncertainty &amp; verification</em></h2>
     </header>
     <div class="sb stack">
       <div class="row c2 evo">
-        <figure class="fig"><p class="ck">Before</p><div class="tile"><span class="pin"><img class="app" src="img/review-before.webp" alt="Chart review table before the redesign" width="2000" height="1120"></span></div><figcaption class="cap">Every answer colored, so routine values looked urgent.</figcaption></figure>
-        <figure class="fig"><p class="ck">After</p><div class="tile"><span class="pin"><img class="app" src="img/review-after.webp" alt="Chart review table after the redesign" width="2000" height="944"><i class="b1">1</i><i class="b2">2</i></span></div><figcaption class="cap">Only uncertain results stand out.</figcaption></figure>
+        <figure class="fig"><p class="ck">Before</p><div class="tile"><span class="pin"><img class="app" src="img/review-before.webp" alt="Chart review table before the redesign" width="2000" height="1120"></span></div><figcaption class="cap">Heavy visual emphasis across all results made it difficult to distinguish routine findings from cases requiring attention.</figcaption></figure>
+        <figure class="fig"><p class="ck">After</p><div class="tile"><span class="pin"><img class="app" src="img/review-after.webp" alt="Chart review table after the redesign" width="2000" height="944"><i class="b1">1</i><i class="b2">2</i></span></div><figcaption class="cap">A neutral visual baseline with selective confidence indicators directs attention toward results requiring further review.</figcaption></figure>
       </div>
       <div class="trio">
-        <div><h3><span class="k">1</span>Calm the default</h3><p class="ev"><b>Tested</b>Borders, labels, full tints: all too noisy.</p></div>
-        <div><h3><span class="k k2">2</span>Confidence in the cell</h3><p class="ev"><b>Encoding</b>Tint + one icon, medium/low only.</p></div>
-        <div><h3>Chat that doesn’t block</h3><p class="ev"><b>User signal</b>Researcher: chat hid the evidence.</p></div>
+        <div><h3><span class="k">1</span>Reduce cognitive load</h3><p class="ev">Explored alternative visual encodings to reduce unnecessary emphasis and improve information hierarchy.</p></div>
+        <div><h3><span class="k k2">2</span>Communicate AI uncertainty</h3><p class="ev">Integrated confidence indicators directly into the results table to support efficient evidence review.</p></div>
+        <div><h3><span class="k k3">3</span>Preserve research context</h3><p class="ev">Redesigned the chat interaction based on researcher feedback so users could access AI assistance without losing sight of clinical evidence.</p></div>
       </div>
-      <p class="role"><b>My role</b>Design and frontend build, in the existing Vue app.</p>
+      <p class="role"><b>My role</b>UX/UI design, interaction refinement, researcher feedback, and frontend implementation within the existing Vue application.</p>
     </div>
   </div>
 </section>
@@ -1342,11 +1404,12 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
     <header class="sh">
       <p class="eyebrow"><b>05b</b> / Echo · Checkpoint 2 · <span class="deep">deep dive</span></p>
       <h2>Three rounds on the <em>patient panel</em></h2>
+      <p class="lead">Each iteration focused on reducing redundant information while preserving access to clinical evidence.</p>
     </header>
     <div class="sb row c3 evo">
-      <figure class="fig"><p class="ck">Round 01</p><div class="tile"><img src="img/panel-1.webp" alt="Patient panel, original" width="950" height="1664"></div><figcaption class="cap">Deep indentation and repeated Evidence controls.</figcaption></figure>
-      <figure class="fig"><p class="ck">Round 02</p><div class="tile"><img src="img/panel-2.webp" alt="Patient panel, first revision" width="1176" height="1664"></div><figcaption class="cap">Grouped by variable, but status shown three times.</figcaption></figure>
-      <figure class="fig"><p class="ck on">Round 03 · Final</p><div class="tile"><img src="img/panel-3.webp" alt="Patient panel, final with chat layer" width="885" height="722"></div><figcaption class="cap">One status per variable; chat moved to its own layer.</figcaption></figure>
+      <figure class="fig"><p class="ck">Round 01 · Original</p><div class="tile"><img src="img/panel-1.webp" alt="Patient panel, original" width="950" height="1664"></div><figcaption class="cap">Nested information and repeated evidence controls increased visual complexity.</figcaption></figure>
+      <figure class="fig"><p class="ck">Round 02 · Exploration</p><div class="tile"><img src="img/panel-2.webp" alt="Patient panel, first revision" width="1176" height="1664"></div><figcaption class="cap">Grouping by study variable improved structure, but redundant status indicators remained.</figcaption></figure>
+      <figure class="fig"><p class="ck on">Round 03 · Final</p><div class="tile"><img src="img/panel-3.webp" alt="Patient panel, final with chat layer" width="885" height="722"></div><figcaption class="cap">Consolidated status indicators and separated the chat interaction to preserve evidence visibility.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -1356,19 +1419,13 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
   <div class="sl">
     <header class="sh">
       <p class="eyebrow"><b>06</b> / CDEMapper &amp; CDEAtlas · NIH Common Data Elements</p>
-      <h2>Data standards: the LLM suggests, <em>experts decide</em></h2>
+      <h2>Making biomedical data standards easier to <em>discover, map, and review</em>.</h2>
+      <p class="lead"><b>Shared design objective</b>Support domain experts in discovering, interpreting, and applying biomedical data standards.</p>
     </header>
     <div class="sb cde-sb">
-      <div class="cde-strip">
-        <ol class="pipe" aria-label="CDEMapper workflow">
-          <li class="lbl"><b>CDEMapper</b> <span>JAMIA 2025</span></li>
-          <li>Study variables</li><li class="ai">LLM indexes &amp; ranks CDEs</li><li class="ck2">Expert review &amp; correction</li><li>Mapping files</li>
-        </ol>
-        <p class="role"><b>My role</b>Evaluation, usability, review workflow, interface.</p>
-      </div>
       <div class="row c2 cde-row">
-        <figure class="fig"><h3 class="ft">Mapping dashboard</h3><div class="tile"><img src="img/cde-dashboard.webp" alt="Visual analytics dashboard for CDE mapping" width="2000" height="1115"></div><figcaption class="cap">Progress heatmap, stage Sankey, coverage map.<span class="cred">First author, AMIA 2025 poster</span></figcaption></figure>
-        <figure class="fig"><h3 class="ft">CDEAtlas</h3><div class="tile"><img class="app" src="img/cde-atlas.webp" alt="CDEAtlas semantic landscape of NIH CDEs" width="1950" height="1296"></div><figcaption class="cap">22,743 NIH CDEs, searchable and filterable by time.<span class="cred">Co-first author, AMIA 2026 paper · First author, Amplify 2026 poster</span></figcaption></figure>
+        <figure class="fig"><p class="ck">Human-centered AI · Data harmonization</p><h3 class="ft">CDEMapper</h3><div class="tile"><img src="img/cde-dashboard.webp" alt="CDEMapper visual analytics dashboard for CDE mapping" width="2000" height="1115"></div><figcaption class="cap"><dl class="cd"><dt>Challenge</dt><dd>Mapping study variables to standardized Common Data Elements requires substantial domain expertise.</dd><dt>Design contribution</dt><dd>Expert review workflows, usability evaluation, visual analytics, and interface design.</dd></dl><span class="cred">First author, AMIA 2025 dashboard poster · JAMIA 2025 · AMIA 2025 CDEMapper 2.0</span></figcaption></figure>
+        <figure class="fig"><p class="ck">Interactive visualization · Data discovery</p><h3 class="ft">CDEAtlas</h3><div class="tile"><img class="app" src="img/cde-atlas.webp" alt="CDEAtlas semantic landscape of NIH CDEs" width="1950" height="1296"></div><figcaption class="cap"><dl class="cd"><dt>Challenge</dt><dd>Tens of thousands of data elements are difficult to navigate using traditional search interfaces alone.</dd><dt>Design contribution</dt><dd>Interactive exploration and visualization of relationships across 22,743 NIH Common Data Elements.</dd></dl><span class="cred">Co-first author, AMIA 2026 paper · First author, Amplify 2026 poster</span></figcaption></figure>
       </div>
     </div>
   </div>
@@ -1390,14 +1447,14 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
         <div class="pf">
           <p class="mlabel">Design contributions · 2024–2026</p>
           <ul class="wl">
-            <li><b>Information architecture</b>Task-based grouping, unified icon system</li>
-            <li><b>Color system</b>Accessible, time-ordered palette</li>
-            <li><b>Temporal navigation</b>Direct range filtering by year</li>
-            <li><b>Onboarding</b>Guided quickstart for non-experts</li>
+            <li><b>Information architecture</b>Reorganized features around researcher tasks to simplify navigation.</li>
+            <li><b>Visual encoding</b>Developed a consistent, time-oriented color system to support interpretation.</li>
+            <li><b>Temporal exploration</b>Enabled direct exploration of literature across customizable time ranges.</li>
+            <li><b>Onboarding</b>Introduced guided interactions to reduce the learning curve for new users.</li>
           </ul>
         </div>
         <div>
-          <p class="mlabel">After launch · Jan 2025–Mar 2026</p>
+          <p class="mlabel">Post-launch reach &amp; engagement · Jan 2025–Mar 2026</p>
           <div class="metrics">
             <div><strong>1.2K+</strong><span>active users</span></div>
             <div><strong>49</strong><span>countries</span></div>
@@ -1417,6 +1474,7 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
     <header class="sh">
       <p class="eyebrow"><b>07b</b> / MedViz · <span class="deep">deep dive</span></p>
       <h2>Data storytelling for <em>scientific audiences</em></h2>
+      <p class="lead">Translating large-scale bibliometric data into meaningful scientific narratives through visual storytelling and interactive exploration.</p>
     </header>
     <div class="sb row c2 st">
       <figure class="fig"><p class="ck">Film · 2025</p><div class="tile"><img src="img/medviz-film.webp" alt="MedViz film: Nature Medicine citation network" width="2000" height="793"></div><figcaption class="cap"><h3 class="ft">Nature Medicine, 30 years</h3>3,800+ papers as a citation network; 30 topics in 11 themes.<span class="cred">Narrative &amp; visualization lead · Used in the MedViz technical paper</span></figcaption></figure>
@@ -1430,21 +1488,41 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
   <div class="sl">
     <header class="sh">
       <p class="eyebrow"><b>08</b> / AITC · IMPACT-MH · Bridge2AI</p>
-      <h2>Digital infrastructure for <em>NIH research consortia</em></h2>
-      <p class="lead">I lead coordination, platform development, and data stewardship across three NIH programs.</p>
+      <h2>Designing and building digital infrastructure for <em>collaborative research</em>.</h2>
+      <p class="lead">I design and develop digital platforms that support the operational and research needs of multi-institutional NIH-funded programs.</p>
     </header>
     <div class="sb cx">
       <ol class="rl4">
-        <li><span>01</span><h3>Coordination</h3><p>Primary liaison among PIs, program managers, and engineers.</p></li>
-        <li><span>02</span><h3>Platform development</h3><p>Websites, portals, and workflows, requirements through production.</p></li>
-        <li><span>03</span><h3>Data stewardship</h3><p>Curation and governance of publications and datasets.</p></li>
-        <li><span>04</span><h3>Sustainability</h3><p>Maintainable systems and documentation for lean teams.</p></li>
+        <li><span>01</span><h3>Stakeholder collaboration</h3><p>Translate requirements from PIs, researchers, program managers, and engineers into actionable product solutions.</p></li>
+        <li><span>02</span><h3>Product design &amp; development</h3><p>Design and implement research portals, websites, and multi-role workflows.</p></li>
+        <li><span>03</span><h3>Workflow optimization</h3><p>Simplify complex application, review, reporting, and information-management processes.</p></li>
+        <li><span>04</span><h3>Scalable systems</h3><p>Develop reusable components, documentation, and maintainable digital experiences.</p></li>
       </ol>
       <div class="sites">
         <figure><p class="ck">AITC · NIA</p><div class="tile"><img class="app" src="img/aitc-site.webp" alt="aitcc.ai homepage" width="1800" height="1125"></div><a class="url" href="https://aitcc.ai/" target="_blank" rel="noopener">aitcc.ai ↗</a></figure>
         <figure><p class="ck">IMPACT-MH · NIMH</p><div class="tile"><img class="app" src="img/impact.webp" alt="IMPACT-MH website" width="1600" height="1000"></div><a class="url" href="https://impact-mh.org/" target="_blank" rel="noopener">impact-mh.org ↗</a></figure>
         <figure><p class="ck">Bridge2AI · NIH Common Fund</p><div class="tile"><img class="app" src="img/bridge2ai-home.webp" alt="Bridge2AI homepage" width="1600" height="887"></div><a class="url" href="https://bridge2ai.org/" target="_blank" rel="noopener">bridge2ai.org ↗</a></figure>
       </div>
+    </div>
+  </div>
+</section>
+<section class="slide" id="aitc-gp" data-label="AITC grant platform">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>08b</b> / AITC Research Funding Platform · Multi-role product design · Research operations</p>
+      <h2>One funding pipeline, <em>four roles</em>.</h2>
+      <p class="lead">The platform that runs AITC’s funding competitions across five collaborating programs. I designed each role’s view around the one next thing that person has to do.</p>
+    </header>
+    <div class="sb gp">
+      <ol class="pipe gpipe" aria-label="Roles in the AITC funding pipeline">
+        <li><b>System admin</b>Publish RFA</li><li><b>Applicant</b>Submit letter of intent</li><li><b>Reviewer</b>Recommend</li><li><b>Program admin</b>Decide &amp; release</li>
+      </ol>
+      <div class="gshots">
+        <figure><p class="ck">Applicant · Submit</p><div class="tile"><img class="app" src="img/gp-loi-workspace.webp" alt="Applicant letter-of-intent workspace with a before-you-submit checklist" width="1800" height="1125"></div><figcaption class="cap">A “before you can submit” checklist; answers save as you type.</figcaption></figure>
+        <figure><p class="ck">Reviewer · Evaluate</p><div class="tile"><img class="app" src="img/gp-review-details.webp" alt="Reviewer recommendation form beside the letter of intent" width="1800" height="1125"></div><figcaption class="cap">One recommendation and a comment, beside the letter being read.</figcaption></figure>
+        <figure><p class="ck">Program admin · Track</p><div class="tile"><img class="app" src="img/gp-rfa-applications.webp" alt="Program admin view of applications grouped by stage" width="1800" height="1125"></div><figcaption class="cap">Applications grouped by stage; anything waiting rises to the top.</figcaption></figure>
+      </div>
+      <p class="role"><b>My role</b>UX design: role-based flows, pre-launch usability review as applicant and reviewer, and user guides for every role. Engineered by a teammate (Vue, FastAPI).</p>
     </div>
   </div>
 </section>
@@ -1805,6 +1883,7 @@ void main() {
     medviz: ['1:15', ``],
     stories: ['deep dive', ``],
     consortia: ['1:15', ``],
+    'aitc-gp': ['1:00', ``],
     fit: ['0:45', ``],
     pubs: ['appendix', ``]
   };
@@ -2685,20 +2764,18 @@ HoloMosaic(document.querySelector('#fibers .hm-bg'), document.querySelector('#fi
 })();
 </script>
 <script>
-/* Fit slide 06 figures to the real space between their titles and the pager (measured, not guessed) */
+/* Fit slide 06 rows: each product row gets half of the space between the first row and the pager */
 (function fitCde() {
   const slide = document.getElementById('cde'); if (!slide) return;
   const row = slide.querySelector('.cde-row'), pager = document.querySelector('.pager');
-  const sb = slide.querySelector('.cde-sb');
   const fit = () => {
-    row.style.removeProperty('--Hfit'); sb.style.alignSelf = 'start';
-    const img = row.querySelector('.tile img'), figs = [...row.querySelectorAll('.fig')];
-    const sr = slide.getBoundingClientRect(), ir = img.getBoundingClientRect();
-    const below = Math.max(...figs.map(f => f.getBoundingClientRect().bottom)) - ir.bottom;
-    /* the pager is fixed to the viewport; a slide fills the viewport, so measure its offset from the slide top that way */
-    const pTop = pager ? sr.height - (innerHeight - pager.getBoundingClientRect().top) : sr.height - 90;
-    const avail = pTop - 18 - (ir.top - sr.top) - below;
-    row.style.setProperty('--Hfit', Math.max(160, Math.floor(avail)) + 'px'); sb.style.alignSelf = '';
+    const figs = [...row.querySelectorAll('.fig')]; if (!figs.length) return;
+    const sr = slide.getBoundingClientRect();
+    const top = figs[0].getBoundingClientRect().top - sr.top;
+    const limit = pager ? sr.height - (innerHeight - pager.getBoundingClientRect().top) - 16 : sr.height - 80;
+    const gap = parseFloat(getComputedStyle(row).rowGap) || 24;
+    const h = Math.floor((limit - top - gap) / 2);
+    row.style.setProperty('--Hfit', Math.max(150, h) + 'px');
   };
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
   window.addEventListener('resize', () => requestAnimationFrame(fit));
