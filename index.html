@@ -1146,6 +1146,13 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
 .lcm { grid-template-rows: auto repeat(5, minmax(0, 1fr)); }
 .about .facts strong { line-height: 1.2; }
 .about .facts span { font: 500 var(--fs-small)/1.4 var(--text); letter-spacing: 0; color: #3E6E86; }
+/* v95: slide 02, category label above title, wider text columns for longer copy */
+.tix .tt { grid-template-columns: 1fr; }
+.tix .tt .thn { grid-row: auto; margin-bottom: .6vh; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+.tix .tt .thw { grid-column: 1; }
+.tix { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr) auto; }
+#threads .tix .tt .thw { font-size: max(14px, calc(var(--fs-mono) * .9)) !important; margin-top: .8vh; }
+#threads .tix .tt h3 { font-size: calc(var(--fs-h3) * .9); }
 </style>
 
 <main>
@@ -1197,31 +1204,31 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
 </section>
 
 <!-- 3 THREADS -->
-<section class="slide" id="threads" data-label="Three threads">
+<section class="slide" id="threads" data-label="Project map">
   <div class="sl">
     <header class="sh">
       <p class="eyebrow"><b>02</b> / Project map</p>
-      <h2>Three kinds of work, <em>one goal</em></h2>
-      <p class="lead">Making AI and large-dataset output understandable and verifiable, so researchers can act on it.</p>
+      <h2>One design approach, <em>three research challenges</em>.</h2>
+      <p class="lead">Transforming complex biomedical research into intuitive, trustworthy, and functional digital experiences.</p>
     </header>
     <div class="sb tix">
-      <div class="tx hd" aria-hidden="true"><span></span><span>Problem</span><span>Build</span><span></span></div>
+      <div class="tx hd" aria-hidden="true"><span></span><span>Challenge</span><span>Design approach</span><span></span></div>
       <article class="tx">
-        <div class="tt"><p class="thn">01</p><h3>Clinical AI that people can verify</h3><p class="thw">Echo · CDEMapper</p></div>
-        <p class="tp">LLM-generated cohort queries and data mappings are hard to verify.</p>
-        <p class="tp">Interfaces that expose each AI step for expert review and approval.</p>
+        <div class="tt"><p class="thn">01 / Human-centered AI</p><h3>Making AI outputs transparent and reviewable</h3><p class="thw">Echo · CDEMapper</p></div>
+        <p class="tp">Researchers need to understand, validate, and refine AI-generated results.</p>
+        <p class="tp">Human-in-the-loop workflows that support inspection, correction, and informed decision-making.</p>
         <div class="tile"><img class="app" src="img/echo-steering.webp" alt="Echo visual steering interface" width="2000" height="1090"></div>
       </article>
       <article class="tx">
-        <div class="tt"><p class="thn">02</p><h3>Large biomedical data, made legible</h3><p class="thw">MedViz · CDEAtlas</p></div>
-        <p class="tp">Millions of papers and tens of thousands of data standards, too many to read.</p>
-        <p class="tp">Visual maps and filters that surface patterns and relevant records.</p>
+        <div class="tt"><p class="thn">02 / Data visualization</p><h3>Making complex biomedical data explorable</h3><p class="thw">MedViz · CDEAtlas</p></div>
+        <p class="tp">Large-scale biomedical datasets are difficult to navigate and interpret.</p>
+        <p class="tp">Interactive visualizations that support exploration, pattern discovery, and information retrieval.</p>
         <div class="tile"><img class="app" src="img/medviz.webp" alt="MedViz literature map" width="2000" height="1288"></div>
       </article>
       <article class="tx">
-        <div class="tt"><p class="thn">03</p><h3>Infrastructure for NIH research networks</h3><p class="thw">AITC · IMPACT-MH · Bridge2AI</p></div>
-        <p class="tp">Multi-site programs coordinate applicants, reviewers, and staff across institutions.</p>
-        <p class="tp">Websites, portals, and workflows a small team can sustain.</p>
+        <div class="tt"><p class="thn">03 / Research infrastructure</p><h3>Supporting collaborative research at scale</h3><p class="thw">AITC · IMPACT-MH · Bridge2AI</p></div>
+        <p class="tp">Multi-institutional research programs involve diverse stakeholders and complex operational workflows.</p>
+        <p class="tp">Sustainable digital platforms, streamlined workflows, and scalable information architecture.</p>
         <div class="tile"><img class="app" src="img/aitc-site.webp" alt="aitcc.ai homepage" width="1800" height="1125"></div>
       </article>
     </div>
