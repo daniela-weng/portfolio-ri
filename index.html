@@ -1242,6 +1242,14 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
 #review .sb.stack { align-self: start !important; height: auto !important; }
 #review .sb.stack > * { min-height: auto !important; }
 #review .row.c2 { min-height: auto !important; }
+/* 01: chart rows at a fixed comfortable height; card and slide size to content */
+.about .sb { grid-template-rows: auto auto auto !important; align-content: start; align-self: start; height: auto !important; gap: clamp(16px, 3vh, 34px) !important; }
+.about .card { height: auto !important; min-height: 0; }
+.lcm { height: auto !important; grid-template-rows: auto repeat(5, clamp(30px, 4.4vh, 42px)) !important; }
+.about .take { margin-top: 0; }
+/* badges centered on the title line */
+#review .trio h3, #steering .points h3 { display: flex; align-items: center; gap: .45em; }
+#review .trio h3 .k, #steering .points h3 .k { flex: none; vertical-align: 0 !important; margin: 0 !important; line-height: 1 !important; position: relative; top: .03em; }
 </style>
 
 <main>
