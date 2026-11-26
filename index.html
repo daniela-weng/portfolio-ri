@@ -1143,6 +1143,9 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
 .echo .cpx .tile img, .echo .cpx .tile img.app { height: var(--eh, 260px) !important; width: auto; max-width: 100%; }
 .echo .cp2 { row-gap: clamp(6px, 1vh, 12px); }
 .echo .cpx dl { row-gap: .3vh; }
+.lcm { grid-template-rows: auto repeat(5, minmax(0, 1fr)); }
+.about .facts strong { line-height: 1.2; }
+.about .facts span { font: 500 var(--fs-small)/1.4 var(--text); letter-spacing: 0; color: #3E6E86; }
 </style>
 
 <main>
@@ -1167,28 +1170,27 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
   <div class="sl">
     <header class="sh">
       <p class="eyebrow"><b>01</b> / About me</p>
-      <h2>A designer who builds <em>research software</em></h2>
+      <h2>Bridging research, <em>design &amp; engineering</em>.</h2>
     </header>
     <div class="sb">
       <div class="facts">
-        <div><strong>Northeastern M.S.</strong><span>Information design &amp; data viz · HCI</span></div>
-        <div><strong>7 years</strong><span>Communication · UX · Engineering</span></div>
-        <div><strong>Yale BIDS, 2024–</strong><span>PIs · clinicians · engineers</span></div>
+        <div><strong>M.S. in Information Design &amp; Data Visualization</strong><span>HCI</span></div>
+        <div><strong>7 years</strong><span>Multidisciplinary experience across communication, design &amp; technology</span></div>
+        <div><strong>Yale School of Medicine</strong><span>Biomedical Informatics &amp; Data Science</span></div>
       </div>
       <div class="card" aria-label="Which stages of the research product lifecycle I own on each project">
         <div class="lcm">
           <div class="r hd"><span class="rl"></span><span class="st"><i>01</i>Requirements</span><span class="st"><i>02</i>Users</span><span class="st"><i>03</i>Strategy</span><span class="st"><i>04</i>UX / UI</span><span class="st"><i>05</i>Prototype</span><span class="st"><i>06</i>Frontend</span><span class="st"><i>07</i>Evaluate</span></div>
-          <div class="r base"><span class="rl">Common handoff model</span><i class="ln" style="grid-column:5 / span 2;--k:2"></i><span class="d" style="grid-column:2"></span><span class="d" style="grid-column:3"></span><span class="d" style="grid-column:4"></span><span class="d ho" style="grid-column:5"></span><span class="d ho" style="grid-column:6"></span><span class="pill" style="grid-column:7 / span 2">Screens, then a handoff</span></div>
           <div class="r"><span class="rl">Echo · Visual Steering</span><i class="ln" style="grid-column:2 / span 7;--k:7"></i><span class="d on" style="grid-column:2"></span><span class="d on" style="grid-column:3"></span><span class="d on" style="grid-column:4"></span><span class="d on" style="grid-column:5"></span><span class="d on" style="grid-column:6"></span><span class="d on" style="grid-column:7"></span><span class="d on" style="grid-column:8"></span></div>
           <div class="r"><span class="rl">Echo · Chart Review</span><i class="ln" style="grid-column:3 / span 6;--k:6"></i><span class="d" style="grid-column:2"></span><span class="d on" style="grid-column:3"></span><span class="d on" style="grid-column:4"></span><span class="d on" style="grid-column:5"></span><span class="d on" style="grid-column:6"></span><span class="d on" style="grid-column:7"></span><span class="d on" style="grid-column:8"></span></div>
           <div class="r"><span class="rl">MedViz · Literature map</span><i class="ln" style="grid-column:3 / span 6;--k:6"></i><span class="d" style="grid-column:2"></span><span class="d on" style="grid-column:3"></span><span class="d on" style="grid-column:4"></span><span class="d on" style="grid-column:5"></span><span class="d on" style="grid-column:6"></span><span class="d tm" style="grid-column:7"></span><span class="d on" style="grid-column:8"></span></div>
           <div class="r"><span class="rl">NIH program websites</span><i class="ln" style="grid-column:2 / span 7;--k:7"></i><span class="d on" style="grid-column:2"></span><span class="d on" style="grid-column:3"></span><span class="d on" style="grid-column:4"></span><span class="d on" style="grid-column:5"></span><span class="d on" style="grid-column:6"></span><span class="d on" style="grid-column:7"></span><span class="d on" style="grid-column:8"></span></div>
           <div class="r"><span class="rl">AITC grant platform</span><i class="ln" style="grid-column:3 / span 6;--k:6"></i><span class="d" style="grid-column:2"></span><span class="d on" style="grid-column:3"></span><span class="d on" style="grid-column:4"></span><span class="d on" style="grid-column:5"></span><span class="d on" style="grid-column:6"></span><span class="d tm" style="grid-column:7"></span><span class="d on" style="grid-column:8"></span></div>
         </div>
-        <p class="lgd"><span><i class="d on"></i>Led</span><span><i class="d tm"></i>Co-led with engineering</span><span><i class="d ho"></i>Conventional design handoff</span></p>
+        <p class="lgd"><span><i class="d on"></i>Led</span><span><i class="d tm"></i>Co-led with engineering</span></p>
       </div>
       <div class="take">
-        <p>From research requirements to shipped, evaluated code: on most projects, <em>I’m the one who connects every stage.</em></p>
+        <p>I translate complex research needs into usable digital products, <em>from early discovery and interaction design to implementation and evaluation.</em></p>
       </div>
     </div>
   </div>
