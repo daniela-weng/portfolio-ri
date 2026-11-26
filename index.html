@@ -1,0 +1,2693 @@
+<title>Daniela Weng · Regenstrief</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,500..700;1,8..60,500..700&family=Geist+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: full-screen slides that snap. Header (mono eyebrow, serif title with one italic accent) + body filling the rest.
+   Every image row uses equal-size frames (CSS subgrid) and shows each screenshot whole, centered. Palette: near-black, white, one cyan-teal accent. */
+:root {
+  --bg: #FFFFFF;
+  --surface: #FFFFFF;
+  --tile: #EAF6FB;
+  --line: #CDE7F2;
+  --ink: #0A1F35;
+  --body: #1F3A57;
+  --muted: #3A5A7C;
+  --accent: #006F99;
+  --warm: #DC7556;
+  --spark: #DC7556;
+  --bar: #0083B0;
+  --bar-soft: #F5C9B9;
+  --night: #0A1B2E;
+  --night-2: #11283F;
+  --night-ink: #F4F9FD;
+  --night-body: #D8E6F2;
+  --night-muted: #A8C2DB;
+  --night-accent: #33B8E6;
+  --night-warm: #F2A65A;
+  --shadow: 0 1px 2px rgba(10,31,53,.06), 0 22px 44px -26px rgba(10,31,53,.30);
+  --display: "Source Serif 4", "Iowan Old Style", Georgia, serif;
+  --text: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --fs-h1: clamp(42px, min(5.4vw, 9vh), 104px);
+  --fs-h2: clamp(32px, min(3.5vw, 6.1vh), 70px);
+  --fs-h3: clamp(24px, min(2vw, 3.4vh), 38px);
+  --fs-lead: clamp(21px, min(1.75vw, 3vh), 32px);
+  --fs-body: clamp(19px, min(1.5vw, 2.55vh), 28px);
+  --fs-small: clamp(17px, min(1.3vw, 2.2vh), 24px);
+  --fs-mono: clamp(15px, min(1.16vw, 2vh), 21px);
+  --gut: clamp(20px, 5vw, 96px);
+  --gap: clamp(16px, min(2.2vw, 3.6vh), 44px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0A1B2E; --surface: #11283F; --tile: #12304A; --line: #1E4262; --ink: #F4F9FD; --body: #D8E6F2; --muted: #A8C2DB;
+    --accent: #33B8E6; --warm: #F2A65A; --spark: #F2A65A; --bar: #33B8E6; --bar-soft: rgba(242,166,90,.4);
+    --night: #071526; --night-2: #0E2238; --night-ink: #F4F9FD; --night-body: #D8E6F2; --night-muted: #A8C2DB; --night-accent: #33B8E6; --night-warm: #F2A65A;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 24px 48px -24px rgba(2,10,20,.75);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0A1B2E; --surface: #11283F; --tile: #12304A; --line: #1E4262; --ink: #F4F9FD; --body: #D8E6F2; --muted: #A8C2DB;
+    --accent: #33B8E6; --warm: #F2A65A; --spark: #F2A65A; --bar: #33B8E6; --bar-soft: rgba(242,166,90,.4);
+    --night: #071526; --night-2: #0E2238; --night-ink: #F4F9FD; --night-body: #D8E6F2; --night-muted: #A8C2DB; --night-accent: #33B8E6; --night-warm: #F2A65A;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 24px 48px -24px rgba(2,10,20,.75);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-snap-type: y mandatory; }
+body { background: var(--bg); color: var(--body); font: 400 var(--fs-body)/1.5 var(--text); -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--night); }
+img { max-width: 100%; display: block; }
+p, h1, h2, h3, ul, figure { margin: 0; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* ---------- slide frame ---------- */
+.slide { position: relative; height: 100vh; height: 100svh; scroll-snap-align: start; overflow: hidden; }
+.sl { height: 100%; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: clamp(18px, 4.2vh, 52px);
+  padding-top: clamp(28px, 6.5vh, 80px); padding-bottom: clamp(56px, 10vh, 110px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px), var(--gut)); padding-right: max(16px, env(safe-area-inset-right, 0px), var(--gut)); }
+.sh { display: flex; flex-direction: column; gap: clamp(10px, 1.8vh, 22px); }
+.sb { min-height: 0; min-width: 0; }
+.eyebrow { font: 500 var(--fs-mono)/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.eyebrow b { color: var(--ink); font-weight: 500; }
+.eyebrow .deep { font-style: italic; }
+h1, h2, h3 { font-family: var(--display); color: var(--ink); font-weight: 600; text-wrap: balance; }
+h2 { font-size: var(--fs-h2); line-height: 1.08; letter-spacing: -.015em; font-weight: 600; }
+h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius: 2px; background: var(--spark); margin-top: clamp(12px, 2vh, 22px); }
+.night h2::after { background: var(--night-warm); }
+h2 em, h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+h3 { font-size: var(--fs-h3); line-height: 1.2; letter-spacing: -.01em; }
+.lead { font-size: var(--fs-lead); line-height: 1.45; color: var(--ink); width: min(100%, 62em); }
+.small { font-size: var(--fs-small); color: var(--muted); line-height: 1.45; }
+.tagline { font: 500 var(--fs-mono)/1.4 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.tagline::before, .pubs .v span:not(.plain)::before { content: ""; display: inline-block; width: .55em; height: .55em; border-radius: 50%; background: var(--warm); margin-right: .55em; vertical-align: .05em; }
+.night .tagline::before { background: var(--night-warm); }
+
+/* ---------- equal-size image frames ---------- */
+.tile { min-height: 0; min-width: 0; height: 100%; background: var(--tile); border-radius: 12px; padding: clamp(10px, 2vh, 24px); display: flex; align-items: center; justify-content: center; }
+.tile img { max-width: 100%; max-height: var(--img-h, 100%); width: auto; height: auto; object-fit: contain; border-radius: 6px; box-shadow: var(--shadow); cursor: zoom-in; }
+.tile img.svg { background: #fff; padding: 10px; }
+.cap { font-size: var(--fs-small); line-height: 1.45; color: var(--muted); }
+.cap b { color: var(--ink); font-weight: 600; }
+/* a row of figures: frames share one height, captions share one baseline */
+.row { height: 100%; display: grid; grid-template-rows: auto auto; align-content: center; column-gap: var(--gap); row-gap: clamp(8px, 1.6vh, 18px); min-height: 0; }
+.row.c2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.row.c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.row > .fig { grid-row: span 2; display: grid; grid-template-rows: subgrid; min-height: 0; min-width: 0; }
+.row > .side { grid-row: span 2; min-width: 0; }
+
+/* night slides */
+.night { background: var(--night); color: var(--night-body); }
+.night h1, .night h2, .night h3 { color: var(--night-ink); }
+.night h2 em, .night h1 em { color: var(--night-accent); }
+.night .eyebrow, .night .small, .night .cap { color: var(--night-muted); }
+.night .eyebrow b { color: var(--night-warm); }
+.night .tagline { color: var(--night-muted); }
+.night .lead { color: var(--night-ink); }
+.night .cap b { color: var(--night-ink); }
+.night .tile { background: var(--night-2); }
+
+/* ---------- cover ---------- */
+.cover { background: var(--night); }
+#glyphs { position: absolute; inset: 0; }
+#glyphs canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.cover::after { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(11,11,16,.92) 0%, rgba(11,11,16,.72) 32%, rgba(11,11,16,.15) 62%, rgba(11,11,16,0) 80%); }
+.cover .sl { position: relative; z-index: 1; grid-template-rows: auto 1fr auto; pointer-events: none; }
+.cover .kicker { font: 500 var(--fs-mono)/1.4 var(--mono); color: var(--night-body); letter-spacing: .08em; text-transform: uppercase; }
+.cover .mid { align-self: center; display: flex; flex-direction: column; gap: clamp(16px, 3vh, 34px); }
+.cover h1 { font-size: var(--fs-h1); line-height: 1.04; letter-spacing: -.02em; font-weight: 600; color: var(--night-ink); width: min(100%, 11.5em); }
+.cover h1 em { color: var(--night-accent); }
+.cover .sub { font-size: var(--fs-lead); color: var(--night-body); width: min(100%, 30em); }
+.cover .who { display: flex; align-items: center; gap: 18px; }
+.cover .who img { width: clamp(52px, 7vh, 72px); height: clamp(52px, 7vh, 72px); border-radius: 50%; object-fit: cover; }
+.cover .who strong { display: block; font: 400 var(--fs-h3)/1.2 var(--display); color: var(--night-ink); }
+.cover .who span { font-size: var(--fs-small); color: var(--night-muted); }
+
+/* ---------- about ---------- */
+.about .sb { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: var(--gap); }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.facts strong { display: block; font: 400 var(--fs-h3)/1.2 var(--display); color: var(--ink); }
+.facts span { font-size: var(--fs-small); color: var(--muted); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(16px, 3vh, 40px) clamp(18px, 2.4vw, 44px); min-height: 0; }
+.lc { height: 100%; display: grid; grid-template-columns: minmax(190px, 18vw) repeat(7, minmax(0, 1fr)); grid-template-rows: auto repeat(6, minmax(0, 1fr)); column-gap: clamp(12px, 1.2vw, 20px); align-items: center; }
+.lc .stage { font-size: var(--fs-small); font-weight: 600; color: var(--ink); line-height: 1.2; align-self: end; padding-bottom: 1.2vh; }
+.lc .stage i { display: block; font: italic 600 var(--fs-h3)/1 var(--display); color: var(--warm); margin-bottom: .6vh; }
+.lc .row-l { font-size: var(--fs-small); font-weight: 600; color: var(--ink); white-space: nowrap; }
+.lc .row-l.base { font-weight: 400; color: var(--muted); }
+.lc .bar { height: clamp(10px, 1.6vh, 18px); border-radius: 9px; background: var(--bar); }
+.lc .bar.soft { background: var(--bar-soft); }
+.closing em, .cover h1 em { font-weight: 500; }
+.lc .note { font-size: var(--fs-small); font-style: italic; color: var(--muted); white-space: nowrap; padding-left: 6px; }
+
+/* ---------- column cards: tile + text rows aligned across columns ---------- */
+.cols { height: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--gap); row-gap: clamp(6px, 1.4vh, 16px); }
+.cols.r3 { grid-template-rows: auto auto auto; align-content: center; }
+.cols.r4 { grid-template-rows: auto auto auto auto; align-content: center; }
+.cols > .col { display: grid; grid-template-rows: subgrid; min-height: 0; min-width: 0; }
+.cols.r3 > .col { grid-row: span 3; }
+.cols.r4 > .col { grid-row: span 4; }
+.col h3 { margin-top: clamp(6px, 1.2vh, 14px); }
+.col h3 i { font: italic 600 1em/1 var(--display); color: var(--warm); margin-right: .4em; }
+.col ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: clamp(4px, 1vh, 12px); }
+.col li b { font: 400 var(--fs-h3)/1.2 var(--display); color: var(--ink); margin-right: .35em; }
+.col li span { font-size: var(--fs-small); color: var(--muted); }
+.col .bul { padding-left: 1.1em; list-style: disc; font-size: var(--fs-body); }
+
+/* ---------- echo flow ---------- */
+.echo .sb { display: grid; grid-template-rows: auto auto; align-content: center; gap: clamp(28px, 7vh, 90px); }
+.flow { display: grid; grid-template-columns: 1.25fr auto 1.25fr auto 2.2fr auto 1.25fr auto 2.2fr; gap: clamp(8px, 1vw, 16px); align-items: start; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: clamp(12px, 2vh, 22px); }
+.step b { display: block; color: var(--ink); font-size: var(--fs-small); font-weight: 600; line-height: 1.25; margin-bottom: .6vh; }
+.step span { font-size: var(--fs-small); line-height: 1.4; color: var(--body); }
+.arrow { margin-top: clamp(20px, 4vh, 44px); color: var(--muted); font-size: var(--fs-h3); }
+.check { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.check .tile { height: auto; aspect-ratio: 16 / 10; padding: clamp(8px, 1.2vh, 14px); }
+.check .label { font: 500 var(--fs-mono)/1.4 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin-top: .8vh; }
+.check .q { font: italic 400 var(--fs-h3)/1.25 var(--display); color: var(--ink); }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }
+.trio h3 { margin-bottom: .5vh; }
+.trio p { font-size: var(--fs-body); }
+
+/* ---------- splits ---------- */
+.split { height: 100%; display: grid; gap: var(--gap); min-height: 0; }
+.split > * { min-height: 0; min-width: 0; }
+.s-main { grid-template-columns: 2.15fr 1fr; }
+.stack { height: 100%; display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: var(--gap); min-height: 0; }
+.figcol { display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: clamp(8px, 1.6vh, 18px); min-height: 0; }
+.points { display: flex; flex-direction: column; justify-content: center; gap: clamp(14px, 3vh, 34px); }
+.points h3 .k { font: italic 600 1.05em/1 var(--display); color: var(--warm); margin-right: .4em; }
+.points p { font-size: var(--fs-body); margin-top: .5vh; }
+.mine { background: var(--tile); border-radius: 12px; padding: clamp(12px, 2vh, 22px) clamp(14px, 1.4vw, 24px); font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+.mine b { color: var(--ink); }
+.stat { font: 300 clamp(34px, min(3.6vw, 6.2vh), 72px)/1 var(--display); color: var(--ink); }
+.textcol { display: flex; flex-direction: column; justify-content: center; gap: clamp(12px, 2.6vh, 30px); }
+.textcol ul { padding-left: 1.1em; display: flex; flex-direction: column; gap: .6vh; font-size: var(--fs-small); }
+
+/* ---------- medviz ---------- */
+.metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 3.4vh, 40px) var(--gap); }
+.metrics strong { display: block; white-space: nowrap; font: 300 clamp(36px, min(3.5vw, 6.6vh), 80px)/1 var(--display); color: var(--night-ink); font-variant-numeric: tabular-nums; }
+.metrics span { font-size: var(--fs-small); color: var(--night-body); }
+
+/* ---------- fit ---------- */
+.fit .sb { display: grid; grid-template-rows: auto auto; align-content: center; gap: clamp(36px, 9vh, 110px); }
+.fitgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(18px, 4vh, 48px) var(--gap); }
+.fitgrid i { font: 500 var(--fs-mono)/1 var(--mono); font-style: normal; letter-spacing: .08em; text-transform: uppercase; color: var(--night-warm); }
+.fitgrid h3 { margin: .9vh 0 .5vh; }
+.fitgrid p { font-size: var(--fs-small); color: var(--night-body); }
+.closing { font: 400 clamp(26px, min(2.7vw, 4.8vh), 54px)/1.2 var(--display); color: var(--night-ink); text-wrap: balance; width: min(100%, 26em); }
+.closing em { color: var(--night-accent); }
+.contact { margin-top: 2vh; font: 500 var(--fs-mono)/1.4 var(--mono); color: var(--night-muted); }
+.contact span { color: var(--night-ink); user-select: all; }
+
+/* ---------- publications ---------- */
+.pubs { height: 100%; display: flex; flex-direction: column; justify-content: center; gap: clamp(8px, 2vh, 22px); }
+.pubs div { display: grid; grid-template-columns: minmax(200px, 22vw) 1fr; gap: var(--gap); align-items: baseline; }
+.pubs .v { font: 500 var(--fs-mono)/1.4 var(--mono); color: var(--ink); }
+.pubs .v span { display: block; color: var(--ink); }
+.pubs .v span.plain { color: var(--muted); }
+.pubs .t { font: 600 var(--fs-lead)/1.3 var(--display); color: var(--ink); }
+
+/* ---------- pager + lightbox ---------- */
+.pager { border: 1px solid var(--line); position: fixed; right: max(16px, calc(env(safe-area-inset-right, 0px) + 20px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); z-index: 20; display: flex; align-items: center; gap: 4px; background: var(--surface); color: var(--ink); border-radius: 999px; box-shadow: var(--shadow); padding: 6px 6px 6px 18px; font: 500 15px/1 var(--mono); font-variant-numeric: tabular-nums; }
+.pager span { min-width: 12em; }
+.pager button { border: 0; background: transparent; color: var(--ink); width: 40px; height: 40px; border-radius: 50%; font-size: 17px; cursor: pointer; }
+.pager button:hover { background: var(--tile); }
+.lightbox { position: fixed; inset: 0; z-index: 30; background: rgba(11,11,16,.94); display: flex; align-items: center; justify-content: center; padding: 3vh 3vw; cursor: zoom-out; }
+.lightbox[hidden] { display: none; }
+.lightbox img { max-width: 94vw; max-height: 92vh; width: auto; height: auto; border-radius: 6px; }
+
+
+/* ---------- presenter notes + mode ---------- */
+.notes { position: fixed; left: max(16px, calc(env(safe-area-inset-left, 0px) + 20px)); bottom: calc(env(safe-area-inset-bottom, 0px) + 20px); z-index: 25; width: min(520px, calc(100vw - 32px)); max-height: 46vh; display: flex; flex-direction: column; background: var(--surface); color: var(--body); border-radius: 14px; box-shadow: 0 2px 6px rgba(0,0,0,.12), 0 30px 60px -20px rgba(0,0,0,.5); }
+.notes[hidden] { display: none; }
+.notes-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; font: 500 14px/1.2 var(--mono); color: var(--muted); border-bottom: 1px solid var(--tile); }
+.notes-head b { color: var(--ink); font-weight: 500; }
+.notes-head .timer { color: var(--ink); font-variant-numeric: tabular-nums; }
+.notes-body { padding: 14px 16px 16px; overflow-y: auto; font: 400 17px/1.55 var(--text); color: var(--ink); white-space: pre-line; }
+.notes-keys { padding: 10px 16px; font: 400 13px/1.4 var(--mono); color: var(--muted); border-top: 1px solid var(--tile); }
+.pager .mode { color: var(--ink); font-weight: 600; margin-left: .6em; }
+
+/* ---------- small screens: slides grow and stack ---------- */
+@media (max-width: 900px), (max-height: 560px) {
+  html { scroll-snap-type: none; }
+  .slide { height: auto; min-height: 100svh; overflow: visible; }
+  .sl { padding-bottom: 96px; }
+  .facts, .flow, .trio, .s-main, .fitgrid, .row.c2, .row.c3, .cols { grid-template-columns: 1fr; }
+  .row, .cols, .cols.r3, .cols.r4 { grid-template-rows: none; height: auto; }
+  .row > .fig, .row > .side, .cols > .col { grid-row: auto; grid-template-rows: none; display: flex; flex-direction: column; gap: 10px; }
+  .tile { height: auto; }
+  .tile img { max-height: none !important; }
+  .arrow { transform: rotate(90deg); margin: 0 0 0 20px; }
+  .card { overflow-x: auto; }
+  .lc { min-width: 760px; grid-template-rows: auto repeat(6, 44px); }
+  .pubs div { grid-template-columns: 1fr; gap: 4px; }
+  .pager span { display: none; }
+}
+
+/* ===== v9: references (Mintly / Alex Carter): bold black sans, two-tone headlines, orange + Regenstrief cyan, floating screenshots, pastel aurora ===== */
+:root {
+  --bg: #FFFFFF; --surface: #FFFFFF; --tile: transparent; --line: rgba(17,17,26,.08);
+  --ink: #0B0B10; --body: #262A36; --muted: #4A5065; --soft: #9A9AA6;
+  --accent: #EE5B2B; --accent-text: #C8461A; --cool: #0083B0; --warm: #EE5B2B; --spark: #EE5B2B;
+  --bar: #0B0B10; --bar-soft: #FAD3C3;
+  --night: #0B0B10; --night-2: #15151C; --night-ink: #FFFFFF; --night-body: #D9DBE4; --night-muted: #A7ABBA; --night-accent: #FF8A5C; --night-warm: #FF8A5C;
+  --display: "Geist", "Helvetica Neue", Arial, sans-serif;
+  --shot: 0 1px 2px rgba(17,17,26,.06), 0 12px 24px -8px rgba(17,17,26,.10), 0 40px 80px -32px rgba(17,17,26,.22);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #0B0B10; --surface: #15151C; --line: rgba(255,255,255,.10); --ink: #FFFFFF; --body: #D9DBE4; --muted: #A7ABBA; --soft: #6E7183;
+    --accent: #FF8A5C; --accent-text: #FF8A5C; --cool: #33B8E6; --warm: #FF8A5C; --spark: #FF8A5C; --bar: #FFFFFF; --bar-soft: #5A2E1F;
+    --shot: 0 1px 2px rgba(0,0,0,.4), 0 30px 60px -24px rgba(0,0,0,.8); color-scheme: dark; }
+}
+:root[data-theme="dark"] { --bg: #0B0B10; --surface: #15151C; --line: rgba(255,255,255,.10); --ink: #FFFFFF; --body: #D9DBE4; --muted: #A7ABBA; --soft: #6E7183;
+  --accent: #FF8A5C; --accent-text: #FF8A5C; --cool: #33B8E6; --warm: #FF8A5C; --spark: #FF8A5C; --bar: #FFFFFF; --bar-soft: #5A2E1F;
+  --shot: 0 1px 2px rgba(0,0,0,.4), 0 30px 60px -24px rgba(0,0,0,.8); color-scheme: dark; }
+
+/* pastel aurora glow on light slides (decorative, behind content) */
+.slide:not(.night):not(.cover) { isolation: isolate; }
+.slide:not(.night):not(.cover)::before { content: ""; position: absolute; z-index: -1; pointer-events: none; right: -12vw; bottom: -18vh; width: 62vw; height: 70vh;
+  background: radial-gradient(40% 45% at 62% 58%, rgba(244,170,200,.42), transparent 70%), radial-gradient(38% 42% at 82% 38%, rgba(160,205,245,.45), transparent 70%), radial-gradient(34% 38% at 40% 80%, rgba(255,198,160,.40), transparent 72%);
+  filter: blur(40px); }
+.night::before { content: none; }
+
+/* headlines: bold sans, tight, two-tone */
+h1, h2, h3 { font-family: var(--display); font-weight: 700; color: var(--ink); }
+h2 { font-weight: 700; letter-spacing: -.035em; line-height: 1.02; }
+h2 em, h1 em { font-style: normal; font-weight: 700; color: var(--accent); }
+h2::after { width: 0; height: 0; margin: 0; }
+h3 { font-weight: 600; letter-spacing: -.02em; }
+.cover h1 { font-weight: 700; letter-spacing: -.045em; line-height: .98; }
+.cover h1 em, .closing em { font-style: normal; color: var(--night-accent); }
+.closing { font-family: var(--display); font-weight: 600; letter-spacing: -.025em; }
+.facts strong, .col li b, .pubs .t, .cover .who strong, .check .q, .stat, .metrics strong { font-family: var(--display); font-style: normal; letter-spacing: -.02em; }
+.facts strong, .col li b, .cover .who strong { font-weight: 600; }
+.pubs .t { font-weight: 600; }
+.check .q { font-weight: 600; }
+.stat, .metrics strong { font-weight: 700; letter-spacing: -.04em; }
+.eyebrow { font-family: var(--text); font-weight: 600; letter-spacing: .01em; text-transform: none; }
+.eyebrow b { color: var(--accent-text); }
+.night .eyebrow b { color: var(--night-accent); }
+
+/* screenshots float: no colored frame behind them */
+.tile, .night .tile { background: transparent; padding: 0; border-radius: 0; }
+.tile img { border-radius: 14px; box-shadow: var(--shot); }
+.night .tile img { box-shadow: 0 30px 60px -24px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.06); }
+.check .tile { aspect-ratio: auto; padding: 0; }
+
+/* cards: white, hairline, soft lift */
+.card, .step { background: var(--surface); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(17,17,26,.04), 0 18px 36px -24px rgba(17,17,26,.18); border-radius: 18px; }
+.mine { background: var(--surface); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(17,17,26,.04), 0 18px 36px -24px rgba(17,17,26,.18); border-radius: 18px; }
+
+/* markers */
+.points h3 .k, .col h3 i, .lc .stage i { font-family: var(--display); font-style: normal; font-weight: 700; color: var(--accent-text); }
+.lc .bar { background: var(--bar); }
+.lc .bar.soft { background: var(--bar-soft); }
+.tagline::before, .pubs .v span:not(.plain)::before { background: var(--cool); }
+.night .tagline::before { background: var(--night-accent); }
+.fitgrid i { color: var(--night-accent); }
+
+/* black pill pager, like the references' CTAs */
+.pager { background: #0B0B10; color: #FFFFFF; border: 0; }
+.pager button { color: #FFFFFF; }
+.pager button:hover { background: rgba(255,255,255,.14); }
+.pager .mode { color: #FF8A5C; }
+
+/* ===== v10: academic serif headlines (Source Serif 4, sturdy weights) + Regenstrief blue as the headline accent, orange as the warm secondary ===== */
+:root { --serif: "Source Serif 4", "Iowan Old Style", Georgia, serif; --ri: #0083B0; --ri-text: #006F99; --night-ri: #33B8E6; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --ri: #33B8E6; --ri-text: #33B8E6; } }
+:root[data-theme="dark"] { --ri: #33B8E6; --ri-text: #33B8E6; }
+h1, h2, h3, .closing, .facts strong, .col li b, .pubs .t, .cover .who strong, .check .q, .stat, .metrics strong { font-family: var(--serif); }
+h2 { font-weight: 600; letter-spacing: -.018em; line-height: 1.06; }
+h3 { font-weight: 600; letter-spacing: -.01em; }
+.cover h1 { font-weight: 600; letter-spacing: -.025em; line-height: 1.02; }
+h2 em, h1 em { font-style: italic; font-weight: 600; color: var(--ri); }
+.night h2 em, .night h1 em, .cover h1 em, .closing em { font-style: italic; color: var(--night-ri); }
+.closing { font-weight: 600; letter-spacing: -.015em; }
+.check .q { font-style: italic; font-weight: 600; }
+.stat, .metrics strong { font-weight: 600; letter-spacing: -.02em; }
+h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius: 2px; background: var(--warm); margin-top: clamp(12px, 2vh, 20px); }
+.night h2::after { background: var(--night-warm); }
+.lc .bar { background: var(--ri); }
+.tagline::before, .pubs .v span:not(.plain)::before { background: var(--warm); }
+
+/* ===== v11: background glow tuned to the palette: Regenstrief blue + sky on one side, peach + soft coral on the other; no violet ===== */
+.slide:not(.night):not(.cover)::before { content: ""; position: absolute; z-index: -1; pointer-events: none; inset: auto; right: -14vw; bottom: -26vh; width: 70vw; height: 82vh;
+  background:
+    radial-gradient(42% 46% at 70% 40%, rgba(64,178,230,.30), transparent 72%),
+    radial-gradient(36% 40% at 48% 66%, rgba(255,196,160,.42), transparent 72%),
+    radial-gradient(30% 34% at 84% 74%, rgba(238,91,43,.14), transparent 74%),
+    radial-gradient(26% 30% at 30% 38%, rgba(168,220,245,.34), transparent 74%);
+  filter: blur(46px); }
+.slide:not(.night):not(.cover)::after { content: ""; position: absolute; z-index: -1; pointer-events: none; left: -10vw; top: -16vh; width: 40vw; height: 46vh;
+  background: radial-gradient(50% 50% at 50% 50%, rgba(0,131,176,.10), transparent 70%); filter: blur(40px); }
+/* alternate the glow corner on every other light slide for rhythm */
+.slide:not(.night):not(.cover):nth-of-type(even)::before { right: auto; left: -16vw; transform: scaleX(-1); }
+.slide:not(.night):not(.cover):nth-of-type(even)::after { left: auto; right: -10vw; }
+/* dark slides: deep blue bloom + a whisper of warm */
+.night { isolation: isolate; position: relative; }
+.night::before { content: ""; position: absolute; z-index: -1; pointer-events: none; right: -10vw; top: -20vh; width: 60vw; height: 70vh;
+  background: radial-gradient(45% 50% at 60% 45%, rgba(0,131,176,.30), transparent 72%), radial-gradient(30% 34% at 35% 70%, rgba(238,91,43,.12), transparent 74%); filter: blur(50px); }
+.night .sl { position: relative; z-index: 0; }
+.cover::before { content: none; }
+
+/* ===== v12: stronger, visible glow + light cover that matches the deck ===== */
+.slide:not(.night):not(.cover)::before { right: -6vw; bottom: -14vh; width: 64vw; height: 76vh;
+  background:
+    radial-gradient(44% 48% at 68% 42%, rgba(64,178,230,.50), transparent 70%),
+    radial-gradient(38% 42% at 46% 68%, rgba(255,190,150,.62), transparent 70%),
+    radial-gradient(30% 34% at 84% 76%, rgba(238,91,43,.22), transparent 72%),
+    radial-gradient(28% 32% at 28% 36%, rgba(168,220,245,.50), transparent 72%);
+  filter: blur(56px); opacity: .9; }
+.slide:not(.night):not(.cover):nth-of-type(even)::before { left: -8vw; right: auto; }
+
+/* cover: light, glyph field in light mode on the right */
+.cover { background: var(--bg); isolation: isolate; }
+.cover::before { content: ""; position: absolute; z-index: 0; pointer-events: none; right: -10vw; top: -12vh; width: 78vw; height: 120vh;
+  background:
+    radial-gradient(40% 40% at 62% 46%, rgba(64,178,230,.42), transparent 70%),
+    radial-gradient(34% 36% at 46% 70%, rgba(255,190,150,.55), transparent 70%),
+    radial-gradient(26% 28% at 80% 72%, rgba(238,91,43,.20), transparent 72%);
+  filter: blur(60px); }
+#glyphs { z-index: 0; left: 34%; }
+.cover::after { z-index: 0; background: linear-gradient(90deg, #FFFFFF 0%, rgba(255,255,255,.94) 30%, rgba(255,255,255,.35) 52%, rgba(255,255,255,0) 70%); }
+.cover .kicker { color: var(--muted); }
+.cover h1 { color: var(--ink); }
+.cover h1 em { color: var(--ri); }
+.cover .sub { color: var(--body); }
+.cover .who strong { color: var(--ink); }
+.cover .who span { color: var(--muted); }
+
+/* ===== v13: one blended mesh gradient per slide + screenshots that lift off the light background ===== */
+.slide:not(.night):not(.cover)::before, .slide:not(.night):not(.cover):nth-of-type(even)::before {
+  inset: 0; left: 0; right: 0; top: 0; bottom: 0; width: auto; height: auto; opacity: 1; transform: none;
+  background:
+    radial-gradient(58% 62% at 100% 100%, rgba(64,178,230,.42), transparent 72%),
+    radial-gradient(52% 56% at 66% 108%, rgba(255,186,146,.55), transparent 72%),
+    radial-gradient(46% 52% at 106% 52%, rgba(160,214,244,.50), transparent 72%),
+    radial-gradient(34% 40% at 86% 90%, rgba(238,91,43,.18), transparent 72%),
+    radial-gradient(44% 46% at 40% 112%, rgba(190,226,246,.45), transparent 72%),
+    radial-gradient(36% 40% at -4% -6%, rgba(170,220,245,.30), transparent 70%);
+  filter: blur(28px); }
+.slide:not(.night):not(.cover):nth-of-type(even)::before { transform: scaleX(-1); }
+.slide:not(.night):not(.cover)::after { content: none; }
+.cover::before { inset: 0; left: 0; right: 0; top: 0; bottom: 0; width: auto; height: auto;
+  background:
+    radial-gradient(52% 64% at 92% 42%, rgba(64,178,230,.40), transparent 72%),
+    radial-gradient(46% 54% at 70% 92%, rgba(255,186,146,.55), transparent 72%),
+    radial-gradient(36% 44% at 104% 86%, rgba(238,91,43,.18), transparent 72%),
+    radial-gradient(40% 50% at 60% 18%, rgba(170,220,245,.40), transparent 72%);
+  filter: blur(30px); }
+
+/* screenshots: hairline edge + deeper layered shadow so white UI separates from the light page */
+.tile img { border: 1px solid rgba(12,32,64,.12); border-radius: 12px;
+  box-shadow: 0 1px 1px rgba(12,32,64,.04), 0 4px 10px -2px rgba(12,32,64,.08), 0 22px 44px -14px rgba(12,32,64,.28), 0 60px 90px -40px rgba(0,96,140,.22); }
+/* app/website screenshots get a light window bar with traffic-light dots */
+.tile img.app { box-sizing: border-box; padding-top: 26px;
+  background:
+    radial-gradient(circle at 16px 13px, #FF5F57 4px, transparent 4.6px),
+    radial-gradient(circle at 31px 13px, #FEBC2E 4px, transparent 4.6px),
+    radial-gradient(circle at 46px 13px, #28C840 4px, transparent 4.6px),
+    linear-gradient(#FFFFFF, #FFFFFF);
+  background-repeat: no-repeat; }
+.night .tile img { border: 1px solid rgba(255,255,255,.10); box-shadow: 0 30px 60px -24px rgba(0,0,0,.85), 0 0 0 1px rgba(255,255,255,.04); }
+.check .tile img.app { padding-top: 16px; background:
+    radial-gradient(circle at 10px 8px, #FF5F57 2.6px, transparent 3px),
+    radial-gradient(circle at 19px 8px, #FEBC2E 2.6px, transparent 3px),
+    radial-gradient(circle at 28px 8px, #28C840 2.6px, transparent 3px),
+    linear-gradient(#FFFFFF, #FFFFFF); background-repeat: no-repeat; }
+
+/* ===== v14: friendlier lifecycle chart ===== */
+.lc .stage i { display: grid; place-items: center; width: 2.1em; height: 2.1em; border-radius: 50%; margin-bottom: 1vh;
+  font: 700 var(--fs-mono)/1 var(--text); font-style: normal; color: #B8431A; background: #FFEDE4; box-shadow: inset 0 0 0 1px rgba(238,91,43,.18); }
+.lc .bar { position: relative; height: clamp(16px, 2.4vh, 26px); border-radius: 999px;
+  background: linear-gradient(90deg, #8ED9F3 0%, #33B8E6 45%, #0083B0 100%);
+  box-shadow: 0 6px 14px -6px rgba(0,131,176,.55), inset 0 1px 0 rgba(255,255,255,.45); }
+.lc .bar::after { content: ""; position: absolute; top: 50%; right: 4px; transform: translateY(-50%);
+  width: calc(clamp(16px, 2.4vh, 26px) - 8px); height: calc(clamp(16px, 2.4vh, 26px) - 8px); border-radius: 50%; background: #FFFFFF;
+  box-shadow: 0 1px 3px rgba(0,60,90,.35); }
+.lc .bar.soft { background: repeating-linear-gradient(-45deg, #FBD2C0 0 7px, #FDE5DA 7px 14px); box-shadow: inset 0 0 0 1px rgba(238,91,43,.18); }
+.lc .bar.soft::after { background: #FFFFFF; box-shadow: 0 1px 3px rgba(184,67,26,.35); }
+.lc .note { justify-self: start; font: 600 var(--fs-mono)/1 var(--text); font-style: normal; color: #B8431A; background: #FFEDE4; padding: .45em .8em; border-radius: 999px; margin-left: 6px; }
+.lc .row-l::before { content: ""; display: inline-block; width: .55em; height: .55em; border-radius: 50%; background: #33B8E6; margin-right: .6em; vertical-align: .08em; }
+.lc .row-l.base::before { background: #FBD2C0; }
+
+/* ===== v15: clearer hierarchy on the map + Echo overview ===== */
+.map { height: 100%; display: grid; grid-template-columns: 1.45fr 1fr; gap: calc(var(--gap) * 1.4); align-items: center; }
+.feat { display: flex; flex-direction: column; gap: clamp(8px, 1.6vh, 18px); min-width: 0; }
+.feat .tile { height: auto; justify-content: flex-start; }
+.feat .tile img { max-height: 40vh; }
+.feat h3 { font-size: clamp(26px, min(2.3vw, 3.9vh), 44px); margin-top: .6vh; }
+.chip { align-self: flex-start; font: 600 var(--fs-mono)/1 var(--text); color: #FFFFFF; background: #0B0B10; padding: .55em 1em; border-radius: 999px; }
+.names { font-size: var(--fs-small); color: var(--muted); }
+.names b { color: var(--ink); font-weight: 600; }
+.names .sep { margin: 0 .4em; }
+.minor { display: flex; flex-direction: column; gap: clamp(20px, 5vh, 56px); min-width: 0; }
+.mrow { display: grid; grid-template-columns: 44% 1fr; gap: clamp(12px, 1.4vw, 24px); align-items: center; }
+.mrow .tile { height: auto; }
+.mrow .tile img { max-height: 18vh; }
+.mrow h3 { font-size: var(--fs-h3); margin-bottom: .6vh; }
+.feat h3 i, .mrow h3 i { font-style: normal; font-weight: 700; color: var(--accent-text); margin-right: .35em; }
+.cp { height: 100%; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto auto auto; column-gap: calc(var(--gap) * 1.6); row-gap: clamp(6px, 1.3vh, 14px); align-content: center; }
+.cpcol { grid-row: span 5; display: grid; grid-template-rows: subgrid; min-width: 0; }
+.cpcol .tile { height: auto; }
+.cpcol .tile img { max-height: 36vh; }
+.ai { font: 500 var(--fs-mono)/1.3 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.ai span { color: var(--accent-text); margin: 0 .3em; }
+.cplabel { font: 700 var(--fs-small)/1.2 var(--text); color: var(--accent-text); margin-top: .8vh; }
+.cpq { font: italic 600 clamp(26px, min(2.4vw, 4.1vh), 46px)/1.12 var(--serif); color: var(--ink); letter-spacing: -.01em; }
+.solves { font-size: var(--fs-small); color: var(--body); }
+.solves b { color: var(--ink); }
+@media (max-width: 900px), (max-height: 560px) {
+  .map, .cp, .mrow { grid-template-columns: 1fr; }
+  .cp { grid-template-rows: none; } .cpcol { grid-row: auto; display: flex; flex-direction: column; gap: 10px; }
+}
+
+/* v15b: Echo overview columns as simple stacks */
+.cp { grid-template-rows: none; align-items: start; align-content: center; }
+.cpcol { grid-row: auto; display: flex; flex-direction: column; gap: clamp(6px, 1.2vh, 12px); }
+.cpcol .tile { display: block; margin: .6vh 0 .4vh; }
+.cpcol .tile img { display: block; width: 100%; height: auto; max-height: none; }
+.cpcol .cplabel { margin-top: .6vh; }
+
+/* v15c: equal, height-capped checkpoint images */
+.cp { align-content: start; }
+.cpcol .tile img { width: auto; max-width: 100%; height: 34vh; object-fit: contain; object-position: left top; }
+
+/* v16: explanatory project map + lighter shadows */
+.th3 { height: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: auto auto auto auto auto auto; column-gap: calc(var(--gap) * 1.2); row-gap: clamp(4px, .9vh, 10px); align-content: center; }
+.th { grid-row: span 6; display: grid; grid-template-rows: subgrid; min-width: 0; }
+.th .tile { height: auto; margin-bottom: 1vh; justify-content: flex-start; }
+.th .tile img { height: 24vh; width: auto; max-width: 100%; object-fit: contain; object-position: left top; }
+.thn { font: 700 var(--fs-mono)/1 var(--text); color: var(--accent-text); }
+.th h3 { font-size: var(--fs-h3); margin-bottom: .6vh; }
+.thp { font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+.thp b { color: var(--ink); font-weight: 600; }
+.thw { font: 500 var(--fs-mono)/1.3 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--ri-text, #006F99); margin-top: .6vh; }
+.tile img, .tile img.app { box-shadow: 0 1px 2px rgba(12,32,64,.05), 0 10px 24px -12px rgba(12,32,64,.14), 0 24px 48px -28px rgba(0,110,160,.14); border-color: rgba(12,32,64,.08); }
+.card, .step, .mine { box-shadow: 0 1px 2px rgba(12,32,64,.03), 0 12px 28px -20px rgba(12,32,64,.12); }
+@media (max-width: 900px), (max-height: 560px) { .th3 { grid-template-columns: 1fr; grid-template-rows: none; } .th { grid-row: auto; display: flex; flex-direction: column; gap: 8px; } }
+
+/* v17: cleaner mesh: blue and peach kept apart (overlapping complements turn grey), bridged by sky and blush, boosted saturation */
+.slide:not(.night):not(.cover)::before, .slide:not(.night):not(.cover):nth-of-type(even)::before {
+  background:
+    radial-gradient(48% 56% at 104% 30%, rgba(56,182,240,.55), transparent 70%),
+    radial-gradient(40% 46% at 88% 64%, rgba(150,220,250,.55), transparent 70%),
+    radial-gradient(44% 50% at 70% 106%, rgba(255,178,140,.60), transparent 70%),
+    radial-gradient(30% 36% at 92% 100%, rgba(255,150,170,.38), transparent 70%),
+    radial-gradient(30% 34% at 40% 112%, rgba(255,214,186,.55), transparent 72%),
+    radial-gradient(34% 40% at -6% -8%, rgba(150,215,248,.35), transparent 70%);
+  filter: blur(24px) saturate(1.35); }
+.cover::before {
+  background:
+    radial-gradient(44% 56% at 96% 30%, rgba(56,182,240,.52), transparent 70%),
+    radial-gradient(36% 44% at 80% 60%, rgba(150,220,250,.50), transparent 70%),
+    radial-gradient(42% 50% at 64% 104%, rgba(255,178,140,.60), transparent 70%),
+    radial-gradient(28% 34% at 90% 98%, rgba(255,150,170,.36), transparent 70%);
+  filter: blur(26px) saturate(1.35); }
+
+/* v18: stage headers top-aligned so all number badges sit on one line */
+.lc .stage { align-self: start; }
+
+/* v19: AITC-style wash. Big soft ellipses from the top edge, solid hues fading to the SAME hue at 0 alpha
+   (never the `transparent` keyword, which is black at 0 and drags the ramp grey), no blur, mostly blue with a warm apricot accent. */
+.slide:not(.night):not(.cover)::before, .slide:not(.night):not(.cover):nth-of-type(even)::before, .cover::before {
+  inset: 0; left: 0; right: 0; top: 0; bottom: 0; width: auto; height: auto; transform: none; filter: none; opacity: .85;
+  background:
+    radial-gradient(55% 120% at 4% 0%, rgb(178 216 247 / 1) 0%, rgb(178 216 247 / 0) 72%),
+    radial-gradient(38% 80% at 14% 70%, rgb(156 202 240 / .85) 0%, rgb(156 202 240 / 0) 70%),
+    radial-gradient(45% 100% at 50% 0%, rgb(226 241 252 / 1) 0%, rgb(226 241 252 / 0) 74%),
+    radial-gradient(40% 95% at 98% 18%, rgb(255 217 199 / 1) 0%, rgb(255 217 199 / 0) 70%); }
+.slide:not(.night):not(.cover):nth-of-type(even)::before { transform: scaleX(-1); }
+.cover::before {
+  background:
+    radial-gradient(60% 120% at 100% 0%, rgb(178 216 247 / 1) 0%, rgb(178 216 247 / 0) 72%),
+    radial-gradient(40% 85% at 86% 78%, rgb(156 202 240 / .85) 0%, rgb(156 202 240 / 0) 70%),
+    radial-gradient(45% 100% at 55% 0%, rgb(226 241 252 / 1) 0%, rgb(226 241 252 / 0) 74%),
+    radial-gradient(42% 95% at 62% 105%, rgb(255 217 199 / 1) 0%, rgb(255 217 199 / 0) 70%); }
+.night::before { filter: none; background:
+    radial-gradient(55% 80% at 95% 0%, rgb(47 157 251 / .30) 0%, rgb(47 157 251 / 0) 70%),
+    radial-gradient(45% 70% at 55% 115%, rgb(124 155 253 / .22) 0%, rgb(124 155 253 / 0) 70%),
+    radial-gradient(45% 80% at 0% 100%, rgb(253 165 121 / .24) 0%, rgb(253 165 121 / 0) 70%);
+  inset: 0; left: 0; right: 0; top: 0; bottom: 0; width: auto; height: auto; }
+
+/* v20: calmer wash. Mostly white; one pale blue at top-right, one apricot blush at bottom-left; same on every slide */
+.slide:not(.night):not(.cover)::before, .slide:not(.night):not(.cover):nth-of-type(even)::before, .cover::before {
+  transform: none; opacity: 1;
+  background:
+    radial-gradient(42% 60% at 100% 0%, rgb(205 230 250 / .9) 0%, rgb(205 230 250 / 0) 70%),
+    radial-gradient(36% 52% at 0% 100%, rgb(255 226 212 / .85) 0%, rgb(255 226 212 / 0) 70%); }
+
+/* v21: fuller consortia slide */
+.cons { height: 100%; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); grid-template-rows: auto auto auto auto; column-gap: calc(var(--gap)*1.2); row-gap: clamp(4px,.9vh,10px); align-content: center; }
+.cn { grid-row: span 4; display: grid; grid-template-rows: subgrid; min-width: 0; }
+.cn .tile { height: auto; justify-content: flex-start; margin-bottom: .8vh; }
+.cn .tile img { height: 22vh; width: auto; max-width: 100%; object-fit: contain; object-position: left top; }
+.cn h3 { font-size: var(--fs-h3); }
+.cn .bul { font-size: var(--fs-small); line-height: 1.4; display: flex; flex-direction: column; gap: .5vh; margin-top: .6vh; }
+@media (max-width: 900px), (max-height: 560px) { .cons { grid-template-columns: 1fr; grid-template-rows: none; } .cn { grid-row: auto; display: flex; flex-direction: column; gap: 8px; } }
+
+/* v22: framed screenshots: white mat + crisp hairline border + light shadow */
+.tile img, .tile img.app { box-sizing: border-box; border: 1px solid rgba(12,32,64,.16); border-radius: 14px; padding: 6px; background-color: #FFFFFF;
+  box-shadow: 0 1px 2px rgba(12,32,64,.05), 0 12px 28px -14px rgba(12,32,64,.16); }
+.tile img.app { padding-top: 26px;
+  background:
+    radial-gradient(circle at 18px 14px, #FF5F57 4px, transparent 4.6px),
+    radial-gradient(circle at 33px 14px, #FEBC2E 4px, transparent 4.6px),
+    radial-gradient(circle at 48px 14px, #28C840 4px, transparent 4.6px),
+    linear-gradient(#FFFFFF, #FFFFFF); background-repeat: no-repeat; }
+.tile img.svg { padding: 10px; }
+.night .tile img, .night .tile img.app { background-color: #15151C; border: 1px solid rgba(255,255,255,.16); padding: 6px; box-shadow: 0 20px 40px -20px rgba(0,0,0,.8); }
+
+/* v23: consortia summary */
+.consum { height: 100%; display: grid; grid-template-rows: auto auto; align-content: center; gap: clamp(24px, 5vh, 56px); }
+.progs { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: calc(var(--gap)*1.2); }
+.progs figure { display: flex; flex-direction: column; gap: 1vh; min-width: 0; }
+.progs .tile { height: auto; justify-content: flex-start; }
+.progs .tile img { height: 24vh; width: auto; max-width: 100%; object-fit: contain; object-position: left top; }
+.progs figcaption { font-size: var(--fs-small); color: var(--muted); }
+.progs figcaption b { font: 600 var(--fs-h3)/1.2 var(--serif); color: var(--ink); margin-right: .4em; }
+.roles { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: var(--gap); padding-top: clamp(14px, 2.6vh, 28px); border-top: 1px solid var(--line); }
+.roles h3 { font-size: var(--fs-h3); margin-bottom: .6vh; }
+.roles h3::before { content: ""; display: block; width: 24px; height: 3px; border-radius: 2px; background: var(--warm); margin-bottom: 1vh; }
+.roles p { font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+@media (max-width: 900px), (max-height: 560px) { .progs, .roles { grid-template-columns: 1fr; } }
+
+/* v24: explained Echo overview */
+.cp2 { height: 100%; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto auto auto; column-gap: calc(var(--gap)*1.6); row-gap: clamp(6px,1.2vh,12px); align-content: center; }
+.cpx { grid-row: span 4; display: grid; grid-template-rows: subgrid; min-width: 0; }
+.cpn { font: 700 var(--fs-small)/1.2 var(--text); color: var(--accent-text); }
+.cpx .tile { height: auto; justify-content: flex-start; }
+.cpx .tile img { height: 25vh; width: auto; max-width: 100%; object-fit: contain; object-position: left top; }
+.cpx .cpq { font: italic 600 clamp(22px, min(2vw, 3.4vh), 38px)/1.15 var(--serif); color: var(--ink); }
+.cpx dl { display: grid; grid-template-columns: max-content 1fr; column-gap: 1em; row-gap: .5vh; margin: 0; font-size: var(--fs-small); line-height: 1.4; }
+.cpx dt { font: 500 var(--fs-mono)/1.6 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.cpx dd { margin: 0; color: var(--body); }
+.cpx dt:nth-of-type(3), .cpx dt:nth-of-type(3) + dd { color: var(--ink); font-weight: 600; }
+.cpx dt:nth-of-type(3) { color: var(--accent-text); }
+@media (max-width: 900px), (max-height: 560px) { .cp2 { grid-template-columns: 1fr; grid-template-rows: none; } .cpx { grid-row: auto; display: flex; flex-direction: column; gap: 8px; } }
+
+/* v24b */
+.cp2 { grid-template-rows: none; align-items: start; }
+.cpx { grid-row: auto; display: flex; flex-direction: column; gap: clamp(8px, 1.4vh, 16px); }
+.cpx .tile img { max-height: none; height: 27vh; }
+
+/* v25: consortia as editorial split */
+.cons3 { height: 100%; display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: calc(var(--gap) * 2); align-items: center; }
+.rolelist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: clamp(12px, 2.6vh, 30px); }
+.rolelist li { display: grid; grid-template-columns: 2.6em 1fr; gap: 1em; align-items: start; }
+.rolelist span { display: grid; place-items: center; width: 2.4em; height: 2.4em; border-radius: 50%; background: #FFEDE4; color: #B8431A; font: 700 var(--fs-mono)/1 var(--text); }
+.rolelist h3 { font-size: var(--fs-h3); margin-bottom: .4vh; }
+.rolelist p { font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+.stack3 { position: relative; height: 56vh; }
+.stack3 figure { position: absolute; margin: 0; width: 62%; }
+.stack3 img { display: block; width: 100%; height: auto; box-sizing: border-box; border: 1px solid rgba(12,32,64,.16); border-radius: 14px; padding: 26px 6px 6px; background-color: #fff;
+  background-image: radial-gradient(circle at 18px 14px, #FF5F57 4px, transparent 4.6px), radial-gradient(circle at 33px 14px, #FEBC2E 4px, transparent 4.6px), radial-gradient(circle at 48px 14px, #28C840 4px, transparent 4.6px);
+  background-repeat: no-repeat; box-shadow: 0 2px 4px rgba(12,32,64,.06), 0 24px 48px -24px rgba(12,32,64,.30); cursor: zoom-in; }
+.stack3 figcaption { position: absolute; left: 14px; bottom: -14px; background: #0B0B10; color: #fff; font: 500 var(--fs-mono)/1 var(--text); padding: .55em .95em; border-radius: 999px; white-space: nowrap; }
+.stack3 figcaption b { font-weight: 700; }
+.stack3 .s1 { left: 0; top: 0; z-index: 1; }
+.stack3 .s2 { left: 19%; top: 30%; z-index: 2; }
+.stack3 .s3 { left: 38%; top: 60%; z-index: 3; }
+@media (max-width: 900px), (max-height: 560px) { .cons3 { grid-template-columns: 1fr; } .stack3 { height: auto; display: flex; flex-direction: column; gap: 28px; } .stack3 figure { position: relative; width: 100%; left: 0; top: 0; } }
+/* Echo overview: keep header and body apart at short heights */
+.cpx .tile img { height: 24vh; }
+.echo .sl { gap: clamp(22px, 5vh, 56px); }
+
+/* v25b */
+.stack3 { height: 52vh; }
+.stack3 figure { width: 60%; }
+.stack3 figcaption { left: auto; right: 12px; top: -13px; bottom: auto; }
+.stack3 .s2 { left: 20%; top: 29%; } .stack3 .s3 { left: 40%; top: 58%; }
+.cp2 { margin-top: clamp(4px, 1.6vh, 16px); }
+
+/* v26: Echo spacing + vivid program labels */
+.cpx .cpq { margin-top: clamp(10px, 2vh, 22px); }
+.stack3 figcaption { color: #0B0B10; font-weight: 600; padding: .55em 1em; border: 1.5px solid #FFFFFF;
+  box-shadow: 0 6px 14px -6px rgba(12,32,64,.30); }
+.stack3 figcaption b { font-weight: 800; }
+.stack3 .s1 figcaption { background: linear-gradient(135deg, #8ED9F3, #4FC3F7); }
+.stack3 .s2 figcaption { background: linear-gradient(135deg, #FFD3BE, #FFAE8A); }
+.stack3 .s3 figcaption { background: linear-gradient(135deg, #C9E7FB, #9CCBF2); }
+.stack3 figcaption::before { content: ""; display: inline-block; width: .55em; height: .55em; border-radius: 50%; background: #FFFFFF; margin-right: .5em; vertical-align: .05em; box-shadow: 0 0 0 2px rgba(255,255,255,.4); }
+
+.cp2 { margin-top: clamp(14px, 3.2vh, 30px); }
+.cpx .tile img { height: 22vh; }
+
+/* v27: glassy program labels */
+.stack3 figcaption { color: #0B2238; font-weight: 600; border: 1px solid rgba(255,255,255,.75);
+  -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(255,255,255,.25), 0 8px 22px -8px rgba(0,90,140,.35), 0 0 0 .5px rgba(12,32,64,.08); }
+.stack3 figcaption::before { background: radial-gradient(circle at 35% 30%, #FFFFFF, rgba(255,255,255,.6)); box-shadow: 0 0 6px rgba(255,255,255,.9); }
+.stack3 .s1 figcaption { background: linear-gradient(160deg, rgba(255,255,255,.75) 0%, rgba(120,205,245,.45) 55%, rgba(79,195,247,.55) 100%); }
+.stack3 .s2 figcaption { background: linear-gradient(160deg, rgba(255,255,255,.75) 0%, rgba(255,200,175,.50) 55%, rgba(255,170,135,.55) 100%); }
+.stack3 .s3 figcaption { background: linear-gradient(160deg, rgba(255,255,255,.78) 0%, rgba(190,225,250,.50) 55%, rgba(150,200,240,.55) 100%); }
+
+/* v28: real frosted glass: label sits ON the screenshot, mostly clear white, heavy blur, thin bright rim, no colored gradient */
+.stack3 figcaption, .stack3 .s1 figcaption, .stack3 .s2 figcaption, .stack3 .s3 figcaption {
+  top: 38px; right: 14px; left: auto; bottom: auto;
+  background: rgba(255,255,255,.22);
+  -webkit-backdrop-filter: blur(18px) saturate(160%) brightness(1.08); backdrop-filter: blur(18px) saturate(160%) brightness(1.08);
+  border: 1px solid rgba(255,255,255,.55);
+  box-shadow: inset 0 1px 1px rgba(255,255,255,.6), 0 4px 16px rgba(0,0,0,.12);
+  color: #FFFFFF; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,.25); padding: .6em 1.05em; }
+.stack3 figcaption::before { width: .5em; height: .5em; box-shadow: none; }
+.stack3 .s1 figcaption::before { background: #6FD6F7; }
+.stack3 .s2 figcaption::before { background: #FFAE8A; }
+.stack3 .s3 figcaption::before { background: #B9DCFF; }
+.stack3 .s2 figcaption { color: #0B2238; text-shadow: none; background: rgba(255,255,255,.45); }
+
+/* v29: label lives in the window title bar (like a browser URL pill), never over content */
+.stack3 img { padding-top: 40px !important;
+  background-image: radial-gradient(circle at 18px 20px, #FF5F57 4.5px, transparent 5px), radial-gradient(circle at 34px 20px, #FEBC2E 4.5px, transparent 5px), radial-gradient(circle at 50px 20px, #28C840 4.5px, transparent 5px) !important; }
+.stack3 figcaption, .stack3 .s1 figcaption, .stack3 .s2 figcaption, .stack3 .s3 figcaption {
+  top: 7px; left: 70px; right: auto; bottom: auto; height: 26px; display: inline-flex; align-items: center; padding: 0 .9em;
+  font: 600 clamp(12px, .85vw, 14px)/1 var(--text); color: #0B2238; text-shadow: none;
+  background: rgba(234,244,252,.75); -webkit-backdrop-filter: blur(12px) saturate(160%); backdrop-filter: blur(12px) saturate(160%);
+  border: 1px solid rgba(255,255,255,.9); box-shadow: inset 0 1px 0 rgba(255,255,255,1), 0 0 0 1px rgba(12,32,64,.06), 0 2px 6px -2px rgba(12,32,64,.12); }
+.stack3 .s2 figcaption { background: rgba(255,238,228,.8); }
+.stack3 figcaption b { font-weight: 700; margin-right: .1em; }
+
+/* v30: centered text + stronger, readable tints */
+.stack3 figcaption, .stack3 .s1 figcaption, .stack3 .s2 figcaption, .stack3 .s3 figcaption {
+  display: inline-block; height: 26px; line-height: 24px; padding: 0 .95em; top: 7px; box-sizing: border-box;
+  font-size: clamp(12px, .85vw, 14px); color: #0B2238; }
+.stack3 figcaption::before { vertical-align: middle; position: relative; top: -1px; }
+.stack3 .s1 figcaption { background: linear-gradient(180deg, rgba(220,242,252,.95), rgba(178,226,248,.95)); border-color: #8FD3F2; }
+.stack3 .s2 figcaption { background: linear-gradient(180deg, rgba(255,234,223,.95), rgba(255,206,182,.95)); border-color: #FFB592; }
+.stack3 .s3 figcaption { background: linear-gradient(180deg, rgba(226,237,255,.95), rgba(190,212,250,.95)); border-color: #9EBDF3; }
+.stack3 .s1 figcaption::before { background: #0083B0; } .stack3 .s2 figcaption::before { background: #E2622F; } .stack3 .s3 figcaption::before { background: #3D6FD6; }
+
+/* v31: no pill. Plain, centered title in the window bar, like a modern browser/app window */
+.stack3 figcaption, .stack3 .s1 figcaption, .stack3 .s2 figcaption, .stack3 .s3 figcaption {
+  left: 0; right: 0; top: 1px; height: 38px; line-height: 38px; padding: 0; text-align: center;
+  background: none !important; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none;
+  font: 500 clamp(12px, .9vw, 14px)/38px var(--text); color: #5A6478; letter-spacing: .01em; text-shadow: none; }
+.stack3 figcaption b { font-weight: 700; color: #0B0B10; }
+.stack3 figcaption::before { width: 7px; height: 7px; top: -1px; margin-right: .55em; box-shadow: none; }
+
+/* v32: evolution arrows between stages; slide 08 without dots */
+.evo > .fig { position: relative; }
+.evo > .fig .tile { position: relative; overflow: visible; }
+.evo > .fig:not(:last-child) .tile::after { content: "→"; position: absolute; top: 50%; right: calc(var(--gap) / -2); transform: translate(50%, -50%); z-index: 5;
+  width: clamp(34px, 2.8vw, 46px); height: clamp(34px, 2.8vw, 46px); border-radius: 50%; display: grid; place-items: center;
+  background: #FFFFFF; color: var(--accent-text); font: 700 clamp(16px, 1.3vw, 22px)/1 var(--text);
+  border: 1px solid rgba(12,32,64,.12); box-shadow: 0 6px 16px -6px rgba(12,32,64,.25); }
+.stack3 img { padding-top: 34px !important; background-image: none !important; }
+.stack3 figcaption, .stack3 .s1 figcaption, .stack3 .s2 figcaption, .stack3 .s3 figcaption { height: 32px; line-height: 32px; }
+.stack3 figcaption::before { content: none !important; }
+
+/* v33: cover. Text side stays pure white; color lives on the right as a vivid AITC-style wash + glyph field */
+.cover::before { left: 46%; right: 0; top: 0; bottom: 0; width: auto; opacity: 1;
+  background:
+    radial-gradient(70% 70% at 78% 30%, rgb(120 198 245 / .95) 0%, rgb(120 198 245 / 0) 70%),
+    radial-gradient(60% 60% at 96% 78%, rgb(255 190 160 / .95) 0%, rgb(255 190 160 / 0) 70%),
+    radial-gradient(55% 55% at 40% 92%, rgb(255 222 206 / .9) 0%, rgb(255 222 206 / 0) 72%),
+    radial-gradient(60% 60% at 50% 10%, rgb(200 228 250 / .9) 0%, rgb(200 228 250 / 0) 72%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 30%); mask-image: linear-gradient(90deg, transparent 0%, #000 30%); }
+#glyphs { left: 50%; -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 25%); mask-image: linear-gradient(90deg, transparent 0%, #000 25%); }
+.cover::after { background: none; }
+.cover h1 em { color: #005A80; }
+.cover h1 { color: #0B0B10; }
+
+.cover::before { background:
+    radial-gradient(62% 58% at 80% 18%, rgb(120 198 245 / .95) 0%, rgb(120 198 245 / 0) 68%),
+    radial-gradient(48% 46% at 104% 50%, rgb(190 226 250 / .85) 0%, rgb(190 226 250 / 0) 70%),
+    radial-gradient(58% 52% at 40% 104%, rgb(255 190 160 / .95) 0%, rgb(255 190 160 / 0) 66%),
+    radial-gradient(40% 40% at 74% 104%, rgb(255 205 214 / .75) 0%, rgb(255 205 214 / 0) 70%); }
+
+/* v34: MicroSlats cover background (light) */
+#slats { position: absolute; top: 0; bottom: 0; right: 0; left: 44%; z-index: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 28%); mask-image: linear-gradient(90deg, transparent 0%, #000 28%); }
+#slats canvas { display: block; width: 100%; height: 100%; }
+.cover::before { opacity: .55; }
+
+#slats { left: 48%; opacity: .9; }
+.cover::before { opacity: .7; }
+
+/* v35: React Bits Threads on the cover */
+#threads-bg { position: absolute; top: 0; bottom: 0; right: 0; left: 38%; width: 62%; height: 100%; z-index: 0; display: block; }
+.cover::before { opacity: .55; }
+
+#threads-bg { left: 46%; width: 54%; }
+
+/* v36: dark cover with GhostFibers */
+.cover { background: #070B14; }
+.cover::before { content: none !important; }
+.cover::after { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(7,11,20,.85) 0%, rgba(7,11,20,.55) 32%, rgba(7,11,20,0) 56%); }
+#fibers { position: absolute; inset: 0; z-index: 0; }
+#fibers canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.cover .sl { position: relative; z-index: 1; }
+.cover .kicker { color: #A9B6C9; }
+.cover h1 { color: #FFFFFF; }
+.cover h1 em { color: #7FD3F7; }
+.cover .sub { color: #D3DCE8; }
+.cover .who strong { color: #FFFFFF; }
+.cover .who span { color: #A9B6C9; }
+
+/* v37: fibers a bit further from the title; soft gradient ground */
+#fibers { left: 16%; right: -6%; }
+.cover { background:
+  radial-gradient(70% 90% at 85% 15%, #13305A 0%, rgba(19,48,90,0) 70%),
+  radial-gradient(60% 70% at 70% 110%, #1A2A4A 0%, rgba(26,42,74,0) 70%),
+  linear-gradient(135deg, #0A1324 0%, #0B1A33 55%, #0E2140 100%); }
+.cover::after { background: linear-gradient(90deg, rgba(10,19,36,.9) 0%, rgba(10,19,36,.6) 30%, rgba(10,19,36,0) 52%); }
+
+#fibers { left: 28%; right: -10%; }
+
+/* v38: no hard edge on the left; calmer fibers */
+#fibers { left: 0; right: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.08) 22%, rgba(0,0,0,.45) 42%, #000 64%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.08) 22%, rgba(0,0,0,.45) 42%, #000 64%); }
+.cover::after { content: none; }
+
+/* v39: warm balance on the cover */
+.cover { background:
+  radial-gradient(42% 56% at 0% 100%, rgb(255 150 125 / .30) 0%, rgb(255 150 125 / 0) 68%),
+  radial-gradient(70% 90% at 85% 15%, #13305A 0%, rgba(19,48,90,0) 70%),
+  radial-gradient(60% 70% at 70% 110%, #1A2A4A 0%, rgba(26,42,74,0) 70%),
+  linear-gradient(135deg, #0A1324 0%, #0B1A33 55%, #0E2140 100%); }
+.cover h1::after { content: ""; display: block; width: 44px; height: 3px; border-radius: 2px; background: #F2A65A; margin-top: clamp(16px, 2.6vh, 28px); }
+
+/* v40: no eyebrow; text block takes more of the left side */
+.cover .sl { grid-template-rows: 1fr auto; }
+.cover h1 { font-size: clamp(48px, min(6.4vw, 10.5vh), 124px); width: min(100%, 12em); }
+.cover .sub { font-size: clamp(20px, min(1.9vw, 3.2vh), 34px); width: min(100%, 30em); }
+.cover .mid { gap: clamp(18px, 3.4vh, 40px); }
+#fibers { -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.06) 30%, rgba(0,0,0,.4) 50%, #000 70%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.06) 30%, rgba(0,0,0,.4) 50%, #000 70%); }
+
+/* v41: cover entrance, portrait ring */
+@keyframes coverIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.cover h1, .cover .sub, .cover .who { animation: coverIn .9s cubic-bezier(.2,.7,.2,1) both; }
+.cover h1 { animation-delay: .35s; }
+.cover .sub { animation-delay: .8s; }
+.cover .who { animation-delay: 1.15s; }
+@media (prefers-reduced-motion: reduce) { .cover h1, .cover .sub, .cover .who { animation: none; } }
+.cover .who img { border: 3px solid #0B1730; box-shadow: 0 0 0 2px #F2A65A, 0 6px 18px -6px rgba(242,166,90,.45); }
+/* v42: HoloMosaic panel (as on Clarion): pearl-gold tiles + a faint ASCII data layer */
+#fibers { left: auto; right: 0; width: 52%; -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 22%, rgba(0,0,0,.7) 45%, #000 65%);
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.25) 22%, rgba(0,0,0,.7) 45%, #000 65%); }
+#fibers .hm { position: absolute; inset: 0; }
+#fibers .hm-data { display: none; }
+#fibers .hm-scan { position: absolute; left: 0; right: 0; top: 0; height: 22%; pointer-events: none; mix-blend-mode: screen;
+  background: linear-gradient(180deg, rgb(127 211 247 / 0) 0%, rgb(127 211 247 / .55) 85%, rgb(220 244 255 / .95) 100%);
+  animation: hmScan 7s cubic-bezier(.45,0,.55,1) infinite; }
+@keyframes hmScan { from { transform: translateY(-100%); } to { transform: translateY(460%); } }
+@media (prefers-reduced-motion: reduce) { #fibers .hm-scan { display: none; } }
+#fibers .hm-head { position: absolute; left: 0; right: 0; top: 0; height: 0; background: #9FDDF7; opacity: .85; pointer-events: none; }
+#fibers .hm-bg { opacity: .2; }
+.cover .who-tag .url { color: #F2A65A; text-transform: none; letter-spacing: .04em; }
+.cover .who-tag { margin: 0 0 0 clamp(8px, 1.4vw, 22px); padding-left: clamp(16px, 1.6vw, 24px); border-left: 1px solid rgb(159 221 247 / .3);
+  font: 500 clamp(11px, min(.85vw, 1.5vh), 13px)/1.7 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: rgb(127 211 247 / .85); }
+#fibers .hm-tint { position: absolute; inset: 0; background: #33B8E6; mix-blend-mode: color; pointer-events: none; }
+#fibers .hm-base { opacity: 1; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+#fibers { -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.12) 28%, rgba(0,0,0,.55) 50%, #000 72%), linear-gradient(0deg, transparent 0%, #000 10%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0,0,0,.12) 28%, rgba(0,0,0,.55) 50%, #000 72%), linear-gradient(0deg, transparent 0%, #000 10%); mask-composite: intersect; }
+/* v49: About, dot matrix + scannable facts + takeaway */
+.about .sb { grid-template-rows: auto minmax(0, 1fr) auto; }
+.about .facts strong { font-size: var(--fs-h3); }
+.about .facts span { display: block; margin-top: .55em; font: 500 var(--fs-mono)/1.4 var(--mono); letter-spacing: .01em; color: #3E6E86; }
+.lcm { --cg: clamp(10px, 1.2vw, 20px); height: 100%; display: grid; grid-template-columns: minmax(200px, 17vw) repeat(7, minmax(0, 1fr));
+  grid-template-rows: auto repeat(6, minmax(0, 1fr)); column-gap: var(--cg); }
+.lcm .r { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: center; position: relative; border-top: 1px solid #E3EEF4; }
+.lcm .r.hd { border-top: 0; align-items: end; padding-bottom: 1.4vh; }
+.lcm .rl { grid-column: 1; font-size: var(--fs-small); font-weight: 600; color: var(--ink); white-space: nowrap; }
+.lcm .r.base .rl { font-weight: 500; color: #6A5446; }
+.lcm .st { font-size: var(--fs-small); font-weight: 600; color: var(--ink); line-height: 1.2; text-align: center; }
+.lcm .st i { display: block; font: 500 var(--fs-mono)/1 var(--mono); font-style: normal; letter-spacing: .06em;  color: #006F99; margin-bottom: .7vh; }
+.lcm .d, .take .d { justify-self: center; grid-row: 1; width: 7px; height: 7px; border-radius: 50%; background: #CFE3EC; position: relative; z-index: 1; }
+.lcm .d.on, .take .d.on { width: clamp(14px, 2vh, 20px); height: clamp(14px, 2vh, 20px); background: #0083B0; box-shadow: 0 0 0 3px #FFFFFF; }
+.lcm .d.tm, .take .d.tm { width: clamp(14px, 2vh, 20px); height: clamp(14px, 2vh, 20px); background: #FFFFFF; box-shadow: inset 0 0 0 2px #33B8E6, 0 0 0 3px #FFFFFF; }
+.lcm .d.ho { width: clamp(14px, 2vh, 20px); height: clamp(14px, 2vh, 20px); background: #F2A65A; box-shadow: 0 0 0 3px #FFFFFF; }
+.lcm .ln { grid-row: 1; align-self: center; height: 3px; border-radius: 2px; background: linear-gradient(90deg, #7FD3F7, #0083B0);
+  margin-inline: calc((100% - (var(--k) - 1) * var(--cg)) / var(--k) / 2); }
+.lcm .r.base .ln { background: #F8CFA6; }
+.lcm .pill { grid-row: 1; justify-self: center; font: 600 var(--fs-mono)/1 var(--text); color: #B8431A; background: #FFEDE4; padding: .45em .8em; border-radius: 999px; white-space: nowrap; }
+.take { display: flex; align-items: baseline; justify-content: space-between; gap: var(--gap); }
+.take p { margin: 0; font-size: var(--fs-body); color: var(--ink); }
+.take em { font-style: normal; font-weight: 600; color: #006F99; }
+.take .lg { display: flex; align-items: center; gap: .6em; font: 500 var(--fs-mono)/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #3E6E86; white-space: nowrap; }
+.take .lg .d { display: inline-block; margin-left: .8em; }
+.take .lg .d:first-child { margin-left: 0; }
+@media (max-width: 900px) { .lcm { min-width: 760px; grid-template-rows: auto repeat(6, 44px); } .take { flex-direction: column; } }
+/* v50: lighter matrix, smaller marks, no empty dots */
+.lcm .d:not(.on):not(.tm):not(.ho) { display: none; }
+.lcm .d.on, .lcm .d.tm, .lcm .d.ho { width: 11px; height: 11px; }
+.lcm .d.on { background: #1E9CCB; box-shadow: 0 0 0 3px #FFFFFF; }
+.lcm .d.tm { background: #FFFFFF; box-shadow: inset 0 0 0 2px #1E9CCB, 0 0 0 3px #FFFFFF; }
+.lcm .ln { height: 2px; background: #BFE4F3; }
+.lcm .r.base .ln { background: #F8D9BC; }
+.lcm .rl { font-weight: 500; }
+.lcm .r { border-top-color: #EEF5F9; }
+.take .d.on, .take .d.tm { width: 11px; height: 11px; }
+.take .d.on { background: #1E9CCB; }
+.take .d.tm { box-shadow: inset 0 0 0 2px #1E9CCB; }
+/* v51: legend inside the card, in plain words; takeaway stands alone */
+.about .card { display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+.lgd { margin: 1.6vh 0 0; padding-top: 1.4vh; border-top: 1px solid #EEF5F9; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .4em 2em;
+  font-size: var(--fs-small); color: #3E6E86; }
+.lgd span { display: inline-flex; align-items: center; gap: .55em; }
+.lgd .d { display: inline-block; width: 11px; height: 11px; border-radius: 50%; }
+.lgd .d.on { background: #1E9CCB; }
+.lgd .d.tm { background: #FFFFFF; box-shadow: inset 0 0 0 2px #1E9CCB; }
+.lgd .d.ho { background: #F2A65A; }
+.take { justify-content: flex-start; }
+/* v53: slide 02, equal frames, one-line copy, mono labels, shared goal rule */
+.th3 { grid-template-rows: auto auto auto auto auto auto auto; }
+.th3 .goal { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; position: relative; margin-bottom: 1.2vh; padding-top: 2.4vh; }
+.th3 .goal::before { content: ""; position: absolute; left: 0; right: 0; top: calc(2.4vh + 5px); height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, #0083B0, #7FD3F7 70%, rgb(127 211 247 / 0)); }
+.th3 .goal span { position: absolute; left: 0; top: 0; transform: translateY(-60%); font: 500 var(--fs-mono)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;  color: #006F99; }
+.th3 .goal i { width: 12px; height: 12px; border-radius: 50%; background: #0083B0; box-shadow: 0 0 0 3px #FFFFFF; position: relative; z-index: 1; }
+.th3 .goal i:nth-of-type(2) { background: #1E9CCB; }
+.th3 .goal i:nth-of-type(3) { background: #33B8E6; }
+.th3 .goal { grid-row: 1; padding-top: 0; margin-bottom: 1.6vh; }
+.th3 .goal::before { top: 5px; }
+.th .tile { min-height: auto; }
+#threads .th3 { align-content: start; padding-top: 0; }
+.th3 .th { grid-row: 2 / span 6; }
+.th .tile img, .th .tile img.app { --fh: clamp(120px, calc(100vh - 640px), min(22vh, 16vw)); height: var(--fh); width: min(100%, calc((var(--fh) - 32px) * 1.7 + 12px)); max-height: none; object-fit: contain; object-position: center; }
+.thn { font: 500 var(--fs-mono)/1 var(--mono); letter-spacing: .06em;  color: #006F99; }
+.thp { font-size: var(--fs-small); line-height: 1.45; }
+.thp b { display: block; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #3E6E86; margin-bottom: .5vh; }
+/* v54: slide 02 as an index: one row per thread, scan across or down */
+.tix { --fh: clamp(96px, calc((100vh - 390px) / 3.2), 210px); display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+  column-gap: calc(var(--gap) * 1.3); row-gap: clamp(10px, 2.4vh, 28px); align-content: center; height: 100%; }
+.tix .tx { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: center; }
+.tix .tx.hd { align-items: end; margin-bottom: calc(clamp(14px, 3.2vh, 36px) * -0.5); }
+.tix .tx.hd span { font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #3E6E86; }
+.tix .tt { display: grid; grid-template-columns: auto 1fr; column-gap: 1em; align-items: baseline; }
+.tix .tt .thn { grid-row: 1 / span 2; font: 500 var(--fs-mono)/1 var(--mono); letter-spacing: .06em;  color: #006F99; }
+.tix .tt h3 { font-size: var(--fs-h3); line-height: 1.15; margin: 0; }
+.tix .tt .thw { grid-column: 2; margin-top: .9vh; font: 500 calc(var(--fs-mono) * .9)/1.3 var(--mono); letter-spacing: .04em; text-transform: uppercase; color: #006F99; }
+.tix .tp { margin: 0; font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+.tix .tile { height: auto; padding: 0; justify-content: flex-end; }
+.tix .tile img, .tix .tile img.app { height: var(--fh); width: calc((var(--fh) - 32px) * 1.7 + 12px); max-height: none; max-width: none; object-fit: contain; object-position: center; }
+#threads .sb.tix { padding: clamp(10px, 2.6vh, 28px) 0 clamp(20px, 5vh, 48px); }
+@media (max-width: 900px), (max-height: 560px) { .tix { grid-template-columns: 1fr; } .tix .tx { grid-template-columns: 1fr; gap: 8px; } .tix .tx.hd { display: none; } }
+/* v56: slide 03, pipeline strip, larger screenshots, deck-consistent labels */
+.echo .sb.echo-sb { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: clamp(14px, 3vh, 34px); align-content: start; }
+.pipe { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .5em 0;
+  font: 500 calc(var(--fs-mono) * .9)/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #3E6E86; }
+.pipe li { display: inline-flex; align-items: center; }
+.pipe li + li { margin-left: 2.4em; position: relative; }
+.pipe li + li::before { content: "→"; position: absolute; left: -1.7em; top: 50%; transform: translateY(-50%); color: #9CC9DC; letter-spacing: 0; font-weight: 400; }
+.pipe li.ai {  color: #4E6B7A; }
+.pipe li.ck { color: #006F99; background: #E3F4FB; padding: .55em .85em; border-radius: 999px; font-weight: 600; }
+.pipe li.ck::after { content: "✓"; margin-left: .5em; }
+.echo .cp2 { margin-top: 0; align-content: start; }
+.cpn { font: 500 var(--fs-mono)/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #3E6E86; }
+.cpn b {  color: #006F99; font-weight: 600; }
+.cpx .tile img, .echo .cpx .tile img { height: clamp(130px, calc(100vh - 710px), 30vh); width: auto; max-width: 100%; }
+.cpx .cpq { margin-top: clamp(4px, 1vh, 12px); }
+.cpx dt:nth-of-type(3) { color: #C8461A; }
+/* v57: slide 04, research goals over A/B/C, dark badges, credential line, unboxed role */
+#steering .points .goal { margin: 0 0 .6vh; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;  color: #006F99; }
+#steering .points h3 .k { display: inline-grid; place-items: center; width: 1.25em; height: 1.25em; border-radius: 50%; background: #1C2433; color: #FFFFFF;
+  font: 600 .62em/1 var(--text); vertical-align: .18em; margin-right: .5em; }
+#steering .role { padding-top: clamp(4px, 1vh, 12px); }
+#steering .points { gap: clamp(12px, 2.6vh, 30px); }
+#steering .role .cred { margin: 0 0 1vh; font: 600 calc(var(--fs-mono) * .9)/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #C8461A; }
+#steering .role p:last-child { margin: 0; font-size: var(--fs-small); line-height: 1.45; color: var(--body); }
+#steering .role b { display: inline; margin-right: .7em; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #3E6E86; }
+#steering .figcol { align-content: center; grid-template-rows: auto auto; }
+#steering .cap { font: 500 calc(var(--fs-mono) * .85)/1.3 var(--mono); letter-spacing: .04em; text-transform: uppercase;  color: #4E6B7A; margin-top: -.4vh; }
+/* v60: slide 04b, column labels matching the headline, ownership tag, top-aligned */
+#steering-more .row { grid-template-rows: auto auto auto; align-content: start; padding-top: clamp(4px, 1.4vh, 16px); }
+#steering-more .row > .fig { grid-row: span 3; }
+#steering-more .row > .side { grid-row: span 3; justify-content: flex-start; }
+#steering-more .ck { margin: 0 0 .4vh; font: 500 calc(var(--fs-mono) * .9)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;  color: #006F99; }
+#steering-more .tile { overflow: visible; }
+#steering-more .own { position: relative; display: inline-block; max-width: 100%; }
+#steering-more .own img { display: block; }
+#steering-more .own i { position: absolute; right: 10px; top: 0; transform: translateY(-50%); font: 600 calc(var(--fs-mono) * .78)/1 var(--mono); font-style: normal; letter-spacing: .06em;
+  text-transform: uppercase; color: #FFFFFF; background: #0083B0; padding: .55em .8em; border-radius: 999px; box-shadow: 0 4px 12px -4px rgba(0,111,153,.45); white-space: nowrap; }
+/* v61: slide 05, aligned before/after, numbered principles with evidence, role line */
+#review .stack { grid-template-rows: auto auto auto; align-content: start; gap: clamp(14px, 3vh, 34px); padding-top: clamp(4px, 1.4vh, 16px); }
+#review .row { grid-template-rows: auto auto auto; align-content: start; }
+#review .row > .fig { grid-row: span 3; }
+#review .ck { margin: 0 0 .4vh; font: 500 calc(var(--fs-mono) * .9)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;  color: #006F99; }
+#review .fig:first-child .ck {  color: #4E6B7A; }
+#review .tile { justify-content: flex-start; padding: 0; }
+#review .pin { position: relative; display: inline-block; max-width: 100%; }
+#review .pin img { display: block; height: min(32vh, 19vw); width: auto; max-width: 100%; max-height: none; }
+#review .pin i { position: absolute; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #1C2433; color: #fff;
+  font: 600 12px/1 var(--text); font-style: normal; box-shadow: 0 0 0 2px #fff, 0 4px 10px -2px rgba(12,32,64,.35); transform: translate(-50%, -50%); z-index: 2; }
+#review .pin .b1 { left: calc(6px + (100% - 12px) * .172); top: calc(26px + (100% - 32px) * .577); }
+#review .pin .b2 { left: calc(6px + (100% - 12px) * .172); top: calc(26px + (100% - 32px) * .418); background: #C8461A; }
+#review .cap { font-size: var(--fs-small); }
+#review .trio h3 .k { display: inline-grid; place-items: center; width: 1.25em; height: 1.25em; border-radius: 50%; background: #1C2433; color: #fff;
+  font: 600 .62em/1 var(--text); vertical-align: .18em; margin-right: .5em; }
+#review .trio p { font-size: var(--fs-small); }
+#review .trio .ev { margin-top: .5vh; color: var(--body); }
+#review .trio h3 .k2 { background: #C8461A; }
+#review .ev b, #review .role b { display: inline; margin-right: .7em; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #3E6E86; }
+#review .role { margin: 0; font-size: var(--fs-small); color: var(--body); }
+/* v62: slide 05, columns hug the screenshots so the pair fills the width; arrow sits in the gap */
+#review .row.c2 { --h: max(212px, min(calc((100vw - 250px) / 3.95 + 32px), calc(100vh - 530px))); grid-template-columns: calc((var(--h) - 32px) * 1.786 + 12px) calc((var(--h) - 32px) * 2.119 + 12px); justify-content: start; column-gap: clamp(44px, 4.4vw, 64px); }
+#review .pin { display: block; }
+#review .pin img { height: var(--h); width: 100%; }
+#review .row .tile { height: auto; min-height: auto; }
+#review .trio { margin-top: clamp(4px, 1.6vh, 18px); }
+#review .sb.stack, #review .row.c2 { height: auto; }
+#review .row .cap { margin-top: .4vh; }
+#review .evo > .fig:not(:last-child) .tile::after { content: "→"; right: calc(clamp(44px, 4.4vw, 64px) / -2); width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center; background: #1C2433; color: #FFFFFF; border: 0; box-shadow: 0 0 0 4px #FFFFFF, 0 8px 18px -6px rgba(12,32,64,.45);
+  font: 600 20px/1 var(--text); }
+/* v63: slide 05, quiet line arrow instead of a heavy dark circle */
+#review .evo > .fig:not(:last-child) .tile::after { content: ""; width: 38px; height: 14px; border-radius: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 14'%3E%3Cpath d='M1 7h36M31 1.5 37.5 7 31 12.5' fill='none' stroke='%230083B0' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  box-shadow: none; border: 0; opacity: .85; }
+/* v66: slide 05b, equal-height top-aligned rounds, mono labels, issue-to-fix captions, thin arrows */
+#review-more .sl { container-type: inline-size; }
+#review-more .row.c3 { --cg: clamp(40px, 4vw, 60px); --H: min(calc((100cqi - 2 * var(--cg) - 36px) / 2.504 + 12px), calc(100vh - 370px));
+  height: auto; align-content: start; justify-content: start; padding-top: clamp(4px, 1.4vh, 16px);
+  grid-template-columns: calc(.571 * (var(--H) - 12px) + 12px) calc(.707 * (var(--H) - 12px) + 12px) calc(1.226 * (var(--H) - 12px) + 12px);
+  grid-template-rows: auto auto auto; column-gap: var(--cg); }
+#review-more .row > .fig { grid-row: span 3; }
+#review-more .ck { margin: 0 0 .4vh; font: 500 calc(var(--fs-mono) * .9)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;  color: #4E6B7A; }
+#review-more .ck.on {  color: #006F99; }
+#review-more .tile { height: auto; min-height: auto; padding: 0; justify-content: flex-start; align-items: flex-start; }
+#review-more .tile img { width: 100%; height: var(--H); max-height: none; max-width: none; box-sizing: border-box; }
+#review-more .cap { font-size: var(--fs-small); margin-top: .4vh; }
+#review-more .evo > .fig:not(:last-child) .tile::after { content: ""; right: calc(var(--cg) / -2); width: 34px; height: 14px; border-radius: 0; border: 0; box-shadow: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 14'%3E%3Cpath d='M1 7h36M31 1.5 37.5 7 31 12.5' fill='none' stroke='%230083B0' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat; opacity: .85; }
+/* v67: slide 06, CDEMapper strip carries the headline, aligned figures, deck-consistent labels */
+#cde .cde-sb { display: grid; grid-template-rows: auto auto; align-content: start; gap: clamp(14px, 3vh, 34px); padding-top: clamp(2px, .8vh, 10px); }
+#cde .ck { margin: 0 0 .5vh; font: 500 calc(var(--fs-mono) * .9)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;  color: #006F99; }
+#cde .pipe li.lbl {  color: #006F99; font-weight: 600; }
+#cde .pipe li.lbl + li::before { content: ""; }
+#cde .pipe li.lbl + li { margin-left: 1.6em; padding-left: 1.6em; border-left: 1px solid #CFE3EC; }
+#cde .pipe li.ck2 { color: #006F99; background: #E3F4FB; padding: .55em .85em; border-radius: 999px; font-weight: 600; }
+#cde .pipe li.ck2::after { content: "✓"; margin-left: .5em; }
+#cde .role { margin: .8vh 0 0; font-size: var(--fs-small); color: var(--body); }
+#cde .role b { margin-right: .7em; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #3E6E86; }
+#cde .cde-row { --cg: clamp(40px, 4vw, 60px); --H: min(calc((100cqi - var(--cg) - 24px) / 3.211 + 12px), calc(100vh - 560px));
+  height: auto; justify-content: start; align-content: start; grid-template-rows: auto auto auto; column-gap: var(--cg);
+  grid-template-columns: calc(1.794 * (var(--H) - 12px) + 12px) calc(1.417 * (var(--H) - 32px) + 12px); }
+#cde .sl { container-type: inline-size; }
+#cde .cde-row > .fig { grid-row: span 3; }
+#cde .tile { height: auto; min-height: auto; padding: 0; justify-content: flex-start; }
+#cde .tile img { width: 100%; height: var(--H); max-height: none; max-width: none; box-sizing: border-box; }
+#cde .cap { font-size: var(--fs-small); margin-top: .4vh; }
+#cde .cap .cred + .cred { margin-top: .4vh; }
+#cde .cap .cred { display: block; margin-top: .7vh; font: 600 calc(var(--fs-mono) * .85)/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #C8461A; }
+/* v71: slide 05, pair breaks into the side margins with a tighter gap; whole block centered vertically */
+#review .sl { container-type: inline-size; }
+#review .row.c2 { --bleed: clamp(0px, 3vw, 48px); --cg: clamp(36px, 3vw, 46px);
+  --h: max(212px, min(calc((100cqi + var(--bleed) - var(--cg) - 24px) / 3.905 + 32px), calc(100vh - 500px)));
+  margin-inline: 0 calc(-1 * var(--bleed)); column-gap: var(--cg); }
+#review .evo > .fig:not(:last-child) .tile::after { right: calc(var(--cg) / -2); }
+#review .sb.stack { align-content: center; }
+/* v73: slide 06, tighter vertical rhythm so the figures can grow */
+#cde .sl { gap: clamp(14px, 2.6vh, 30px); }
+#cde .sh .lead { margin-top: .8vh; }
+#cde .cde-sb { gap: clamp(10px, 2vh, 22px); padding-top: 0; }
+#cde .role { margin-top: .5vh; }
+#cde .cde-row .ck { margin-bottom: .3vh; }
+#cde .cde-row { --H: min(calc((100cqi - var(--cg) - 24px) / 3.211 + 12px), var(--Hfit, calc(100vh - 518px))); }
+#cde .cde-row { margin-top: clamp(10px, 2.2vh, 24px); }
+#cde .sl { grid-template-rows: auto minmax(0, 1fr); }
+#cde .sb.cde-sb { align-self: safe center; padding-bottom: clamp(40px, 7vh, 64px); }
+#cde .cde-row { padding-bottom: 0; }
+#cde .sb.cde-sb { padding-bottom: clamp(40px, 7vh, 64px); }
+/* v77: slide 06 readability, sentence-case type instead of tracked uppercase mono */
+#cde .pipe { font: 500 var(--fs-small)/1.3 var(--text); letter-spacing: 0; text-transform: none; color: var(--body); }
+#cde .pipe li, #cde .pipe li.ai { font: inherit; text-transform: none; letter-spacing: 0; color: var(--body); }
+#cde .pipe li.ck2 { color: #006F99; }
+#cde .pipe li.lbl { color: var(--ink); }
+#cde .pipe li.lbl { color: var(--ink); }
+#cde .pipe li.lbl b { font-weight: 700; }
+#cde .pipe li.lbl span { margin-left: .4em; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .04em;  color: #006F99; }
+#cde .pipe li.ck2 { font-weight: 600; letter-spacing: 0; }
+#cde .pipe li + li::before { color: #7FB9D0; font-size: 1.05em; }
+#cde .role b { text-transform: none; letter-spacing: 0; font: 600 var(--fs-small)/1 var(--text); color: var(--ink); }
+#cde .role b::after { content: ":"; }
+#cde .ft { margin: 0 0 .8vh; font-size: var(--fs-h3); line-height: 1.15; }
+#cde .cap { color: var(--body); }
+#cde .cap .cred { text-transform: none; letter-spacing: 0; font: 600 calc(var(--fs-small) * .84)/1.35 var(--text); color: #C8461A; margin-top: .4vh; white-space: nowrap; }
+@media (max-width: 1360px) { #cde .cap .cred { white-space: normal; } }
+/* v78: slide 05b, rounds centered in the space under the header */
+#review-more .sl { grid-template-rows: auto minmax(0, 1fr); }
+#review-more .sb.row.c3 { align-self: safe center; padding-top: 0; padding-bottom: clamp(24px, 5vh, 56px); }
+/* v80: slides 05 and 06, tighter gap between figures and an exact width fill */
+#cde .cde-row { --cg: clamp(28px, 2.2vw, 36px); --H: min(calc((100cqi - var(--cg) + 43px) / 3.211), var(--Hfit, calc(100vh - 518px))); }
+#review .row.c2 { --cg: clamp(34px, 2.6vw, 40px); }
+#review .evo > .fig:not(:last-child) .tile::after { width: 22px; height: 12px; }
+/* v81: slide 07, problem/fix, labeled metrics, role line, larger top-aligned figure */
+#medviz .sb.mv { align-items: start; padding-top: 0; }
+#medviz .figcol { align-content: start; grid-template-rows: auto auto; gap: clamp(8px, 1.2vh, 14px); }
+#medviz .sb.mv { grid-template-columns: 2.45fr 1fr; }
+#medviz .figcol .tile { height: auto; padding: 0; justify-content: flex-start; }
+#medviz .figcol .tile img { max-height: calc(100vh - 330px); width: auto; max-width: 100%; height: auto; }
+#medviz .figl { margin: 0; font: 500 calc(var(--fs-mono) * .85)/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #8FB3C8; }
+#medviz .textcol { justify-content: flex-start; gap: clamp(12px, 3.2vh, 40px); }
+#medviz .pf p { margin: 0 0 2vh; font-size: var(--fs-small); line-height: 1.45; color: var(--night-body); }
+#medviz .pf b, #medviz .role b, #medviz .mlabel { display: block; margin-bottom: .5vh; font: 500 calc(var(--fs-mono) * .85)/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #7FD3F7; }
+#medviz .mlabel { margin: 0 0 1.2vh; }
+#medviz .role { margin: 0; font-size: var(--fs-small); line-height: 1.45; color: var(--night-body); }
+/* v82: slide 07, image column hugs the screenshot (no dead gap); text column takes the rest */
+#medviz .sl { container-type: inline-size; }
+#medviz .sb.mv { grid-template-columns: auto minmax(300px, 1fr); column-gap: clamp(32px, 3vw, 52px); }
+#medviz .figcol .tile img { height: min(calc(100vh - 330px), calc(100cqi * .66 / 1.553)); max-height: none; width: auto; max-width: none; }
+/* v83: slide 07, the four MedViz redesigns instead of one anecdote */
+#medviz .wl { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(6px, 1.2vh, 12px); }
+#medviz .wl li { font-size: var(--fs-small); line-height: 1.35; color: var(--night-body); padding-left: .9em; position: relative; }
+#medviz .wl li::before { content: ""; position: absolute; left: 0; top: .55em; width: 5px; height: 5px; border-radius: 50%; background: #F2A65A; }
+#medviz .wl b { display: block; margin: 0; font: 600 var(--fs-small)/1.3 var(--text); letter-spacing: 0; text-transform: none; color: #FFFFFF; }
+#medviz .pf .mlabel { margin: 0 0 1.2vh; font: 500 calc(var(--fs-mono) * .85)/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #7FD3F7; }
+#medviz .wl { gap: clamp(4px, .9vh, 9px); }
+#medviz .metrics strong { font-size: clamp(30px, min(2.7vw, 4.6vh), 52px); }
+#medviz .metrics { row-gap: clamp(8px, 1.8vh, 20px); }
+#medviz .textcol { gap: clamp(12px, 2.8vh, 32px); }
+/* v85: slide 07b, equal-height top-aligned pieces with structured captions */
+#stories .sl { container-type: inline-size; }
+#stories .row.st { --cg: clamp(32px, 2.6vw, 44px); --H: min(calc((100cqi - var(--cg) - 24px) / 4.546 + 12px), calc(100vh - 470px));
+  height: auto; align-content: start; justify-content: start; padding-top: 0; column-gap: var(--cg);
+  grid-template-rows: auto auto auto; grid-template-columns: calc(2.522 * (var(--H) - 12px) + 12px) calc(2.023 * (var(--H) - 12px) + 12px); }
+#stories .row.st > .fig { grid-row: span 3; }
+#stories .sl { grid-template-rows: auto minmax(0, 1fr); }
+#stories .sb.row.st { align-self: safe center; padding-bottom: clamp(24px, 5vh, 56px); }
+#stories .tile { height: auto; padding: 0; justify-content: flex-start; }
+#stories .tile img { width: 100%; height: var(--H); max-height: none; max-width: none; box-sizing: border-box; }
+#stories .ck { margin: 0 0 .4vh; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #7FD3F7; }
+#stories .cap { font-size: var(--fs-small); color: var(--night-body); margin-top: .6vh; }
+#stories .ft { margin: 0 0 .5vh; font-size: var(--fs-h3); line-height: 1.15; color: var(--night-ink); }
+#stories .cred { display: block; margin-top: .8vh; font: 600 calc(var(--fs-small) * .84)/1.35 var(--text); color: #F2A65A; }
+#stories .url { display: block; margin-top: .4vh; font: 500 calc(var(--fs-mono) * .85)/1.3 var(--mono); letter-spacing: .02em; color: #8FB3C8; }
+/* v86: every visible link is a real, clickable link */
+.slide a[href] { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .22em; text-decoration-color: currentColor; pointer-events: auto; cursor: pointer; }
+.slide a[href]:hover { text-decoration-thickness: 2px; }
+.slide a[href]:focus-visible { outline: 2px solid #7FD3F7; outline-offset: 3px; border-radius: 3px; }
+.cover .who-tag a.url { color: #F2A65A; }
+.contact a { color: var(--night-ink); }
+#stories a.url { display: inline-block; color: #8FB3C8; }
+/* v87: slide 08, roles in one row, three fully visible sites, blue mono numbers, links */
+#consortia .sl { container-type: inline-size; }
+#consortia .cx { display: grid; grid-template-rows: auto auto; align-content: start; gap: clamp(18px, 3.6vh, 40px); }
+#consortia .rl4 { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(18px, 2vw, 32px); }
+#consortia .rl4 span { display: block; margin-bottom: .6vh; font: 500 var(--fs-mono)/1 var(--mono); letter-spacing: .06em;  color: #006F99; }
+#consortia .rl4 h3 { margin: 0 0 .5vh; font-size: var(--fs-h3); line-height: 1.15; }
+#consortia .rl4 p { margin: 0; font-size: var(--fs-small); line-height: 1.4; color: var(--body); }
+#consortia .sites { --g: clamp(24px, 2.2vw, 36px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--g); }
+#consortia .sites figure { margin: 0; min-width: 0; }
+#consortia .sites .ck { margin: 0 0 .6vh; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;  color: #006F99; }
+#consortia .sites .tile { height: auto; padding: 0; display: block; }
+#consortia .sites .tile img { display: block; width: 100%; height: auto; max-height: none; max-width: none; }
+#consortia .sites { align-items: start; }
+#consortia .sl { grid-template-rows: auto minmax(0, 1fr); }
+@media (max-height: 760px) { #consortia .sites { width: 86%; } }
+#consortia .sb.cx { align-self: safe center; padding-bottom: clamp(28px, 6vh, 60px); gap: clamp(22px, 4.4vh, 52px); }
+#consortia .sites .url { display: inline-block; margin-top: .8vh; font: 500 calc(var(--fs-mono) * .85)/1.3 var(--mono); letter-spacing: .02em; color: #006F99; }
+/* v89: slide 09, three-point close */
+.fitgrid.f3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 2.6vw, 44px); }
+.fitgrid.f3 > div { padding-top: clamp(12px, 2vh, 20px); border-top: 1px solid rgb(127 211 247 / .28); }
+.fitgrid.f3 i { color: #7FD3F7; }
+.fitgrid.f3 p { margin-top: .4vh; line-height: 1.45; }
+.fitgrid.f3 p span { display: block; margin-top: .8vh; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: #F2A65A; }
+/* v89b: slide 08, three sites at one shared height; columns sized by each screenshot's aspect */
+#consortia .sites { --H: calc((100cqi - 36px - 2 * var(--g)) / 5.004 + 32px);
+  grid-template-columns: calc((var(--H) - 32px) * 1.6 + 12px) calc((var(--H) - 32px) * 1.6 + 12px) calc((var(--H) - 32px) * 1.804 + 12px); justify-content: start; }
+#consortia .sites .tile img { height: var(--H); width: 100%; box-sizing: border-box; }
+@media (max-height: 760px) { #consortia .sites { --H: calc((100cqi * .86 - 36px - 2 * var(--g)) / 5.004 + 32px); width: auto; } }
+/* v90: appendix, grouped by authorship, Scholar link, deck-consistent credits */
+#pubs .scholar { margin: .6vh 0 0; font: 500 calc(var(--fs-mono) * .9)/1.3 var(--mono); letter-spacing: .02em; }
+#pubs .scholar a { color: #006F99; }
+#pubs .pubs.pg { justify-content: center; gap: clamp(6px, 1.3vh, 14px); }
+#pubs .pubs .grp { margin: clamp(6px, 1.4vh, 14px) 0 0; font: 500 calc(var(--fs-mono) * .85)/1 var(--mono); letter-spacing: .08em; text-transform: uppercase;  color: #006F99; }
+#pubs .pubs .grp:first-child { margin-top: 0; }
+#pubs .pubs div { grid-template-columns: minmax(260px, 24vw) 1fr; }
+#pubs .pubs .v { font-size: calc(var(--fs-mono) * .9); letter-spacing: .02em; }
+#pubs .pubs .v span::before { content: none !important; }
+#pubs .pubs .v span.cr { color: #C8461A; font-weight: 600; }
+#pubs .pubs .t { font-size: calc(var(--fs-lead) * .92); }
+.cover .sub { width: min(100%, 44em); }
+/* v91: WCAG AA pass. AA blue for small text, 14px floor for labels */
+.cover .who-tag { font-size: clamp(14px, min(.98vw, 1.65vh), 16px); }
+#steering-more .own i { background: #006F99; font-size: max(14px, calc(var(--fs-mono) * .82)); }
+.slide :is(.ck, .grp, .mlabel, .goal, .figl, .url, .cred, .cr, .thw, .lbl span, .cap .cred) { font-size: max(14px, 1em); }
+#review .pin i { width: 24px; height: 24px; font-size: 13px; }
+@media (max-height: 760px) {
+  .echo .cpx .tile img, .echo .cpx .tile img.app { height: 108px !important; }
+  #steering .points { gap: 10px; }
+  #steering .points p { margin-top: 0; }
+  #steering .tile img { max-height: calc(100vh - 300px); }
+}
+</style>
+
+<main>
+<!-- 1 COVER -->
+<section class="slide cover" id="cover" data-label="Opening" aria-label="Opening">
+  <div id="fibers" aria-hidden="true"><div class="hm hm-bg"><canvas></canvas></div><canvas class="dg"></canvas></div>
+  <div class="sl">
+    <div class="mid">
+      <h1>Designing at the intersection of <em>research, data &amp; technology.</em></h1>
+      <p class="sub">Selected work · Yale Biomedical Informatics &amp; Data Science · 2024–present</p>
+    </div>
+    <div class="who">
+      <img src="img/portrait.webp" alt="Daniela Weng" width="72" height="72">
+      <div><strong>Daniela Weng</strong><span>Senior UI/UX Web Developer, Yale BIDS</span></div>
+      <p class="who-tag">Prepared for<br>Regenstrief Data Services<br><a class="url" href="https://www.danielaweng.com" target="_blank" rel="noopener">danielaweng.com</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- 2 ABOUT -->
+<section class="slide about" id="about" data-label="About me">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>01</b> / About me</p>
+      <h2>A designer who builds <em>research software</em></h2>
+    </header>
+    <div class="sb">
+      <div class="facts">
+        <div><strong>Northeastern M.S.</strong><span>Information design &amp; data viz · HCI</span></div>
+        <div><strong>7 years</strong><span>Communication · UX · Engineering</span></div>
+        <div><strong>Yale BIDS, 2024–</strong><span>PIs · clinicians · engineers</span></div>
+      </div>
+      <div class="card" aria-label="Which stages of the research product lifecycle I own on each project">
+        <div class="lcm">
+          <div class="r hd"><span class="rl"></span><span class="st"><i>01</i>Requirements</span><span class="st"><i>02</i>Users</span><span class="st"><i>03</i>Strategy</span><span class="st"><i>04</i>UX / UI</span><span class="st"><i>05</i>Prototype</span><span class="st"><i>06</i>Frontend</span><span class="st"><i>07</i>Evaluate</span></div>
+          <div class="r base"><span class="rl">Common handoff model</span><i class="ln" style="grid-column:5 / span 2;--k:2"></i><span class="d" style="grid-column:2"></span><span class="d" style="grid-column:3"></span><span class="d" style="grid-column:4"></span><span class="d ho" style="grid-column:5"></span><span class="d ho" style="grid-column:6"></span><span class="pill" style="grid-column:7 / span 2">Screens, then a handoff</span></div>
+          <div class="r"><span class="rl">Echo · Visual Steering</span><i class="ln" style="grid-column:2 / span 7;--k:7"></i><span class="d on" style="grid-column:2"></span><span class="d on" style="grid-column:3"></span><span class="d on" style="grid-column:4"></span><span class="d on" style="grid-column:5"></span><span class="d on" style="grid-column:6"></span><span class="d on" style="grid-column:7"></span><span class="d on" style="grid-column:8"></span></div>
+          <div class="r"><span class="rl">Echo · Chart Review</span><i class="ln" style="grid-column:3 / span 6;--k:6"></i><span class="d" style="grid-column:2"></span><span class="d on" style="grid-column:3"></span><span class="d on" style="grid-column:4"></span><span class="d on" style="grid-column:5"></span><span class="d on" style="grid-column:6"></span><span class="d on" style="grid-column:7"></span><span class="d on" style="grid-column:8"></span></div>
+          <div class="r"><span class="rl">MedViz · Literature map</span><i class="ln" style="grid-column:3 / span 6;--k:6"></i><span class="d" style="grid-column:2"></span><span class="d on" style="grid-column:3"></span><span class="d on" style="grid-column:4"></span><span class="d on" style="grid-column:5"></span><span class="d on" style="grid-column:6"></span><span class="d tm" style="grid-column:7"></span><span class="d on" style="grid-column:8"></span></div>
+          <div class="r"><span class="rl">NIH program websites</span><i class="ln" style="grid-column:2 / span 7;--k:7"></i><span class="d on" style="grid-column:2"></span><span class="d on" style="grid-column:3"></span><span class="d on" style="grid-column:4"></span><span class="d on" style="grid-column:5"></span><span class="d on" style="grid-column:6"></span><span class="d on" style="grid-column:7"></span><span class="d on" style="grid-column:8"></span></div>
+          <div class="r"><span class="rl">AITC grant platform</span><i class="ln" style="grid-column:3 / span 6;--k:6"></i><span class="d" style="grid-column:2"></span><span class="d on" style="grid-column:3"></span><span class="d on" style="grid-column:4"></span><span class="d on" style="grid-column:5"></span><span class="d on" style="grid-column:6"></span><span class="d tm" style="grid-column:7"></span><span class="d on" style="grid-column:8"></span></div>
+        </div>
+        <p class="lgd"><span><i class="d on"></i>Led</span><span><i class="d tm"></i>Co-led with engineering</span><span><i class="d ho"></i>Conventional design handoff</span></p>
+      </div>
+      <div class="take">
+        <p>From research requirements to shipped, evaluated code: on most projects, <em>I’m the one who connects every stage.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 THREADS -->
+<section class="slide" id="threads" data-label="Three threads">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>02</b> / Project map</p>
+      <h2>Three kinds of work, <em>one goal</em></h2>
+      <p class="lead">Making AI and large-dataset output understandable and verifiable, so researchers can act on it.</p>
+    </header>
+    <div class="sb tix">
+      <div class="tx hd" aria-hidden="true"><span></span><span>Problem</span><span>Build</span><span></span></div>
+      <article class="tx">
+        <div class="tt"><p class="thn">01</p><h3>Clinical AI that people can verify</h3><p class="thw">Echo · CDEMapper</p></div>
+        <p class="tp">LLM-generated cohort queries and data mappings are hard to verify.</p>
+        <p class="tp">Interfaces that expose each AI step for expert review and approval.</p>
+        <div class="tile"><img class="app" src="img/echo-steering.webp" alt="Echo visual steering interface" width="2000" height="1090"></div>
+      </article>
+      <article class="tx">
+        <div class="tt"><p class="thn">02</p><h3>Large biomedical data, made legible</h3><p class="thw">MedViz · CDEAtlas</p></div>
+        <p class="tp">Millions of papers and tens of thousands of data standards, too many to read.</p>
+        <p class="tp">Visual maps and filters that surface patterns and relevant records.</p>
+        <div class="tile"><img class="app" src="img/medviz.webp" alt="MedViz literature map" width="2000" height="1288"></div>
+      </article>
+      <article class="tx">
+        <div class="tt"><p class="thn">03</p><h3>Infrastructure for NIH research networks</h3><p class="thw">AITC · IMPACT-MH · Bridge2AI</p></div>
+        <p class="tp">Multi-site programs coordinate applicants, reviewers, and staff across institutions.</p>
+        <p class="tp">Websites, portals, and workflows a small team can sustain.</p>
+        <div class="tile"><img class="app" src="img/aitc-site.webp" alt="aitcc.ai homepage" width="1800" height="1125"></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 4 ECHO -->
+<section class="slide echo" id="echo" data-label="Echo">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>03</b> / Echo · AI-assisted clinical trial matching · Dr. Hua Xu’s lab</p>
+      <h2>When AI builds the cohort, <em>who checks it?</em></h2>
+      <p class="lead">Echo’s LLMs draft both the cohort and the evidence. I designed a human checkpoint for each stage.</p>
+    </header>
+    <div class="sb echo-sb">
+    <ol class="pipe" aria-label="Echo pipeline">
+      <li>Eligibility criteria</li><li class="ai">LLM drafts SQL</li><li class="ck">Checkpoint 01</li><li class="ai">LLM extracts evidence</li><li class="ck">Checkpoint 02</li><li>Eligible patients</li>
+    </ol>
+    <div class="cp2">
+      <article class="cpx">
+        <p class="cpn"><b>Checkpoint 01</b> · Visual steering</p>
+        <div class="tile"><img class="app" src="img/echo-steering.webp" alt="Checkpoint 1: visual steering" width="2000" height="1090"></div>
+        <p class="cpq">Is the cohort logic right?</p>
+        <dl>
+          <dt>The AI</dt><dd>Translates each eligibility criterion into an SQL query against the OMOP CDM.</dd>
+          <dt>The risk</dt><dd>A single monolithic query obscures criterion-level errors, and any revision requires full regeneration.</dd>
+          <dt>My design</dt><dd>An editable criteria graph with live cohort counts and inspectable, criterion-level SQL.</dd>
+        </dl>
+      </article>
+      <article class="cpx">
+        <p class="cpn"><b>Checkpoint 02</b> · Chart review</p>
+        <div class="tile"><img class="app" src="img/review-cover.webp" alt="Checkpoint 2: chart review" width="2000" height="1049"></div>
+        <p class="cpq">Is each patient’s evidence right?</p>
+        <dl>
+          <dt>The AI</dt><dd>Extracts study variables from each patient’s record, with a confidence level for every answer.</dd>
+          <dt>The risk</dt><dd>Uniform visual emphasis makes low-confidence results hard to spot.</dd>
+          <dt>My design</dt><dd>A neutral review table that flags only uncertain results and keeps source evidence in view.</dd>
+        </dl>
+      </article>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 CHECKPOINT 1 -->
+<section class="slide" id="steering" data-label="Checkpoint 1">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>04</b> / Echo · Checkpoint 1 · Visual steering · IEEE VIS 2026</p>
+      <h2>Make the <em>cohort logic</em> inspectable</h2>
+    </header>
+    <div class="sb split s-main">
+      <div class="figcol">
+        <div class="tile"><img class="app" src="img/echo-steering.webp" alt="Echo visual steering: criteria graph (A), console (B), cohort analysis (C)" width="2000" height="1090"></div>
+        <p class="cap">Four alternative cohorts · synthetic EHR data</p>
+      </div>
+      <div class="points">
+        <div><p class="goal">Goal · Inspectable</p><h3><span class="k">A</span>Graph, not checklist</h3><p>Criteria flow down from the dataset, with patient counts on every node.</p></div>
+        <div><p class="goal">Goal · Refinable</p><h3><span class="k">B</span>SQL beside every node</h3><p>The LLM drafts it. The researcher’s edit becomes the source of truth.</p></div>
+        <div><p class="goal">Goal · Comparable</p><h3><span class="k">C</span>Compare in lockstep</h3><p>Overlap, profile, and insights all follow the graph.</p></div>
+        <div class="role"><p class="cred">Co-equal first author · IEEE VIS 2026</p><p><b>My role</b>End-to-end research, design, frontend, and evaluation. Collaborators built the backend and SQL agent.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 CHECKPOINT 1 DEEP DIVE -->
+<section class="slide" id="steering-more" data-deep data-label="Under the hood">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>04b</b> / Echo · Checkpoint 1 · <span class="deep">deep dive</span></p>
+      <h2>Under the hood: <em>analysis, build, evaluation</em></h2>
+    </header>
+    <div class="sb row c3" style="--img-h: 50vh">
+      <figure class="fig"><p class="ck">Analysis</p><div class="tile"><img src="img/echo-analysis.webp" alt="Cohort overlap UpSet plot and cohort profile" width="1400" height="1317"></div><figcaption class="cap"><b>Detail of C:</b> overlap (top) and profile (bottom). Do alternative definitions capture different patients?</figcaption></figure>
+      <figure class="fig"><p class="ck">Build</p><div class="tile"><span class="own"><img class="svg" src="img/echo-viz-architecture.svg" alt="Echo system architecture"><i>Frontend · designed &amp; built by me</i></span></div><figcaption class="cap"><b>Architecture.</b> I designed and built everything except the data layer. Collaborators built the backend, Text-to-SQL agent, and OMOP databases.</figcaption></figure>
+      <div class="side textcol">
+        <p class="ck">Evaluation</p>
+        <div><p class="stat">2 experts</p><p class="lead" style="margin-top:.6vh">90-minute sessions</p><p class="small" style="margin-top:1vh">Clinical oncology faculty and a clinical-trials data scientist, on synthetic MIMIC-IV in OMOP CDM. Both built and compared cohorts.</p></div>
+        <div><h3>Limits we found</h3><ul><li>Concept mappings still need human checks</li><li>Splitting criteria into nodes is manual</li><li>Complex queries run slowly</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 CHECKPOINT 2 -->
+<section class="slide" id="review" data-label="Checkpoint 2">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>05</b> / Echo · Checkpoint 2 · Study variable chart review</p>
+      <h2>Make <em>patient evidence</em> reviewable</h2>
+    </header>
+    <div class="sb stack">
+      <div class="row c2 evo">
+        <figure class="fig"><p class="ck">Before</p><div class="tile"><span class="pin"><img class="app" src="img/review-before.webp" alt="Chart review table before the redesign" width="2000" height="1120"></span></div><figcaption class="cap">Every answer colored, so routine values looked urgent.</figcaption></figure>
+        <figure class="fig"><p class="ck">After</p><div class="tile"><span class="pin"><img class="app" src="img/review-after.webp" alt="Chart review table after the redesign" width="2000" height="944"><i class="b1">1</i><i class="b2">2</i></span></div><figcaption class="cap">Only uncertain results stand out.</figcaption></figure>
+      </div>
+      <div class="trio">
+        <div><h3><span class="k">1</span>Calm the default</h3><p class="ev"><b>Tested</b>Borders, labels, full tints: all too noisy.</p></div>
+        <div><h3><span class="k k2">2</span>Confidence in the cell</h3><p class="ev"><b>Encoding</b>Tint + one icon, medium/low only.</p></div>
+        <div><h3>Chat that doesn’t block</h3><p class="ev"><b>User signal</b>Researcher: chat hid the evidence.</p></div>
+      </div>
+      <p class="role"><b>My role</b>Design and frontend build, in the existing Vue app.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 CHECKPOINT 2 DEEP DIVE -->
+<section class="slide" id="review-more" data-deep data-label="Iteration">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>05b</b> / Echo · Checkpoint 2 · <span class="deep">deep dive</span></p>
+      <h2>Three rounds on the <em>patient panel</em></h2>
+    </header>
+    <div class="sb row c3 evo">
+      <figure class="fig"><p class="ck">Round 01</p><div class="tile"><img src="img/panel-1.webp" alt="Patient panel, original" width="950" height="1664"></div><figcaption class="cap">Deep indentation and repeated Evidence controls.</figcaption></figure>
+      <figure class="fig"><p class="ck">Round 02</p><div class="tile"><img src="img/panel-2.webp" alt="Patient panel, first revision" width="1176" height="1664"></div><figcaption class="cap">Grouped by variable, but status shown three times.</figcaption></figure>
+      <figure class="fig"><p class="ck on">Round 03 · Final</p><div class="tile"><img src="img/panel-3.webp" alt="Patient panel, final with chat layer" width="885" height="722"></div><figcaption class="cap">One status per variable; chat moved to its own layer.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 9 CDE -->
+<section class="slide" id="cde" data-label="Data standards">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>06</b> / CDEMapper &amp; CDEAtlas · NIH Common Data Elements</p>
+      <h2>Data standards: the LLM suggests, <em>experts decide</em></h2>
+    </header>
+    <div class="sb cde-sb">
+      <div class="cde-strip">
+        <ol class="pipe" aria-label="CDEMapper workflow">
+          <li class="lbl"><b>CDEMapper</b> <span>JAMIA 2025</span></li>
+          <li>Study variables</li><li class="ai">LLM indexes &amp; ranks CDEs</li><li class="ck2">Expert review &amp; correction</li><li>Mapping files</li>
+        </ol>
+        <p class="role"><b>My role</b>Evaluation, usability, review workflow, interface.</p>
+      </div>
+      <div class="row c2 cde-row">
+        <figure class="fig"><h3 class="ft">Mapping dashboard</h3><div class="tile"><img src="img/cde-dashboard.webp" alt="Visual analytics dashboard for CDE mapping" width="2000" height="1115"></div><figcaption class="cap">Progress heatmap, stage Sankey, coverage map.<span class="cred">First author, AMIA 2025 poster</span></figcaption></figure>
+        <figure class="fig"><h3 class="ft">CDEAtlas</h3><div class="tile"><img class="app" src="img/cde-atlas.webp" alt="CDEAtlas semantic landscape of NIH CDEs" width="1950" height="1296"></div><figcaption class="cap">22,743 NIH CDEs, searchable and filterable by time.<span class="cred">Co-first author, AMIA 2026 paper · First author, Amplify 2026 poster</span></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 MEDVIZ -->
+<section class="slide night" id="medviz" data-label="MedViz">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>07</b> / MedViz · Biomedical literature visualization</p>
+      <h2>From scattered tools to a <em>navigable map</em></h2>
+    </header>
+    <div class="sb split s-main mv">
+      <div class="figcol">
+        <div class="tile"><img src="img/medviz.webp" alt="Redesigned MedViz interface" width="2000" height="1288"></div>
+        <p class="figl">MedViz · Nature &amp; Science, 100 years</p>
+      </div>
+      <div class="textcol">
+        <div class="pf">
+          <p class="mlabel">Design contributions · 2024–2026</p>
+          <ul class="wl">
+            <li><b>Information architecture</b>Task-based grouping, unified icon system</li>
+            <li><b>Color system</b>Accessible, time-ordered palette</li>
+            <li><b>Temporal navigation</b>Direct range filtering by year</li>
+            <li><b>Onboarding</b>Guided quickstart for non-experts</li>
+          </ul>
+        </div>
+        <div>
+          <p class="mlabel">After launch · Jan 2025–Mar 2026</p>
+          <div class="metrics">
+            <div><strong>1.2K+</strong><span>active users</span></div>
+            <div><strong>49</strong><span>countries</span></div>
+            <div><strong>8.2K</strong><span>page views</span></div>
+            <div><strong>5m 03s</strong><span>avg. engagement</span></div>
+          </div>
+        </div>
+        <p class="role"><b>My role</b>UX research, interaction and UI design, design system; frontend with engineering.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 MEDVIZ STORIES -->
+<section class="slide night" id="stories" data-deep data-label="Storytelling">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>07b</b> / MedViz · <span class="deep">deep dive</span></p>
+      <h2>Data storytelling for <em>scientific audiences</em></h2>
+    </header>
+    <div class="sb row c2 st">
+      <figure class="fig"><p class="ck">Film · 2025</p><div class="tile"><img src="img/medviz-film.webp" alt="MedViz film: Nature Medicine citation network" width="2000" height="793"></div><figcaption class="cap"><h3 class="ft">Nature Medicine, 30 years</h3>3,800+ papers as a citation network; 30 topics in 11 themes.<span class="cred">Narrative &amp; visualization lead · Used in the MedViz technical paper</span></figcaption></figure>
+      <figure class="fig"><p class="ck">Interactive story · 2026</p><div class="tile"><img src="img/lilly.webp" alt="Eli Lilly 150 years data story" width="1408" height="696"></div><figcaption class="cap"><h3 class="ft">Eli Lilly, 150 years</h3>12,187 papers in five clusters, 18 milestone drugs, 1923–2022.<span class="cred">Designed &amp; built from scratch · D3.js, GSAP, Astro</span><a class="url" href="https://lilly-150years.vercel.app/" target="_blank" rel="noopener">lilly-150years.vercel.app ↗</a></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 12 CONSORTIA -->
+<section class="slide" id="consortia" data-label="NIH consortia">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>08</b> / AITC · IMPACT-MH · Bridge2AI</p>
+      <h2>Digital infrastructure for <em>NIH research consortia</em></h2>
+      <p class="lead">I lead coordination, platform development, and data stewardship across three NIH programs.</p>
+    </header>
+    <div class="sb cx">
+      <ol class="rl4">
+        <li><span>01</span><h3>Coordination</h3><p>Primary liaison among PIs, program managers, and engineers.</p></li>
+        <li><span>02</span><h3>Platform development</h3><p>Websites, portals, and workflows, requirements through production.</p></li>
+        <li><span>03</span><h3>Data stewardship</h3><p>Curation and governance of publications and datasets.</p></li>
+        <li><span>04</span><h3>Sustainability</h3><p>Maintainable systems and documentation for lean teams.</p></li>
+      </ol>
+      <div class="sites">
+        <figure><p class="ck">AITC · NIA</p><div class="tile"><img class="app" src="img/aitc-site.webp" alt="aitcc.ai homepage" width="1800" height="1125"></div><a class="url" href="https://aitcc.ai/" target="_blank" rel="noopener">aitcc.ai ↗</a></figure>
+        <figure><p class="ck">IMPACT-MH · NIMH</p><div class="tile"><img class="app" src="img/impact.webp" alt="IMPACT-MH website" width="1600" height="1000"></div><a class="url" href="https://impact-mh.org/" target="_blank" rel="noopener">impact-mh.org ↗</a></figure>
+        <figure><p class="ck">Bridge2AI · NIH Common Fund</p><div class="tile"><img class="app" src="img/bridge2ai-home.webp" alt="Bridge2AI homepage" width="1600" height="887"></div><a class="url" href="https://bridge2ai.org/" target="_blank" rel="noopener">bridge2ai.org ↗</a></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 FIT -->
+<section class="slide night fit" id="fit" data-label="Regenstrief">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow"><b>09</b> / Closing</p>
+      <h2>What I bring to <em>Regenstrief.</em></h2>
+    </header>
+    <div class="sb">
+      <div class="fitgrid f3">
+        <div><i>01 / Research</i><h3>Research-driven design</h3><p>Translating complex biomedical workflows into intuitive experiences.</p></div>
+        <div><i>02 / Product</i><h3>Human-centered AI</h3><p>Designing transparent, interpretable, and usable research tools.</p></div>
+        <div><i>03 / Engineering</i><h3>From concept to implementation</h3><p>Bridging design and engineering to deliver functional products.</p></div>
+      </div>
+      <div>
+        <p class="closing">Making complex research <em>more accessible, actionable, and human.</em></p>
+        <p class="contact">Thank you · <a href="https://www.danielaweng.com" target="_blank" rel="noopener">danielaweng.com</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 PUBLICATIONS -->
+<section class="slide" id="pubs" data-deep data-label="Publications">
+  <div class="sl">
+    <header class="sh">
+      <p class="eyebrow">Appendix</p>
+      <h2>Publications &amp; <em>research contributions</em></h2>
+      <p class="scholar"><a href="https://scholar.google.com/citations?user=bbVk07IAAAAJ&amp;hl=en" target="_blank" rel="noopener">Full list on Google Scholar ↗</a></p>
+    </header>
+    <div class="sb pubs pg">
+      <p class="grp">Led · first or co-first author</p>
+        <div><p class="v">IEEE VIS 2026 · Poster<span class="cr">Co-equal first author</span></p><p class="t">Echo: Visual Steering for AI-Assisted Cohort Definition and Comparison in EHRs</p></div>
+        <div><p class="v">AMIA 2026 · Paper<span class="cr">Co-first author</span></p><p class="t">CDEAtlas: Interactive Visualization and Exploration of Common Data Elements at Scale</p></div>
+        <div><p class="v">AMIA Amplify 2026 · Poster<span class="cr">First author</span></p><p class="t">CDEAtlas: Interactive Visualization and Exploration of CDEs at Scale</p></div>
+        <div><p class="v">AMIA 2025 · Poster<span class="cr">First author</span></p><p class="t">Designing a Visual Analytics Dashboard to Streamline Collaborative CDE Mapping</p></div>
+      <p class="grp">Contributed</p>
+        <div><p class="v">AMIA 2025 · Poster<span class="plain">Workflow framework, interface</span></p><p class="t">CDEMapper 2.0: Collaborative Review and Consensus Building in CDE Mapping</p></div>
+        <div><p class="v">JAMIA 2025 · Paper<span class="plain">Evaluation, usability, visualization</span></p><p class="t">CDEMapper: Enhancing NIH Common Data Element Use with LLMs</p></div>
+        <div><p class="v">JAMIA 2025 · Paper<span class="plain">Kiwi interface design</span></p><p class="t">Information Extraction from Clinical Notes: Are We Ready to Switch to LLMs?</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<nav class="pager" aria-label="Slide navigation">
+  <span id="pager-label" aria-live="polite">01 / 14 Opening</span><span class="mode" id="pager-mode" hidden>15-min</span>
+  <button type="button" id="prev" aria-label="Previous slide">↑</button>
+  <button type="button" id="next" aria-label="Next slide">↓</button>
+</nav>
+<aside class="notes" id="notes" hidden aria-label="Presenter notes">
+  <div class="notes-head"><span><b id="notes-title">Opening</b> · <span id="notes-time">target</span></span><span class="timer" id="notes-timer">00:00</span></div>
+  <div class="notes-body" id="notes-body"></div>
+  <div class="notes-keys">N notes · D 15-min mode · F fullscreen · T reset timer</div>
+</aside>
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-label="Full-size image"><img alt=""></div>
+
+<script>
+/* ===== NeonGlyphs: dependency-free port of the React Bits <NeonGlyphs /> component (WebGL2) ===== */
+function NeonGlyphs(container, opts) {
+  const MAX_COLORS = 8, MAX_CLICKS = 4, MAX_STEPS = 56, MAX_RENDER_DIM = 2400, BLOOM_LEVELS = 6, INTRO_SECONDS = 2.4, CLICK_SECONDS = 1.6, ATLAS_CELL = 64, ATLAS_COLUMNS = 16;
+  const s = Object.assign({
+    colors: ['#a6f3fa', '#ea6fe0', '#6fd6f7', '#d351b6', '#5aaef0'], characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&*+=<>?!',
+    fontFamily: '"Geist Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace', cellSize: 16, depth: 12, tilt: 25, turn: 0, rotation: 0,
+    perspective: 60, sway: 0.5, speed: 0.15, density: 0.1, trails: 0.25, glow: 0.75, flicker: 0.5, scramble: 0.5, brightness: 1, fade: 0.75,
+    aberration: 0.5, variation: 0, opacity: 1, intro: true, mouseInteraction: true, burstOnClick: true, lightMode: false
+  }, opts);
+  s.colors = s.colors.slice(0, MAX_COLORS);
+  const canvas = document.createElement('canvas');
+  container.appendChild(canvas);
+  const gl = canvas.getContext('webgl2', { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false });
+  if (!gl) return;
+
+  const VERTEX = `#version 300 es
+void main() { vec2 p = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2)); gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0); }`;
+  const SCENE = `#version 300 es
+precision highp float;
+uniform sampler2D uAtlas; uniform vec2 uRes; uniform vec2 uAtlasGrid; uniform float uCount; uniform float uCell; uniform mat3 uBasis;
+uniform float uFocal; uniform float uDepth; uniform float uTime; uniform float uGlyphTime; uniform float uDensity; uniform float uFlicker;
+uniform float uBrightness; uniform float uSeed; uniform vec3 uColors[${MAX_COLORS}]; uniform float uColorCount; uniform vec4 uHover;
+uniform vec4 uClicks[${MAX_CLICKS}]; uniform float uIntro;
+out vec4 outColor;
+float h21(vec2 p) { vec3 q = fract(vec3(p.xyx) * vec3(0.1031, 0.1030, 0.0973)); q += dot(q, q.yzx + 33.33); return fract((q.x + q.y) * q.z); }
+float h31(vec3 p) { p = fract(p * vec3(0.1031, 0.1030, 0.0973)); p += dot(p, p.yxz + 33.33); return fract((p.x + p.y) * p.z); }
+vec3 pick(float h) { return uColors[int(min(floor(h * uColorCount), uColorCount - 1.0))]; }
+float glyph(float id, vec2 local, float lod) {
+  vec2 q = (floor(clamp(local, 0.0, 0.999) * 14.0) + 0.5) / 14.0;
+  float index = min(floor(id * uCount), uCount - 1.0);
+  float column = mod(index, uAtlasGrid.x); float row = floor(index / uAtlasGrid.x);
+  vec2 uv = vec2((column + q.x) / uAtlasGrid.x, (row + 1.0 - q.y) / uAtlasGrid.y);
+  return textureLod(uAtlas, uv, lod).a;
+}
+void main() {
+  vec2 frag = gl_FragCoord.xy; vec2 p = (frag - 0.5 * uRes) / uRes.y; vec3 rd = normalize(vec3(p, -uFocal));
+  vec3 U = uBasis[0]; vec3 V = uBasis[1]; vec3 N = uBasis[2]; vec3 C = vec3(0.0, 0.0, -uFocal);
+  float half_ = 0.5 * uDepth * uCell; float dn = dot(rd, N); float cn = dot(C, N); float tNear = 0.0; float tFar = 40.0 * uFocal;
+  if (abs(dn) > 1e-5) { float ta = (cn - half_) / dn; float tb = (cn + half_) / dn; tNear = max(min(ta, tb), 0.0); tFar = max(ta, tb); }
+  else if (abs(cn) > half_) { outColor = vec4(0.0, 0.0, 0.0, 1.0); return; }
+  if (tFar <= tNear) { outColor = vec4(0.0, 0.0, 0.0, 1.0); return; }
+  float stepLen = 0.5 * uCell; float count = min(ceil((tFar - tNear) / stepLen), ${MAX_STEPS.toFixed(1)});
+  vec3 right = normalize(cross(rd, vec3(0.0, 1.0, 0.0))); vec3 up = cross(right, rd);
+  float jitter = fract(52.9829189 * fract(dot(frag, vec2(0.06711056, 0.00583715))));
+  float t = tNear + stepLen * jitter; vec3 P0 = rd * t - C;
+  vec3 L = vec3(dot(P0, U), dot(P0, V), dot(P0, N)) / uCell; vec3 dL = vec3(dot(rd, U), dot(rd, V), dot(rd, N)) * 0.5;
+  float depthScale = uFocal * uRes.y * uCell / max(-rd.z, 0.05);
+  vec3 flow = vec3(0.9 * sin(uTime * 0.05), uTime * 0.22, 0.6 * sin(uTime * 0.037)); vec3 accum = vec3(0.0);
+  for (int i = 0; i < ${MAX_STEPS}; i++) {
+    if (float(i) >= count) break;
+    float tt = t + float(i) * stepLen; float layer = floor(L.z);
+    vec3 Lp = L + vec3(h21(vec2(layer, 5.3) + uSeed), h21(vec2(layer, 8.1) + uSeed), 0.0) - flow; vec3 cell = floor(Lp);
+    float appear = clamp((uIntro - abs(cell.x) * 0.012 - abs(cell.y) * 0.016 - h31(cell + uSeed + 19.0) * 0.7) / 0.35, 0.0, 1.0);
+    if (appear > 0.0) {
+      float cycle = uTime * (0.06 + 0.07 * h31(cell + uSeed + 2.7)) + h31(cell + uSeed + 4.9); float slot = floor(cycle); float phase = cycle - slot;
+      vec3 id = cell + slot * 31.0; bool present = h31(id + uSeed + 13.7) < uDensity;
+      float power = present ? (1.0 + 1.6 * h31(id + uSeed + 9.0)) * smoothstep(0.0, 0.2, phase) * (1.0 - smoothstep(0.7, 1.0, phase)) : 0.0;
+      vec3 color = pick(h31(id + uSeed + 3.0)); float rate = 4.0;
+      if (uHover.w > 0.001) {
+        vec2 hv = (cell.xy + 0.5 - uHover.xy) / uHover.z; float w = exp(-dot(hv, hv)) * uHover.w;
+        if (present) { power *= 1.0 + 1.2 * w; rate += 10.0 * w; }
+        else if (w > 0.02 && h31(cell + uSeed + 63.0) < w * 0.25) { present = true; power = 1.4 * w; rate = 12.0; }
+      }
+      for (int c = 0; c < ${MAX_CLICKS}; c++) {
+        vec4 click = uClicks[c]; if (click.w <= 0.0) continue;
+        float reach = length(cell.xy + 0.5 - click.xy) - click.z * 16.0; float fade = 1.0 - click.z / ${CLICK_SECONDS.toFixed(1)};
+        float ring = exp(-reach * reach / 5.0) * fade * fade; if (ring < 0.03) continue;
+        if (present) { power *= 1.0 + 2.5 * ring; color = mix(color, vec3(1.0), 0.4 * ring); rate = max(rate, 16.0); }
+        else if (h31(cell + uSeed + float(c) * 5.1 + 71.0) < ring * 0.5) { present = true; power = 2.0 * ring; color = mix(color, vec3(1.0), 0.3); rate = 16.0; }
+      }
+      if (present && power > 0.001) {
+        vec3 bob = 0.1 * sin(uTime * (0.4 + 0.5 * vec3(h31(id + 1.1), h31(id + 2.2), h31(id + 3.3))) + 6.2831 * vec3(h31(id + 4.4), h31(id + 5.5), h31(id + 6.6)));
+        vec3 offset = (Lp - cell - 0.5 - bob) / 0.8; vec3 world = U * offset.x + V * offset.y + N * offset.z;
+        vec2 local = vec2(dot(world, right), dot(world, up)) + 0.5;
+        if (local.x > 0.0 && local.x < 1.0 && local.y > 0.0 && local.y < 1.0) {
+          float pixels = depthScale / tt * 0.8; float lod = clamp(log2(64.0 / max(pixels, 1.0)), 2.0, 6.0);
+          float seedHash = h31(id + uSeed + 11.0);
+          float charId = h31(id * 1.31 + floor(uGlyphTime * rate + seedHash * 9.0) * 17.17 + uSeed);
+          float ink = glyph(charId, local, lod); float cover = smoothstep(0.25, 0.45, ink) * ink;
+          if (cover > 0.0) {
+            float beat = floor(uTime * 3.5 + seedHash * 3.0);
+            if (h31(id * 0.73 + beat * 9.13 + uSeed) > 1.0 - uFlicker) { power *= 5.5; color = mix(color, vec3(1.0), 0.4); }
+            color = mix(color, pick(fract(seedHash + 0.37 + uTime * 0.05 + Lp.y * 0.012)), 0.25);
+            float fog = exp(-tt / uCell * 0.0086);
+            accum += color * cover * power * appear * fog * smoothstep(1.5, 4.0, pixels);
+          }
+        }
+      }
+    }
+    L += dL;
+  }
+  outColor = vec4(accum * 0.3 * uBrightness, 1.0);
+}`;
+  const DOWN = `#version 300 es
+precision highp float; uniform sampler2D uSource; uniform vec2 uTexel; out vec4 outColor;
+void main() { vec2 uv = gl_FragCoord.xy * 2.0 * uTexel;
+  vec3 c = texture(uSource, uv + vec2(-0.5, -0.5) * uTexel).rgb; c += texture(uSource, uv + vec2(0.5, -0.5) * uTexel).rgb;
+  c += texture(uSource, uv + vec2(-0.5, 0.5) * uTexel).rgb; c += texture(uSource, uv + vec2(0.5, 0.5) * uTexel).rgb;
+  outColor = vec4(min(c * 0.25, vec3(2.0)), 1.0); }`;
+  const BLUR = `#version 300 es
+precision highp float; uniform sampler2D uSource; uniform vec2 uStep; uniform vec2 uSize; out vec4 outColor;
+void main() { vec2 uv = gl_FragCoord.xy / uSize; vec3 c = texture(uSource, uv).rgb * 0.2270270;
+  c += texture(uSource, uv + uStep * 1.3846154).rgb * 0.3162162; c += texture(uSource, uv - uStep * 1.3846154).rgb * 0.3162162;
+  c += texture(uSource, uv + uStep * 3.2307692).rgb * 0.0702703; c += texture(uSource, uv - uStep * 3.2307692).rgb * 0.0702703;
+  outColor = vec4(c, 1.0); }`;
+  const UP = `#version 300 es
+precision highp float; uniform sampler2D uSource; uniform sampler2D uBase; uniform vec2 uSize; out vec4 outColor;
+void main() { vec2 uv = gl_FragCoord.xy / uSize; outColor = vec4(texture(uBase, uv).rgb + texture(uSource, uv).rgb * 0.8, 1.0); }`;
+  const ACCUM = `#version 300 es
+precision highp float; uniform sampler2D uScene; uniform sampler2D uBloom; uniform sampler2D uPrev; uniform vec2 uRes; uniform float uGlow; uniform float uBlend; out vec4 outColor;
+void main() { vec2 uv = gl_FragCoord.xy / uRes; vec3 bloom = texture(uBloom, uv).rgb; vec3 current = texture(uScene, uv).rgb + bloom * uGlow;
+  vec3 previous = texture(uPrev, uv).rgb; outColor = vec4(mix(previous, current, uBlend), 1.0); }`;
+  const COMPOSITE = `#version 300 es
+precision highp float; uniform sampler2D uScene; uniform vec2 uRes; uniform float uFade; uniform float uAberration; uniform float uLightMode; uniform float uOpacity; out vec4 outColor;
+float feather(float x, float w) { if (w <= 0.0) return 1.0; float t = clamp(min(x, 1.0 - x) / w, 0.0, 1.0); return t * t * t * (t * (t * 6.0 - 15.0) + 10.0); }
+float mask(vec2 uv) { return feather(uv.x, uFade * 0.34) * feather(uv.y, uFade * 0.44); }
+vec3 lightAt(vec2 uv) { return texture(uScene, uv).rgb; }
+void main() {
+  vec2 uv = gl_FragCoord.xy / uRes; float m = mask(uv); vec2 dir = (uv - 0.5) * vec2(uRes.x / uRes.y, 1.0); float edge = 1.0 - m;
+  vec2 shift = dir * uAberration * (0.004 + 0.05 * edge * edge) / vec2(uRes.x / uRes.y, 1.0); vec2 ur = uv + shift; vec2 ub = uv - shift;
+  vec3 c = vec3(lightAt(ur).r * mask(ur), lightAt(uv).g * m, lightAt(ub).b * mask(ub));
+  float peak = max(max(c.r, c.g), c.b); if (peak <= 0.0005) { outColor = vec4(0.0); return; }
+  float mapped = peak < 0.75 ? peak : 0.75 + 0.25 * (1.0 - exp(-(peak - 0.75) / 0.25));
+  vec3 col = c * (mapped / peak); col = mix(col, vec3(mapped), smoothstep(0.9, 2.6, peak) * 0.55);
+  float alpha;
+  if (uLightMode > 0.5) { vec3 hue = c / peak; float lum = dot(hue, vec3(0.2126, 0.7152, 0.0722)); hue = clamp(mix(vec3(lum), hue, 1.7), 0.0, 1.0);
+    lum = dot(hue, vec3(0.2126, 0.7152, 0.0722)); vec3 ink = clamp(hue * (0.46 / max(lum, 0.2)), 0.0, 1.0); float lift = max(peak - 0.14, 0.0) / 0.86;
+    alpha = (1.0 - exp(-3.2 * lift)) * 0.95; col = ink * alpha; }
+  else { alpha = max(max(col.r, col.g), col.b); }
+  outColor = vec4(col, alpha) * uOpacity;
+}`;
+  const PROGRAMS = {
+    scene: [SCENE, ['uAtlas','uRes','uAtlasGrid','uCount','uCell','uBasis','uFocal','uDepth','uTime','uGlyphTime','uDensity','uFlicker','uBrightness','uSeed','uColors','uColorCount','uHover','uClicks','uIntro']],
+    down: [DOWN, ['uSource','uTexel']], blur: [BLUR, ['uSource','uStep','uSize']], up: [UP, ['uSource','uBase','uSize']],
+    accum: [ACCUM, ['uScene','uBloom','uPrev','uRes','uGlow','uBlend']], composite: [COMPOSITE, ['uScene','uRes','uFade','uAberration','uLightMode','uOpacity']]
+  };
+  const compile = (type, src) => { const sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh); return sh; };
+  const programs = {};
+  for (const [name, [src, names]] of Object.entries(PROGRAMS)) {
+    const p = gl.createProgram(); const v = compile(gl.VERTEX_SHADER, VERTEX), f = compile(gl.FRAGMENT_SHADER, src);
+    gl.attachShader(p, v); gl.attachShader(p, f); gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) { console.error(name, gl.getShaderInfoLog(f) || gl.getProgramInfoLog(p)); return; }
+    const u = {}; names.forEach(n => u[n] = gl.getUniformLocation(p, n)); programs[name] = { program: p, uniforms: u };
+  }
+  const floatTargets = Boolean(gl.getExtension('EXT_color_buffer_float'));
+  const vao = gl.createVertexArray();
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const colorData = new Float32Array(MAX_COLORS * 3), clickData = new Float32Array(MAX_CLICKS * 4);
+  const hex = h => { const n = parseInt(h.replace('#', ''), 16); return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255]; };
+  s.colors.forEach((c, i) => colorData.set(hex(c), i * 3));
+  const state = { time: 0, glyphTime: 0, clock: 0, intro: s.intro && !reduce ? 0 : INTRO_SECONDS, width: 1, height: 1, ratio: 1, atlas: null, targets: null, flip: 0, fresh: true,
+    pointer: { x: 0, y: 0, inside: false }, hover: { x: 0, y: 0, vx: 0, vy: 0, presence: 0, placed: false }, lean: { x: 0, y: 0, vx: 0, vy: 0 }, angles: { tilt: 0, turn: 0 }, clicks: [] };
+
+  const buildAtlas = () => {
+    const list = [...new Set([...s.characters].filter(c => c.trim()))];
+    const columns = Math.min(ATLAS_COLUMNS, list.length), rows = Math.ceil(list.length / columns);
+    const cv = document.createElement('canvas'); cv.width = ATLAS_CELL * columns; cv.height = ATLAS_CELL * rows;
+    const ctx = cv.getContext('2d'); ctx.font = `500 ${Math.round(ATLAS_CELL * 0.74)}px ${s.fontFamily}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = '#fff';
+    list.forEach((ch, i) => ctx.fillText(ch, (i % columns) * ATLAS_CELL + ATLAS_CELL / 2, Math.floor(i / columns) * ATLAS_CELL + ATLAS_CELL / 2 + 2));
+    if (state.atlas) gl.deleteTexture(state.atlas.texture);
+    const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false); gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, gl.RGBA, gl.UNSIGNED_BYTE, cv); gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    state.atlas = { texture: tex, count: list.length, grid: [columns, rows] };
+  };
+  buildAtlas();
+  document.fonts && document.fonts.load(`500 64px ${s.fontFamily}`, s.characters).then(buildAtlas, () => {});
+
+  const makeTarget = (w, h) => {
+    const tex = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texImage2D(gl.TEXTURE_2D, 0, floatTargets ? gl.RGBA16F : gl.RGBA8, w, h, 0, gl.RGBA, floatTargets ? gl.HALF_FLOAT : gl.UNSIGNED_BYTE, null);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    const fb = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, fb); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+    gl.clearColor(0, 0, 0, 1); gl.clear(gl.COLOR_BUFFER_BIT); gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    return { texture: tex, framebuffer: fb, width: w, height: h };
+  };
+  const freeTarget = t => { gl.deleteTexture(t.texture); gl.deleteFramebuffer(t.framebuffer); };
+  const syncTargets = () => {
+    const w = canvas.width, h = canvas.height;
+    if (state.targets && state.targets.width === w && state.targets.height === h) return;
+    if (state.targets) { freeTarget(state.targets.scene); state.targets.trail.forEach(freeTarget); state.targets.levels.forEach(l => { freeTarget(l.a); freeTarget(l.b); }); }
+    const q = Math.min(1, 1.5 / Math.max(state.ratio, 1)); const sw = Math.max(1, Math.round(w * q)), sh = Math.max(1, Math.round(h * q));
+    const levels = []; let lw = sw, lh = sh;
+    for (let i = 0; i < BLOOM_LEVELS; i++) { lw = Math.max(1, Math.round(lw / 2)); lh = Math.max(1, Math.round(lh / 2)); levels.push({ a: makeTarget(lw, lh), b: makeTarget(lw, lh) }); }
+    state.targets = { width: w, height: h, scene: makeTarget(sw, sh), trail: [makeTarget(w, h), makeTarget(w, h)], levels }; state.flip = 0; state.fresh = true;
+  };
+  const planeBasis = (tilt, turn, rotation) => {
+    const a = tilt * Math.PI / 180, b = turn * Math.PI / 180, c = rotation * Math.PI / 180;
+    const roll = v => [v[0] * Math.cos(c) - v[1] * Math.sin(c), v[0] * Math.sin(c) + v[1] * Math.cos(c), v[2]];
+    const pitch = v => [v[0], v[1] * Math.cos(a) + v[2] * Math.sin(a), -v[1] * Math.sin(a) + v[2] * Math.cos(a)];
+    const yaw = v => [v[0] * Math.cos(b) + v[2] * Math.sin(b), v[1], -v[0] * Math.sin(b) + v[2] * Math.cos(b)];
+    const ap = v => yaw(pitch(roll(v))); return [ap([1, 0, 0]), ap([0, 1, 0]), ap([0, 0, 1])];
+  };
+  const syncAngles = () => { const t = state.clock; state.angles.tilt = s.tilt + s.sway * 4 * Math.sin(t * 0.17 + 1.1) + state.lean.y; state.angles.turn = s.turn + s.sway * 9 * Math.sin(t * 0.11) + state.lean.x; };
+  const project = (px, py) => {
+    const focal = 1 / Math.tan(s.perspective * Math.PI / 180 / 2); const [U, V, N] = planeBasis(state.angles.tilt, state.angles.turn, s.rotation);
+    const d = [(px - state.width / 2) / state.height, (state.height / 2 - py) / state.height, -focal]; const dn = d[0] * N[0] + d[1] * N[1] + d[2] * N[2];
+    if (dn > -1e-5) return null; const t = (-focal * N[2]) / dn; const P = [d[0] * t, d[1] * t, d[2] * t + focal]; const cell = s.cellSize / state.height;
+    return { x: (P[0] * U[0] + P[1] * U[1] + P[2] * U[2]) / cell, y: (P[0] * V[0] + P[1] * V[1] + P[2] * V[2]) / cell };
+  };
+  const draw = (prog, target, w, h) => { gl.bindFramebuffer(gl.FRAMEBUFFER, target ? target.framebuffer : null); gl.viewport(0, 0, w, h); gl.useProgram(prog.program); gl.drawArrays(gl.TRIANGLES, 0, 3); };
+  const bind = (unit, tex) => { gl.activeTexture(gl.TEXTURE0 + unit); gl.bindTexture(gl.TEXTURE_2D, tex); };
+  const render = dt => {
+    const { scene, down, blur, up, accum, composite } = programs;
+    syncTargets(); const T = state.targets, w = canvas.width, h = canvas.height;
+    gl.disable(gl.BLEND); gl.bindVertexArray(vao); syncAngles();
+    const u = scene.uniforms; gl.useProgram(scene.program); bind(0, state.atlas.texture); gl.uniform1i(u.uAtlas, 0);
+    gl.uniform2f(u.uRes, T.scene.width, T.scene.height); gl.uniform2f(u.uAtlasGrid, state.atlas.grid[0], state.atlas.grid[1]); gl.uniform1f(u.uCount, state.atlas.count);
+    gl.uniform1f(u.uCell, s.cellSize / state.height);
+    const [U, V, N] = planeBasis(state.angles.tilt, state.angles.turn, s.rotation); gl.uniformMatrix3fv(u.uBasis, false, [...U, ...V, ...N]);
+    gl.uniform1f(u.uFocal, 1 / Math.tan(s.perspective * Math.PI / 180 / 2)); gl.uniform1f(u.uDepth, s.depth); gl.uniform1f(u.uTime, state.time);
+    gl.uniform1f(u.uGlyphTime, state.glyphTime); gl.uniform1f(u.uDensity, s.density); gl.uniform1f(u.uFlicker, s.flicker * 0.07); gl.uniform1f(u.uBrightness, s.brightness);
+    gl.uniform1f(u.uSeed, (s.variation % 1000) * 13.37); gl.uniform3fv(u.uColors, colorData); gl.uniform1f(u.uColorCount, s.colors.length);
+    gl.uniform4f(u.uHover, state.hover.x, state.hover.y, 5.5, state.hover.presence);
+    clickData.fill(0); state.clicks.forEach((c, i) => { clickData[i * 4] = c.x; clickData[i * 4 + 1] = c.y; clickData[i * 4 + 2] = state.clock - c.start; clickData[i * 4 + 3] = 1; });
+    gl.uniform4fv(u.uClicks, clickData); gl.uniform1f(u.uIntro, state.intro); draw(scene, T.scene, T.scene.width, T.scene.height);
+    let source = T.scene;
+    T.levels.forEach(level => {
+      gl.useProgram(down.program); bind(0, source.texture); gl.uniform1i(down.uniforms.uSource, 0); gl.uniform2f(down.uniforms.uTexel, 1 / source.width, 1 / source.height);
+      draw(down, level.a, level.a.width, level.a.height);
+      gl.useProgram(blur.program); gl.uniform1i(blur.uniforms.uSource, 0); gl.uniform2f(blur.uniforms.uSize, level.a.width, level.a.height);
+      bind(0, level.a.texture); gl.uniform2f(blur.uniforms.uStep, 1 / level.a.width, 0); draw(blur, level.b, level.a.width, level.a.height);
+      bind(0, level.b.texture); gl.uniform2f(blur.uniforms.uStep, 0, 1 / level.a.height); draw(blur, level.a, level.a.width, level.a.height); source = level.a;
+    });
+    for (let i = T.levels.length - 2; i >= 0; i--) {
+      const level = T.levels[i]; gl.useProgram(up.program); bind(0, T.levels[i + 1].a.texture); bind(1, level.a.texture);
+      gl.uniform1i(up.uniforms.uSource, 0); gl.uniform1i(up.uniforms.uBase, 1); gl.uniform2f(up.uniforms.uSize, level.b.width, level.b.height);
+      draw(up, level.b, level.b.width, level.b.height); const sw = level.a; level.a = level.b; level.b = sw;
+    }
+    const read = T.trail[state.flip], write = T.trail[1 - state.flip], au = accum.uniforms;
+    gl.useProgram(accum.program); bind(0, T.scene.texture); bind(1, T.levels[0].a.texture); bind(2, read.texture);
+    gl.uniform1i(au.uScene, 0); gl.uniform1i(au.uBloom, 1); gl.uniform1i(au.uPrev, 2); gl.uniform2f(au.uRes, w, h); gl.uniform1f(au.uGlow, s.glow * (s.lightMode ? 0.25 : 1.8));
+    const tau = s.trails * 0.15; gl.uniform1f(au.uBlend, state.fresh || tau <= 0.001 ? 1 : 1 - Math.exp(-Math.max(dt, 1 / 240) / tau));
+    draw(accum, write, w, h); state.flip = 1 - state.flip; state.fresh = false;
+    const cu = composite.uniforms; gl.useProgram(composite.program); bind(0, write.texture); gl.uniform1i(cu.uScene, 0); gl.uniform2f(cu.uRes, w, h);
+    gl.uniform1f(cu.uFade, s.fade); gl.uniform1f(cu.uAberration, s.aberration); gl.uniform1f(cu.uLightMode, s.lightMode ? 1 : 0); gl.uniform1f(cu.uOpacity, s.opacity);
+    draw(composite, null, w, h); gl.bindVertexArray(null);
+  };
+  const resize = () => {
+    const width = Math.max(1, container.clientWidth), height = Math.max(1, container.clientHeight);
+    const base = Math.min(window.devicePixelRatio || 1, 2), longest = Math.max(width, height) * base;
+    const ratio = longest > MAX_RENDER_DIM ? (base * MAX_RENDER_DIM) / longest : base;
+    canvas.width = Math.max(1, Math.round(width * ratio)); canvas.height = Math.max(1, Math.round(height * ratio));
+    state.width = width; state.height = height; state.ratio = canvas.height / height; state.fresh = true; render(0);
+  };
+  let raf = 0, last = 0, visible = true;
+  const frame = now => {
+    raf = 0; if (!visible || document.hidden) return;
+    const dt = last ? Math.min(0.05, (now - last) / 1000) : 0; last = now; const moving = !reduce;
+    if (moving) { state.clock += dt; state.intro += dt; state.time += dt * s.speed; state.glyphTime += dt * s.scramble; state.clicks = state.clicks.filter(c => state.clock - c.start < CLICK_SECONDS); }
+    else state.intro = INTRO_SECONDS;
+    const { pointer, hover, lean } = state; const leaning = s.mouseInteraction && pointer.inside && !reduce;
+    const leanX = leaning ? ((pointer.x / state.width) * 2 - 1) * 5 : 0, leanY = leaning ? ((pointer.y / state.height) * 2 - 1) * 3 : 0;
+    if (dt > 0) { lean.vx += (40 * (leanX - lean.x) - 12 * lean.vx) * dt; lean.vy += (40 * (leanY - lean.y) - 12 * lean.vy) * dt; lean.x += lean.vx * dt; lean.y += lean.vy * dt; }
+    syncAngles(); const target = leaning ? project(pointer.x, pointer.y) : null;
+    if (target) {
+      if (!hover.placed) { hover.x = target.x; hover.y = target.y; hover.vx = 0; hover.vy = 0; hover.placed = true; }
+      if (dt > 0) { hover.vx += (90 * (target.x - hover.x) - 18 * hover.vx) * dt; hover.vy += (90 * (target.y - hover.y) - 18 * hover.vy) * dt; hover.x += hover.vx * dt; hover.y += hover.vy * dt; }
+    }
+    const goal = target ? 1 : 0; hover.presence += (goal - hover.presence) * (1 - Math.exp(-dt / (goal > hover.presence ? 0.25 : 0.6)));
+    if (!target && hover.presence < 0.001) hover.placed = false;
+    render(dt);
+    if (moving) raf = requestAnimationFrame(frame); else last = 0;
+  };
+  const wake = () => { if (!raf && visible && !document.hidden) raf = requestAnimationFrame(frame); };
+  const locate = e => { const r = container.getBoundingClientRect(); const x = e.clientX - r.left, y = e.clientY - r.top; return { x, y, inside: x >= 0 && y >= 0 && x <= r.width && y <= r.height }; };
+  addEventListener('pointermove', e => { const p = locate(e); Object.assign(state.pointer, p); wake(); }, { passive: true });
+  addEventListener('pointerdown', e => {
+    if (!s.burstOnClick || e.button !== 0 || reduce) return;
+    if (e.target instanceof Element && e.target.closest('a, button, input, textarea, select, label, [role="button"], .tile, .lightbox')) return;
+    const p = locate(e); if (!p.inside) return; const pt = project(p.x, p.y); if (!pt) return;
+    state.clicks.push({ x: pt.x, y: pt.y, start: state.clock }); while (state.clicks.length > MAX_CLICKS) state.clicks.shift(); wake();
+  });
+  document.documentElement.addEventListener('pointerleave', () => { state.pointer.inside = false; wake(); });
+  document.addEventListener('visibilitychange', () => { last = 0; wake(); });
+  new ResizeObserver(resize).observe(container);
+  new IntersectionObserver(es => { visible = es.some(x => x.isIntersecting); if (visible) { last = 0; wake(); } }).observe(container);
+  resize(); wake();
+}
+
+
+/* ===== slide navigation, pager, presenter notes, 15-minute mode, lightbox ===== */
+(() => {
+  const NOTES = {
+    cover: ['0:20', ``],
+    about: ['1:00', ``],
+    threads: ['0:50', ``],
+    echo: ['1:00', ``],
+    steering: ['2:00', ``],
+    'steering-more': ['deep dive', ``],
+    review: ['1:15', ``],
+    'review-more': ['deep dive', ``],
+    cde: ['1:30', ``],
+    medviz: ['1:15', ``],
+    stories: ['deep dive', ``],
+    consortia: ['1:15', ``],
+    fit: ['0:45', ``],
+    pubs: ['appendix', ``]
+  };
+  const slides = [...document.querySelectorAll('.slide')];
+  const label = document.getElementById('pager-label'), modeTag = document.getElementById('pager-mode');
+  const notes = document.getElementById('notes'), nTitle = document.getElementById('notes-title'), nTime = document.getElementById('notes-time'), nBody = document.getElementById('notes-body'), nTimer = document.getElementById('notes-timer');
+  const total = slides.length, pad = n => String(n).padStart(2, '0');
+  const store = { get: k => { try { return localStorage.getItem(k); } catch (_) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (_) {} } };
+  let current = 0, short = store.get('dw-short') === '1', started = 0;
+  const renderNotes = () => {
+    const s = slides[current], n = NOTES[s.id] || ['', ''];
+    nTitle.textContent = pad(current + 1) + '  ' + s.dataset.label; nTime.textContent = n[0]; nBody.textContent = n[1];
+  };
+  const update = () => {
+    const mid = innerHeight * 0.4; let idx = 0;
+    slides.forEach((s, i) => { if (s.getBoundingClientRect().top <= mid) idx = i; });
+    if (idx !== current) { current = idx; if (!started && idx > 0) started = performance.now(); }
+    current = idx; label.textContent = pad(idx + 1) + ' / ' + pad(total) + '  ' + slides[idx].dataset.label;
+    if (!notes.hidden) renderNotes();
+  };
+  const setMode = v => { short = v; modeTag.hidden = !v; store.set('dw-short', v ? '1' : '0'); };
+  setMode(short);
+  const smooth = () => matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+  let pending = null, pendingTimer = 0;
+  const go = dir => {
+    const base = pending ?? current;
+    let i = base + dir;
+    while (short && i > 0 && i < total - 1 && slides[i].hasAttribute('data-deep')) i += dir;
+    if (short && i === total - 1 && slides[i].hasAttribute('data-deep')) i = base;
+    i = Math.max(0, Math.min(total - 1, i));
+    pending = i; clearTimeout(pendingTimer); pendingTimer = setTimeout(() => { pending = null; }, 900);
+    slides[i].scrollIntoView({ behavior: smooth() });
+  };
+  const jump = i => slides[i].scrollIntoView({ behavior: smooth() });
+  setInterval(() => {
+    if (notes.hidden) return;
+    const sec = started ? Math.floor((performance.now() - started) / 1000) : 0;
+    nTimer.textContent = pad(Math.floor(sec / 60)) + ':' + pad(sec % 60);
+  }, 500);
+  document.getElementById('next').addEventListener('click', () => go(1));
+  document.getElementById('prev').addEventListener('click', () => go(-1));
+  addEventListener('scroll', update, { passive: true }); addEventListener('resize', update); update();
+  const lb = document.getElementById('lightbox'), lbImg = lb.querySelector('img');
+  document.querySelectorAll('.tile img, .stack3 img').forEach(img => img.addEventListener('click', () => { lbImg.src = img.currentSrc || img.src; lbImg.alt = img.alt; lb.hidden = false; }));
+  lb.addEventListener('click', () => { lb.hidden = true; });
+  addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (!lb.hidden) { if (e.key === 'Escape') lb.hidden = true; return; }
+    const k = e.key;
+    if (['ArrowDown', 'ArrowRight', 'PageDown', ' '].includes(k)) { e.preventDefault(); go(1); }
+    else if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(k)) { e.preventDefault(); go(-1); }
+    else if (k === 'n' || k === 'N') { notes.hidden = !notes.hidden; if (!notes.hidden) renderNotes(); }
+    else if (k === 'd' || k === 'D') setMode(!short);
+    else if (k === 't' || k === 'T') { started = performance.now(); }
+    else if (k === 'f' || k === 'F') { try { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen(); } catch (_) {} }
+    else if (k === 'Home') { e.preventDefault(); jump(0); }
+    else if (k === 'End') { e.preventDefault(); jump(total - 1); }
+  });
+})();
+</script>
+<script>
+/* HoloMosaic: vanilla port of React Bits HoloMosaic (WebGL2, no deps) */
+function HoloMosaic(container, canvas, opts) {
+const MAX_WAVES = 6;
+const MAX_RENDER_DIM = 2400;
+const TILE_PX = 52;
+const EYE = 1.15;
+const INTRO_SECONDS = 2.4;
+const WAVE_SECONDS = 4;
+const FILTERS = { none: 0, dither: 1, ascii: 2 };
+
+const SPECTRUMS = {
+  full: [400, 700, 0],
+  warm: [565, 700, 0],
+  cool: [405, 565, 0],
+  pearl: [420, 690, 0.55]
+};
+
+const VERTEX = `#version 300 es
+void main() {
+  vec2 p = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2));
+  gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0);
+}`;
+
+const FRAGMENT = `#version 300 es
+precision highp float;
+uniform vec2 uRes;
+uniform float uPixel;
+uniform float uTime;
+uniform float uClock;
+uniform float uTile;
+uniform vec2 uRot;
+uniform float uGap;
+uniform float uRound;
+uniform float uBevel;
+uniform float uScatter;
+uniform float uTilt;
+uniform float uSwirl;
+uniform float uRipple;
+uniform float uBands;
+uniform float uSoft;
+uniform float uIntensity;
+uniform float uSaturation;
+uniform vec3 uSpectrum;
+uniform float uGlitter;
+uniform float uSheen;
+uniform float uGrain;
+uniform vec3 uColor;
+uniform vec3 uMetal;
+uniform vec2 uLight;
+uniform vec4 uHover;
+uniform vec4 uWaves[${MAX_WAVES}];
+uniform vec4 uIntro;
+uniform float uFade;
+uniform float uOpacity;
+uniform float uLightMode;
+uniform float uSeed;
+uniform float uFrame;
+uniform float uFilter;
+uniform float uFilterSize;
+out vec4 outColor;
+
+float h21(vec2 p) {
+  vec3 q = fract(vec3(p.xyx) * vec3(0.1031, 0.1030, 0.0973));
+  q += dot(q, q.yzx + 33.33);
+  return fract((q.x + q.y) * q.z);
+}
+
+float h31(vec3 p) {
+  p = fract(p * vec3(0.1031, 0.1030, 0.0973));
+  p += dot(p, p.yxz + 33.33);
+  return fract((p.x + p.y) * p.z);
+}
+
+float vn3(vec3 p) {
+  vec3 i = floor(p);
+  vec3 f = fract(p);
+  f = f * f * (3.0 - 2.0 * f);
+  return mix(
+    mix(mix(h31(i), h31(i + vec3(1, 0, 0)), f.x), mix(h31(i + vec3(0, 1, 0)), h31(i + vec3(1, 1, 0)), f.x), f.y),
+    mix(mix(h31(i + vec3(0, 0, 1)), h31(i + vec3(1, 0, 1)), f.x), mix(h31(i + vec3(0, 1, 1)), h31(i + vec3(1, 1, 1)), f.x), f.y),
+    f.z
+  );
+}
+
+vec3 bump3y(vec3 x, vec3 yo) {
+  return clamp(1.0 - x * x - yo, 0.0, 1.0);
+}
+
+vec3 spectral(float w) {
+  float x = clamp((w - 400.0) / 300.0, 0.0, 1.0);
+  vec3 c1 = vec3(3.54585104, 2.93225262, 2.41593945);
+  vec3 x1 = vec3(0.69549072, 0.49228336, 0.27699880);
+  vec3 y1 = vec3(0.02312639, 0.15225084, 0.52607955);
+  vec3 c2 = vec3(3.90307140, 3.21182957, 3.96587128);
+  vec3 x2 = vec3(0.11748627, 0.86755042, 0.66077860);
+  vec3 y2 = vec3(0.84897130, 0.88445281, 0.73949448);
+  return bump3y(c1 * (x - x1), y1) + bump3y(c2 * (x - x2), y2);
+}
+
+vec3 band(float lam) {
+  float window = smoothstep(380.0, 425.0, lam) * (1.0 - smoothstep(680.0, 780.0, lam));
+  if (window <= 0.0) return vec3(0.0);
+  return spectral(mix(uSpectrum.x, uSpectrum.y, clamp((lam - 380.0) / 400.0, 0.0, 1.0))) * window;
+}
+
+float boxDist(vec2 p, float b, float r, out vec2 grad) {
+  vec2 q = abs(p) - b + r;
+  vec2 m = max(q, 0.0);
+  float outside = length(m);
+  vec2 sg = vec2(p.x < 0.0 ? -1.0 : 1.0, p.y < 0.0 ? -1.0 : 1.0);
+  grad = outside > 0.0 ? sg * m / outside : sg * (q.x > q.y ? vec2(1.0, 0.0) : vec2(0.0, 1.0));
+  return outside + min(max(q.x, q.y), 0.0) - r;
+}
+
+vec4 shade(vec2 frag, float solid) {
+  vec2 c = frag - 0.5 * uRes;
+  vec2 s = c / uRes.y;
+  vec2 g = vec2(uRot.x * c.x + uRot.y * c.y, uRot.x * c.y - uRot.y * c.x) / uTile;
+  vec2 id = floor(g);
+  vec2 f = g - id - 0.5;
+  vec2 gc = (id + 0.5) * uTile;
+  vec2 cell = vec2(uRot.x * gc.x - uRot.y * gc.y, uRot.y * gc.x + uRot.x * gc.y) / uRes.y;
+  vec2 seed = vec2(uSeed * 17.13, uSeed * 31.71);
+  float h1 = h21(id + seed);
+  float h2 = h21(id + seed + 19.7);
+  float h3 = h21(id + seed + 41.3);
+
+  float flip = 0.0;
+  float presence = 1.0;
+  if (uIntro.w > 0.0) {
+    float k = clamp((uIntro.z - length(cell - uIntro.xy) * 0.85 - h1 * 0.22) / 0.75, 0.0, 1.0);
+    float e = k * k * k * (k * (k * 6.0 - 15.0) + 10.0);
+    flip = (1.0 - e) * 1.5707963;
+    presence = e;
+  }
+  for (int i = 0; i < ${MAX_WAVES}; i++) {
+    vec4 w = uWaves[i];
+    if (w.w <= 0.0) continue;
+    float k = clamp(((uClock - w.z) * 0.95 - length(cell - w.xy)) / 0.2, 0.0, 1.0);
+    flip += k * k * (3.0 - 2.0 * k) * 3.1415927;
+  }
+
+  float ca = cos(flip);
+  float sa = sin(flip);
+  float squash = max(abs(ca), 0.02);
+  float half_ = 0.5 - 0.5 * uGap;
+  vec2 grad;
+  float d = boxDist(vec2(f.x / squash, f.y), half_, uRound * half_, grad);
+  float aa = 1.2 / uTile;
+  float aaD = mix(aa, aa / squash, abs(grad.x));
+  float cover = mix((1.0 - smoothstep(-aaD, aaD, d)) * smoothstep(0.02, 0.08, abs(ca)), 1.0, solid);
+  float alpha = cover * uOpacity;
+  if (uFade > 0.0) {
+    vec2 uv = frag / uRes;
+    vec2 m = clamp(min(uv, 1.0 - uv) / max(uFade * 0.5, 1e-4), 0.0, 1.0);
+    m = m * m * m * (m * (m * 6.0 - 15.0) + 10.0);
+    alpha *= m.x * m.y;
+  }
+  if (alpha <= 0.002) return vec4(0.0);
+
+  float edge = smoothstep(-0.02 - 0.07 * uBevel, 0.0, d) * uBevel;
+  float inner = smoothstep(0.0, -0.09, d);
+  vec3 n = normalize(vec3((vec2(h2, h3) - 0.5) * (0.5 * uTilt) + grad * edge * 0.55, 1.0));
+  n = vec3(n.x * ca + n.z * sa, n.y, abs(n.z * ca - n.x * sa));
+  vec3 N = vec3(uRot.x * n.x - uRot.y * n.y, uRot.y * n.x + uRot.x * n.y, n.z);
+  vec2 hv = cell - uHover.xy;
+  float hw = exp(-dot(hv, hv) / (uHover.z * uHover.z)) * uHover.w;
+  N = normalize(N + vec3(-hv / uHover.z * hw * 1.3, 0.0));
+  float turn = abs(sin(flip));
+
+  float t = uTime;
+  float flow = vn3(vec3(s * (1.4 * uSwirl) + seed * 0.013, t * 0.05));
+  vec2 rc = vec2(0.15 + 0.22 * sin(t * 0.07), -0.05 + 0.16 * cos(t * 0.053));
+  float rip = sin(length(s - rc) * 26.0 - t * 1.2) * 0.5 + 0.5;
+  float phi = 6.2831853 * mix(flow, h1, uScatter) + uRipple * 0.9 * rip;
+  vec3 T = vec3(cos(phi), sin(phi), 0.0);
+  T = normalize(T - dot(T, N) * N);
+  vec3 V = normalize(vec3(-s, ${EYE.toFixed(1)}));
+  vec3 L = normalize(vec3(uLight, 1.0));
+  float D = 1450.0 * uBands;
+  vec3 sh = vec3(0.0);
+  for (int k = 0; k < 3; k++) {
+    float a = float(k) * 2.39996 + 0.7;
+    vec3 Lk = normalize(vec3(uLight + vec2(cos(a), sin(a)) * sqrt((float(k) + 0.5) / 3.0) * uSoft, 1.0));
+    float x = abs(dot(Lk + V, T)) * D;
+    sh += band(x) + 0.6 * band(x * 0.5);
+  }
+  sh *= presence * (0.62 + 0.38 * inner) / 3.0;
+  float lum = dot(sh, vec3(0.2126, 0.7152, 0.0722));
+  sh = mix(vec3(lum), sh, uSaturation);
+  sh = mix(sh, vec3(lum * 1.15 + 0.08 * presence), uSpectrum.z * 0.6);
+
+  vec3 H = normalize(L + V);
+  float ndh = max(dot(N, H), 0.0);
+  float wide = pow(ndh, 34.0);
+  float tight = pow(ndh, 700.0);
+  vec2 spot = uLight * ${EYE.toFixed(1)};
+  float pool = pow(max(1.0 - length(s - spot) * 2.1, 0.0), 2.5) * uSheen;
+
+  float spark = 0.0;
+  vec3 sparkColor = vec3(1.0);
+  if (uGlitter > 0.0) {
+    vec2 gq = frag / (uPixel * 6.0);
+    vec2 gid = floor(gq) + seed;
+    float gh = h21(gid + 3.7);
+    if (gh < 0.05 + 0.25 * uGlitter) {
+      vec2 off = vec2(h21(gid + 1.3), h21(gid + 5.9)) - 0.5;
+      float r = length(fract(gq) - 0.5 - off * 0.45);
+      vec3 gn = normalize(vec3((vec2(h21(gid + 9.1), h21(gid + 2.2)) - 0.5) * 0.7 + N.xy, 1.0));
+      float twinkle = 0.55 + 0.45 * sin(t * (2.0 + 5.0 * gh) + gh * 70.0);
+      spark = smoothstep(0.991, 0.9995, dot(gn, H)) * (1.0 - smoothstep(0.07, 0.24, r)) * twinkle * presence * uGlitter;
+      sparkColor = spectral(420.0 + 260.0 * h21(gid + 7.7));
+    }
+  }
+
+  float grainNoise = h31(vec3(floor(frag / uPixel), uFrame)) - 0.5;
+  vec3 col;
+  if (uLightMode > 0.5) {
+    float ink = max(max(sh.r, sh.g), sh.b) * uIntensity;
+    float top = max(max(sh.r, sh.g), sh.b);
+    vec3 hue = sh / max(top, 1e-3);
+    float chroma = (top - min(min(sh.r, sh.g), sh.b)) / max(top, 1e-3);
+    hue = clamp(mix(vec3(dot(hue, vec3(0.2126, 0.7152, 0.0722))), hue, 1.35) * 0.92, 0.0, 1.0);
+    hue = mix(uMetal * 0.85, hue, smoothstep(0.08, 0.45, chroma));
+    float density = 0.86 * smoothstep(0.0, 0.85, ink);
+    vec3 paper = uColor * (1.0 - 0.035 * (1.0 - wide) - 0.05 * edge) + uMetal * (0.08 * tight);
+    col = mix(paper, hue * mix(vec3(1.0), uColor, 0.15), density);
+    col = mix(col, sparkColor * 0.9, min(spark * 1.4, 0.9));
+    col -= abs(grainNoise) * uGrain * 0.35 * clamp(density * 1.6 + spark, 0.0, 1.0);
+    col = mix(col, uColor, 0.12 * (1.0 - wide) * (1.0 - density) * pool);
+  } else {
+    vec3 base = uColor + vec3(0.018, 0.018, 0.024);
+    col = base + uMetal * (0.025 + 0.07 * wide + 1.1 * tight + 0.2 * pool + 0.55 * turn * turn) * (0.75 + 0.25 * inner);
+    col += sh * (1.65 * uIntensity);
+    col += mix(sparkColor, vec3(1.0), 0.45) * spark * 2.4;
+    col = col * (1.0 + col / 5.0) / (1.0 + col * 0.55);
+    col += grainNoise * uGrain * 0.24;
+  }
+  col = clamp(col, 0.0, 1.0);
+  return vec4(col * alpha, alpha);
+}
+
+float bayer(vec2 p) {
+  int i = int(mod(p.x, 4.0)) + int(mod(p.y, 4.0)) * 4;
+  int m[16] = int[16](0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5);
+  return (float(m[i]) + 0.5) / 16.0;
+}
+
+float glyph(float level, vec2 uv) {
+  int codes[8] = int[8](0, 4194304, 131200, 14336, 459200, 145536, 703136, 11512810);
+  vec2 g = floor(uv * 7.0) - 1.0;
+  if (g.x < 0.0 || g.y < 0.0 || g.x > 4.0 || g.y > 4.0) return 0.0;
+  int code = codes[int(clamp(level * 8.0, 0.0, 7.0))];
+  return float((code >> (int(g.x) + 5 * int(4.0 - g.y))) & 1);
+}
+
+void main() {
+  vec2 frag = gl_FragCoord.xy;
+  if (uFilter > 1.5) {
+    float size = max(4.0, floor(uPixel * 10.0 * uFilterSize + 0.5));
+    vec2 cellId = floor(frag / size);
+    vec4 sampled = shade((cellId + 0.5) * size, 1.0);
+    if (sampled.a <= 0.002) {
+      outColor = vec4(0.0);
+      return;
+    }
+    vec3 col = sampled.rgb / sampled.a;
+    float ink = pow(clamp(length(col - uColor) * 1.25, 0.0, 1.0), 0.85);
+    float on = glyph(ink, (frag - cellId * size) / size);
+    float top = max(max(col.r, col.g), col.b);
+    vec3 tone = uLightMode > 0.5 ? col * 0.82 : mix(col, col / max(top, 0.25), 0.4);
+    float alpha = on * sampled.a;
+    outColor = vec4(clamp(tone, 0.0, 1.0) * alpha, alpha);
+  } else if (uFilter > 0.5) {
+    float size = max(1.0, floor(uPixel * 2.0 * uFilterSize + 0.5));
+    vec2 cellId = floor(frag / size);
+    vec4 sampled = shade((cellId + 0.5) * size, 0.0);
+    float threshold = bayer(cellId);
+    float alpha = sampled.a >= 0.999 ? 1.0 : step(threshold, sampled.a);
+    if (alpha <= 0.0) {
+      outColor = vec4(0.0);
+      return;
+    }
+    vec3 col = sampled.rgb / max(sampled.a, 1e-3);
+    vec3 levels = clamp(uColor + floor((col - uColor) * 4.0 + threshold) / 4.0, 0.0, 1.0);
+    outColor = vec4(levels * alpha, alpha);
+  } else {
+    outColor = shade(frag, 0.0);
+  }
+}`;
+
+const UNIFORMS = [
+  'uRes',
+  'uPixel',
+  'uTime',
+  'uClock',
+  'uTile',
+  'uRot',
+  'uGap',
+  'uRound',
+  'uBevel',
+  'uScatter',
+  'uTilt',
+  'uSwirl',
+  'uRipple',
+  'uBands',
+  'uSoft',
+  'uIntensity',
+  'uSaturation',
+  'uSpectrum',
+  'uGlitter',
+  'uSheen',
+  'uGrain',
+  'uColor',
+  'uMetal',
+  'uLight',
+  'uHover',
+  'uWaves',
+  'uIntro',
+  'uFade',
+  'uOpacity',
+  'uLightMode',
+  'uSeed',
+  'uFrame',
+  'uFilter',
+  'uFilterSize'
+];
+
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+const num = (value, fallback) => {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : fallback;
+};
+
+const compileShader = (gl, type, source) => {
+  const shader = gl.createShader(type);
+  if (!shader) return null;
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  return shader;
+};
+
+const startProgram = gl => {
+  const vertex = compileShader(gl, gl.VERTEX_SHADER, VERTEX);
+  const fragment = compileShader(gl, gl.FRAGMENT_SHADER, FRAGMENT);
+  const program = vertex && fragment ? gl.createProgram() : null;
+  if (!vertex || !fragment || !program) {
+    if (vertex) gl.deleteShader(vertex);
+    if (fragment) gl.deleteShader(fragment);
+    return null;
+  }
+  gl.attachShader(program, vertex);
+  gl.attachShader(program, fragment);
+  gl.linkProgram(program);
+  return { program, vertex, fragment };
+};
+
+const finishProgram = (gl, job) => {
+  const { program, vertex, fragment } = job;
+  const linked = gl.getProgramParameter(program, gl.LINK_STATUS);
+  if (!linked && !gl.isContextLost()) {
+    const broken = [vertex, fragment].filter(shader => !gl.getShaderParameter(shader, gl.COMPILE_STATUS));
+    if (broken.length) broken.forEach(shader => console.error(gl.getShaderInfoLog(shader)));
+    else console.error(gl.getProgramInfoLog(program));
+  }
+  gl.deleteShader(vertex);
+  gl.deleteShader(fragment);
+  if (!linked) {
+    gl.deleteProgram(program);
+    return null;
+  }
+  const uniforms = {};
+  for (const name of UNIFORMS) uniforms[name] = gl.getUniformLocation(program, name);
+  return { program, uniforms };
+};
+
+  const {
+    color = '#120f17', metalColor = '#e8ebf1', spectrum = 'full', tileSize = 1, gap = 0.08, roundness = 0.15,
+    bevel = 0.35, rotation = 0, scatter = 0.3, tilt = 0.35, swirl = 1, ripple = 0.6, bands = 1.3, softness = 0.5,
+    intensity = 1.25, saturation = 0.1, glitter = 0.85, sheen = 0.8, grain = 0.08, speed = 0.5, variation = 0,
+    filter = 'none', filterSize = 1, fade = 0, opacity = 1, intro = true, mouseInteraction = true,
+    mouseStrength = 1, mouseRadius = 0.25, flipOnClick = true, lightMode = false, paused = false, dpr
+  } = opts || {};
+  const settings = {
+    color: String(color),
+    metalColor: String(metalColor),
+    spectrum: SPECTRUMS[spectrum] || SPECTRUMS.full,
+    tileSize: clamp(num(tileSize, 1), 0.2, 6),
+    gap: clamp(num(gap, 0), 0, 0.6),
+    roundness: clamp(num(roundness, 0), 0, 1),
+    bevel: clamp(num(bevel, 0), 0, 1),
+    rotation: (num(rotation, 0) * Math.PI) / 180,
+    scatter: clamp(num(scatter, 0), 0, 1),
+    tilt: clamp(num(tilt, 0), 0, 2),
+    swirl: clamp(num(swirl, 0), 0, 5),
+    ripple: clamp(num(ripple, 0), 0, 3),
+    bands: clamp(num(bands, 1), 0.3, 3),
+    softness: clamp(num(softness, 0), 0, 1),
+    intensity: Math.max(0, num(intensity, 0)),
+    saturation: clamp(num(saturation, 0), 0, 1.5),
+    glitter: clamp(num(glitter, 0), 0, 1),
+    sheen: clamp(num(sheen, 0), 0, 2),
+    grain: clamp(num(grain, 0), 0, 1),
+    speed: Math.max(0, num(speed, 0)),
+    variation: num(variation, 0),
+    filter: FILTERS[filter] ?? 0,
+    filterSize: clamp(num(filterSize, 1), 0.5, 4),
+    fade: clamp(num(fade, 0), 0, 1),
+    opacity: clamp(num(opacity, 1), 0, 1),
+    intro,
+    mouseInteraction,
+    mouseStrength: clamp(num(mouseStrength, 0), 0, 3),
+    mouseRadius: clamp(num(mouseRadius, 0.25), 0.05, 1),
+    flipOnClick,
+    lightMode,
+    paused,
+    dpr
+  };
+  const settingsRef = { current: settings };
+    const gl = canvas.getContext('webgl2', {
+      alpha: true,
+      premultipliedAlpha: true,
+      antialias: false,
+      depth: false,
+      stencil: false,
+      powerPreference: 'default'
+    });
+    if (!gl) return undefined;
+    const parallel = gl.getExtension('KHR_parallel_shader_compile');
+    let job = startProgram(gl);
+    if (!job) return undefined;
+    let surface = null;
+    if (!parallel) {
+      surface = finishProgram(gl, job);
+      job = null;
+      if (!surface) return undefined;
+    }
+    const vao = gl.createVertexArray();
+    const probe = document.createElement('canvas');
+    probe.width = 1;
+    probe.height = 1;
+    const probeContext = probe.getContext('2d', { willReadFrequently: true });
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    const waveData = new Float32Array(MAX_WAVES * 4);
+    const state = {
+      time: 17 + (settingsRef.current.variation % 97) * 3.1,
+      clock: 0,
+      frame: 0,
+      intro: settingsRef.current.intro && !reduce && !settingsRef.current.paused ? 0 : INTRO_SECONDS,
+      started: false,
+      width: 1,
+      height: 1,
+      ratio: 1,
+      colorKey: '',
+      color: [0.07, 0.06, 0.09],
+      metal: [0.78, 0.8, 0.85],
+      pointer: { x: 0, y: 0, inside: false },
+      light: { x: 0, y: 0, vx: 0, vy: 0, placed: false },
+      hover: { x: 0, y: 0, vx: 0, vy: 0, presence: 0, placed: false },
+      follow: 0,
+      waves: []
+    };
+    let raf = 0;
+    let last = 0;
+    let visible = true;
+    let alive = true;
+    let lost = false;
+
+    const toRgb = (value, fallback) => {
+      if (!probeContext || !value) return fallback;
+      const css = /^[0-9a-f]{3,8}$/i.test(value) ? `#${value}` : value;
+      probeContext.clearRect(0, 0, 1, 1);
+      probeContext.fillStyle = '#000000';
+      probeContext.fillStyle = css;
+      probeContext.fillRect(0, 0, 1, 1);
+      const [r, g, b] = probeContext.getImageData(0, 0, 1, 1).data;
+      return [r / 255, g / 255, b / 255];
+    };
+
+    const resolveColors = s => {
+      const key = `${s.color}|${s.metalColor}`;
+      if (key === state.colorKey) return;
+      state.colorKey = key;
+      state.color = toRgb(s.color, [0.07, 0.06, 0.09]);
+      state.metal = toRgb(s.metalColor, [0.78, 0.8, 0.85]);
+    };
+
+    const aspect = () => state.width / Math.max(state.height, 1);
+
+    const wander = () => {
+      const t = state.time;
+      return {
+        x: 0.46 * aspect() * Math.cos(t * 0.29 + 0.4),
+        y: 0.36 * Math.sin(t * 0.41 + 1.1)
+      };
+    };
+
+    const toSurface = (px, py) => ({
+      x: (px - state.width / 2) / state.height,
+      y: (state.height / 2 - py) / state.height
+    });
+
+    const render = () => {
+      if (!surface || lost) return;
+      const s = settingsRef.current;
+      resolveColors(s);
+      const u = surface.uniforms;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.disable(gl.BLEND);
+      gl.useProgram(surface.program);
+      gl.bindVertexArray(vao);
+      waveData.fill(0);
+      state.waves.forEach((wave, index) => {
+        waveData[index * 4] = wave.x;
+        waveData[index * 4 + 1] = wave.y;
+        waveData[index * 4 + 2] = wave.start;
+        waveData[index * 4 + 3] = 1;
+      });
+      const introLive = state.intro < INTRO_SECONDS;
+      gl.uniform2f(u.uRes, canvas.width, canvas.height);
+      gl.uniform1f(u.uPixel, state.ratio);
+      gl.uniform1f(u.uTime, state.time);
+      gl.uniform1f(u.uClock, state.clock);
+      gl.uniform1f(u.uTile, TILE_PX * s.tileSize * state.ratio);
+      gl.uniform2f(u.uRot, Math.cos(s.rotation), Math.sin(s.rotation));
+      gl.uniform1f(u.uGap, s.gap);
+      gl.uniform1f(u.uRound, s.roundness);
+      gl.uniform1f(u.uBevel, s.bevel);
+      gl.uniform1f(u.uScatter, s.scatter);
+      gl.uniform1f(u.uTilt, s.tilt);
+      gl.uniform1f(u.uSwirl, s.swirl);
+      gl.uniform1f(u.uRipple, s.ripple);
+      gl.uniform1f(u.uBands, s.bands);
+      gl.uniform1f(u.uSoft, 0.02 + 0.2 * s.softness);
+      gl.uniform1f(u.uIntensity, s.intensity);
+      gl.uniform1f(u.uSaturation, s.saturation);
+      gl.uniform3f(u.uSpectrum, s.spectrum[0], s.spectrum[1], s.spectrum[2]);
+      gl.uniform1f(u.uGlitter, s.glitter);
+      gl.uniform1f(u.uSheen, s.sheen);
+      gl.uniform1f(u.uGrain, s.grain);
+      gl.uniform3f(u.uColor, state.color[0], state.color[1], state.color[2]);
+      gl.uniform3f(u.uMetal, state.metal[0], state.metal[1], state.metal[2]);
+      gl.uniform2f(u.uLight, state.light.x / EYE, state.light.y / EYE);
+      gl.uniform4f(u.uHover, state.hover.x, state.hover.y, s.mouseRadius, 0.8 * state.hover.presence * s.mouseStrength);
+      gl.uniform4fv(u.uWaves, waveData);
+      gl.uniform4f(u.uIntro, 0, 0, state.intro, introLive ? 1 : 0);
+      gl.uniform1f(u.uFade, s.fade);
+      gl.uniform1f(u.uOpacity, s.opacity);
+      gl.uniform1f(u.uLightMode, s.lightMode ? 1 : 0);
+      gl.uniform1f(u.uSeed, (s.variation % 1000) * 0.618);
+      gl.uniform1f(u.uFrame, state.frame % 613);
+      gl.uniform1f(u.uFilter, s.filter);
+      gl.uniform1f(u.uFilterSize, s.filterSize);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      gl.bindVertexArray(null);
+    };
+
+    const resize = () => {
+      const s = settingsRef.current;
+      const width = Math.max(1, container.clientWidth);
+      const height = Math.max(1, container.clientHeight);
+      const base = Math.min(s.dpr || window.devicePixelRatio || 1, 2);
+      const longest = Math.max(width, height) * base;
+      const ratio = longest > MAX_RENDER_DIM ? (base * MAX_RENDER_DIM) / longest : base;
+      const pixelWidth = Math.max(1, Math.round(width * ratio));
+      const pixelHeight = Math.max(1, Math.round(height * ratio));
+      if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+        canvas.width = pixelWidth;
+        canvas.height = pixelHeight;
+      }
+      state.width = width;
+      state.height = height;
+      state.ratio = pixelHeight / height;
+      if (!state.light.placed) {
+        const home = wander();
+        state.light.x = home.x;
+        state.light.y = home.y;
+        state.light.placed = true;
+      }
+      render();
+    };
+
+    const spring = (body, target, stiffness, damping, dt) => {
+      body.vx += (stiffness * (target.x - body.x) - damping * body.vx) * dt;
+      body.vy += (stiffness * (target.y - body.y) - damping * body.vy) * dt;
+      body.x += body.vx * dt;
+      body.y += body.vy * dt;
+    };
+
+    const ready = () => {
+      if (surface) return true;
+      if (!job || !parallel || !gl.getProgramParameter(job.program, parallel.COMPLETION_STATUS_KHR)) return false;
+      surface = finishProgram(gl, job);
+      job = null;
+      return Boolean(surface);
+    };
+
+    const frame = now => {
+      raf = 0;
+      if (!alive || !visible || document.hidden || lost) return;
+      if (!ready()) {
+        if (job) raf = requestAnimationFrame(frame);
+        return;
+      }
+      const s = settingsRef.current;
+      const dt = last && state.started ? Math.min(0.05, (now - last) / 1000) : 0;
+      last = now;
+      state.started = true;
+      const moving = !s.paused && !reduce;
+      if (moving) {
+        state.frame += 1;
+        state.clock += dt;
+        state.intro += dt;
+        state.time += dt * s.speed;
+        state.waves = state.waves.filter(wave => state.clock - wave.start < WAVE_SECONDS);
+      } else if (state.intro < INTRO_SECONDS) {
+        state.intro = INTRO_SECONDS;
+      }
+      const { pointer, light, hover } = state;
+      const active = s.mouseInteraction && pointer.inside && !reduce;
+      const target = active ? toSurface(pointer.x, pointer.y) : null;
+      state.follow += ((active ? 1 : 0) - state.follow) * (1 - Math.exp(-dt / (active ? 0.45 : 1.2)));
+      const home = wander();
+      const goal = target
+        ? { x: home.x + (target.x - home.x) * state.follow, y: home.y + (target.y - home.y) * state.follow }
+        : home;
+      if (dt > 0) spring(light, goal, 38, 11, dt);
+      if (target) {
+        if (!hover.placed) {
+          hover.x = target.x;
+          hover.y = target.y;
+          hover.vx = 0;
+          hover.vy = 0;
+          hover.placed = true;
+        }
+        if (dt > 0) spring(hover, target, 90, 18, dt);
+      }
+      const hoverGoal = target ? 1 : 0;
+      hover.presence += (hoverGoal - hover.presence) * (1 - Math.exp(-dt / (hoverGoal > hover.presence ? 0.3 : 0.6)));
+      if (!target && hover.presence < 0.001) hover.placed = false;
+      render();
+      const settling =
+        Math.abs(hoverGoal - hover.presence) > 0.002 ||
+        Math.hypot(light.vx, light.vy) > 0.0005 ||
+        Math.hypot(goal.x - light.x, goal.y - light.y) > 0.0005 ||
+        Math.hypot(hover.vx, hover.vy) > 0.0005;
+      const animating = moving && (s.speed > 0 || state.intro < INTRO_SECONDS || state.waves.length > 0);
+      if (animating || settling) raf = requestAnimationFrame(frame);
+      else last = 0;
+    };
+
+    const wake = () => {
+      if (!raf && alive && visible && !document.hidden && !lost) raf = requestAnimationFrame(frame);
+    };
+
+    const locate = event => {
+      const rect = container.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      return { x, y, inside: x >= 0 && y >= 0 && x <= rect.width && y <= rect.height };
+    };
+
+    const onPointerMove = event => {
+      const spot = locate(event);
+      state.pointer.x = spot.x;
+      state.pointer.y = spot.y;
+      state.pointer.inside = spot.inside;
+      wake();
+    };
+
+    const onPointerDown = event => {
+      const s = settingsRef.current;
+      if (!s.mouseInteraction || !s.flipOnClick || event.button !== 0 || reduce || s.paused) return;
+      if (
+        event.target instanceof Element &&
+        event.target.closest('a, button, input, textarea, select, label, [role="button"]')
+      )
+        return;
+      const spot = locate(event);
+      if (!spot.inside) return;
+      const point = toSurface(spot.x, spot.y);
+      state.waves.push({ x: point.x, y: point.y, start: state.clock });
+      while (state.waves.length > MAX_WAVES) state.waves.shift();
+      wake();
+    };
+
+    const onPointerLeave = () => {
+      state.pointer.inside = false;
+      wake();
+    };
+
+    const onVisibility = () => {
+      last = 0;
+      wake();
+    };
+
+    const onLost = event => {
+      event.preventDefault();
+      lost = true;
+      cancelAnimationFrame(raf);
+      raf = 0;
+    };
+
+    const onRestored = () => {};
+
+    const resizeObserver = new ResizeObserver(resize);
+    resizeObserver.observe(container);
+    const intersection = new IntersectionObserver(entries => {
+      visible = entries.some(entry => entry.isIntersecting);
+      if (visible) {
+        last = 0;
+        wake();
+      }
+    });
+    intersection.observe(container);
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('pointerdown', onPointerDown);
+    document.documentElement.addEventListener('pointerleave', onPointerLeave);
+    document.addEventListener('visibilitychange', onVisibility);
+    canvas.addEventListener('webglcontextlost', onLost);
+    canvas.addEventListener('webglcontextrestored', onRestored);
+    resize();
+    wake();
+
+}
+
+HoloMosaic(document.querySelector('#fibers .hm-bg'), document.querySelector('#fibers .hm-bg canvas'), {
+  spectrum: 'cool', color: '#0B1A33', metalColor: '#33B8E6', tileSize: 1.6, gap: 0.1, roundness: 0.2, bevel: 0.4, scatter: 0.3, tilt: 0.35,
+  swirl: 1, ripple: 0.5, bands: 1.3, softness: 0.5, intensity: 0.8, saturation: 0.35, glitter: 0.3, sheen: 0.45, grain: 0.06, speed: 0.4,
+  intro: true, mouseInteraction: true, flipOnClick: true, mouseStrength: 1, mouseRadius: 0.25, dpr: 1, variation: 41 });
+</script>
+<script>
+/* Live data field: a table of made-up clinical tokens (decorative, no real data), lit by drifting light,
+   with values that decode in place. One 2D canvas, redrawn each frame, so nothing flashes. */
+(function dataField() {
+  const host = document.getElementById('fibers');
+  const cv = host.querySelector('canvas.dg'), g = cv.getContext('2d');
+  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const r = (a, b, d) => (a + Math.random() * (b - a)).toFixed(d);
+  const cols = [
+    ['z_score', () => r(-1.5, 1.5, 3)],
+    ['prob', () => r(0.05, 0.99, 2)],
+    ['age', () => r(18, 89, 0)],
+    ['flag', () => pick(['TRUE', 'FALSE', 'NULL', 'pos', 'neg'])],
+    ['obs_date', () => '20' + r(19, 25, 0) + '-' + String(1 + Math.floor(Math.random() * 12)).padStart(2, '0') + '-' + String(1 + Math.floor(Math.random() * 28)).padStart(2, '0')],
+    ['person_id', () => String(100000 + Math.floor(Math.random() * 899999))],
+    ['concept_id', () => String(4000000 + Math.floor(Math.random() * 999999))],
+    ['loinc', () => pick(['4548-4', '2345-7', '718-7', '2160-0', '17856-6', '8480-6', '39156-5', '2093-3'])],
+    ['icd10', () => pick(['E11.9', 'I10', 'J45.909', 'F32.A', 'N18.3', 'E78.5', 'K21.9', 'G47.33', 'I48.91', 'Z79.4'])],
+    ['value', () => r(3.5, 9.8, 1)]
+  ];
+  const GLYPHS = '0123456789.-ABCDEFKNZ';
+  const BLUE = [51, 184, 230], ICE = [222, 246, 255], APRI = [242, 166, 90], PEACH = [255, 222, 190];
+  let W = 0, H = 0, dpr = 1, fs, lh, cw, x0, n, first, top, cells = [], heads = [];
+  let mx = -1e4, my = -1e4, hover = 0, visible = true, lastSpawn = 0;
+  const resize = () => {
+    const w = host.clientWidth, h = host.clientHeight; if (!w || !h) return;
+    W = w; H = h; dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+    fs = Math.max(11, Math.min(15, h / 62)); lh = fs * 1.75; cw = fs * 0.62 * 12.5;
+    n = Math.floor((w - fs * 2.5) / cw); first = cols.length - n; x0 = w - fs * 2.5 - n * cw + fs * 0.5; top = lh * 1.2;
+    heads = []; cells = [];
+    for (let k = 0; k < n; k++) heads.push({ x: x0 + k * cw, t: cols[(first + k + cols.length) % cols.length][0].toUpperCase() });
+    for (let y = top + lh * 1.5, row = 0; y < h; y += lh, row++) {
+      for (let k = 0; k < n; k++) {
+        if (Math.random() < 0.1) continue;
+        const ci = (first + k + cols.length) % cols.length, f = cols[ci][1];
+        cells.push({ x: x0 + k * cw, y, row, f, v: ci === cols.length - 1, txt: f(), flash: 0, until: 0 });
+      }
+    }
+    if (reduce) draw(0);
+  };
+  const mix = (a, b, t) => 'rgba(' + Math.round(a[0] + (b[0] - a[0]) * t) + ',' + Math.round(a[1] + (b[1] - a[1]) * t) + ',' + Math.round(a[2] + (b[2] - a[2]) * t) + ',';
+  const draw = (t) => {
+    const s = t / 1000;
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H); g.textBaseline = 'top';
+    // header
+    g.font = '500 ' + (fs * 0.78) + 'px "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace';
+    heads.forEach((hd, k) => { g.fillStyle = (k === heads.length - 1 && cols[cols.length - 1][0].toUpperCase() === hd.t) ? 'rgba(242,166,90,.95)' : 'rgba(159,221,247,.8)'; g.fillText(hd.t, hd.x, top); });
+    g.fillStyle = 'rgba(159,221,247,.35)'; g.fillRect(0, top + lh * 0.85, W, 1);
+    // light: two drifting waves + a scan band + the pointer
+    const scanY = ((s / 11) % 1) * (H + 240) - 120;
+    g.font = '500 ' + fs + 'px "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace';
+    for (const c of cells) {
+      const wave = 0.5 + 0.5 * Math.sin(c.x * 0.011 + s * 0.9) * Math.cos(c.y * 0.009 - s * 0.6) + 0.25 * Math.sin((c.x + c.y) * 0.006 + s * 0.45);
+      let b = 0.12 + 0.55 * Math.max(0, Math.min(1, wave));
+      const dy = (c.y - scanY) / 70; b += 0.28 * Math.exp(-dy * dy);
+      const dx = c.x + cw * 0.3 - mx, dm = (c.y - my); b += 0.8 * hover * Math.exp(-(dx * dx + dm * dm) / (150 * 150));
+      c.flash *= 0.94; b += c.flash * 0.8;
+      const a = Math.max(0.06, Math.min(1, b));
+      const hot = Math.min(1, c.flash + Math.max(0, b - 0.9));
+      g.fillStyle = (c.v ? mix(APRI, PEACH, hot) : mix(BLUE, ICE, hot)) + a.toFixed(3) + ')';
+      let txt = c.txt;
+      if (t < c.until) { let out = ''; for (let i = 0; i < txt.length; i++) out += (i < txt.length * (1 - (c.until - t) / 420)) ? txt[i] : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]; txt = out; }
+      g.fillText(txt, c.x, c.y);
+    }
+  };
+  const loop = (t) => {
+    if (visible && !document.hidden) {
+      if (t - lastSpawn > 140 && cells.length) {
+        lastSpawn = t;
+        for (let i = 0; i < 2; i++) { const c = pick(cells); c.txt = c.f(); c.until = t + 420; c.flash = 1; }
+      }
+      hover += ((mx > -1e3 ? 1 : 0) - hover) * 0.08;
+      draw(t);
+    }
+    requestAnimationFrame(loop);
+  };
+  window.addEventListener('pointermove', e => { const rc = cv.getBoundingClientRect(); const x = e.clientX - rc.left, y = e.clientY - rc.top; if (x >= 0 && y >= 0 && x <= rc.width && y <= rc.height) { mx = x; my = y; } else { mx = my = -1e4; } }, { passive: true });
+  window.addEventListener('pointerdown', e => { const rc = cv.getBoundingClientRect(), x = e.clientX - rc.left, y = e.clientY - rc.top, now = performance.now();
+    cells.forEach(c => { const d = Math.hypot(c.x - x, c.y - y); if (d < 260) { const at = now + d * 1.4; setTimeout(() => { c.txt = c.f(); c.until = performance.now() + 420; c.flash = 1; }, d * 1.4); } }); });
+  new ResizeObserver(resize).observe(host);
+  new IntersectionObserver(es => { visible = es.some(e => e.isIntersecting); }).observe(host);
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { resize(); if (!reduce) requestAnimationFrame(loop); });
+})();
+</script>
+<script>
+/* Fit slide 06 figures to the real space between their titles and the pager (measured, not guessed) */
+(function fitCde() {
+  const slide = document.getElementById('cde'); if (!slide) return;
+  const row = slide.querySelector('.cde-row'), pager = document.querySelector('.pager');
+  const sb = slide.querySelector('.cde-sb');
+  const fit = () => {
+    row.style.removeProperty('--Hfit'); sb.style.alignSelf = 'start';
+    const img = row.querySelector('.tile img'), figs = [...row.querySelectorAll('.fig')];
+    const sr = slide.getBoundingClientRect(), ir = img.getBoundingClientRect();
+    const below = Math.max(...figs.map(f => f.getBoundingClientRect().bottom)) - ir.bottom;
+    /* the pager is fixed to the viewport; a slide fills the viewport, so measure its offset from the slide top that way */
+    const pTop = pager ? sr.height - (innerHeight - pager.getBoundingClientRect().top) : sr.height - 90;
+    const avail = pTop - 18 - (ir.top - sr.top) - below;
+    row.style.setProperty('--Hfit', Math.max(160, Math.floor(avail)) + 'px'); sb.style.alignSelf = '';
+  };
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
+  window.addEventListener('resize', () => requestAnimationFrame(fit));
+})();
+</script>
