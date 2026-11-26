@@ -1204,7 +1204,7 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
 #cde .cd dd { margin-bottom: .2vh; }
 /* v96d: slide 06 as two product rows: text left, screenshot right */
 #cde .cde-row { display: flex !important; flex-direction: column; row-gap: clamp(14px, 2.6vh, 30px); height: auto; }
-#cde .cde-row > .fig { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto 1fr; column-gap: clamp(28px, 3vw, 48px); align-items: start; grid-row: auto !important; height: var(--Hfit); }
+#cde .cde-row > .fig { display: grid !important; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto 1fr; column-gap: clamp(28px, 3vw, 48px); align-items: start; grid-row: auto !important; min-height: var(--Hfit); }
 #cde .cde-row > .fig > .ck { grid-column: 1; grid-row: 1; }
 #cde .cde-row > .fig > .ft { grid-column: 1; grid-row: 2; }
 #cde .cde-row > .fig > .cap { grid-column: 1; grid-row: 3; margin-top: 0; }
@@ -1213,6 +1213,17 @@ h2::after { content: ""; display: block; width: 40px; height: 3px; border-radius
 #cde .cd { grid-template-columns: max-content 1fr; column-gap: 1em; }
 #cde .cd dt { margin-top: 0; }
 #cde .sb.cde-sb { align-self: start; padding-bottom: 0; }
+#medviz .sb.mv { grid-template-columns: minmax(0, 1fr) clamp(420px, 38vw, 620px) !important; }
+#medviz .figcol .tile { display: block; }
+#medviz .metrics { grid-template-columns: repeat(4, auto); justify-content: space-between; column-gap: clamp(14px, 1.4vw, 24px); }
+#medviz .metrics strong { font-size: clamp(26px, min(2.3vw, 4vh), 42px); }
+#medviz .metrics span { font-size: calc(var(--fs-small) * .9); }
+#review .trio h3 { font-size: calc(var(--fs-h3) * .82); margin-bottom: .3vh; }
+#review .trio .ev { font-size: calc(var(--fs-small) * .92); line-height: 1.38; margin-top: .2vh; }
+#review .row .cap { font-size: calc(var(--fs-small) * .86); line-height: 1.35; }
+#review .stack { gap: clamp(10px, 2vh, 26px); }
+#review .trio { margin-top: 0; }
+#steering-more .own i { top: auto; bottom: 10px; right: 10px; transform: none; }
 </style>
 
 <main>
@@ -2764,42 +2775,87 @@ HoloMosaic(document.querySelector('#fibers .hm-bg'), document.querySelector('#fi
 })();
 </script>
 <script>
-/* Fit slide 06 rows: each product row gets half of the space between the first row and the pager */
-(function fitCde() {
-  const slide = document.getElementById('cde'); if (!slide) return;
-  const row = slide.querySelector('.cde-row'), pager = document.querySelector('.pager');
-  const fit = () => {
-    const figs = [...row.querySelectorAll('.fig')]; if (!figs.length) return;
-    const sr = slide.getBoundingClientRect();
-    const top = figs[0].getBoundingClientRect().top - sr.top;
-    const limit = pager ? sr.height - (innerHeight - pager.getBoundingClientRect().top) - 16 : sr.height - 80;
-    const gap = parseFloat(getComputedStyle(row).rowGap) || 24;
-    const h = Math.floor((limit - top - gap) / 2);
-    row.style.setProperty('--Hfit', Math.max(150, h) + 'px');
-  };
-  (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
-  window.addEventListener('resize', () => requestAnimationFrame(fit));
-})();
-</script>
-<script>
-/* Fit slide 03 screenshots to the space left above the pager (measured, not guessed) */
-(function fitEcho() {
-  const slide = document.getElementById('echo'); if (!slide) return;
+/* Auto-fit: for each image slide, find the largest screenshot size at which nothing overlaps,
+   nothing runs under the pager, and nothing leaves the window. Falls back to a gentle zoom
+   of the content block when text alone is too tall. Runs on load and on every resize. */
+(function autoFit() {
   const pager = document.querySelector('.pager');
-  const fit = () => {
-    const imgs = [...slide.querySelectorAll('.cpx .tile img')]; if (!imgs.length) return;
-    slide.style.setProperty('--eh', '200px');
-    const sr = slide.getBoundingClientRect();
-    const cols = [...slide.querySelectorAll('.cpx')];
-    const ir = imgs[0].getBoundingClientRect();
-    const below = Math.max(...cols.map(c => c.getBoundingClientRect().bottom)) - ir.bottom;
-    const limit = pager ? sr.height - (innerHeight - pager.getBoundingClientRect().top) - 14 : sr.height - 80;
-    const avail = limit - (ir.top - sr.top) - below;
-    const colW = cols[0].getBoundingClientRect().width;
-    const maxByWidth = (colW - 12) / 1.907 + 32;
-    slide.style.setProperty('--eh', Math.max(140, Math.floor(Math.min(avail, maxByWidth))) + 'px');
+  const q = (s, sel) => s.querySelector(sel);
+  const imgsMax = sel => (s, h) => s.querySelectorAll(sel).forEach(i => { i.style.setProperty('max-height', h + 'px', 'important'); i.style.setProperty('height', 'auto', 'important'); i.style.setProperty('width', 'auto', 'important'); i.style.setProperty('max-width', '100%', 'important'); });
+  const varOn = (sel, name) => (s, h) => { const el = sel ? q(s, sel) : s; if (el) el.style.setProperty(name, h + 'px', 'important'); };
+  const CFG = {
+    threads: varOn('.tix', '--fh'),
+    echo: varOn(null, '--eh'),
+    steering: imgsMax('.figcol .tile img'),
+    'steering-more': imgsMax('.tile img'),
+    review: varOn('.row.c2', '--h'),
+    'review-more': varOn('.row.c3', '--H'),
+    cde: varOn('.cde-row', '--Hfit'),
+    medviz: imgsMax('.figcol .tile img'),
+    stories: varOn('.row.st', '--H'),
+    consortia: varOn('.sites', '--H'),
+    'aitc-gp': imgsMax('.tile img')
   };
-  (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
-  window.addEventListener('resize', () => requestAnimationFrame(fit));
+  const leaves = s => {
+    const out = [];
+    s.querySelectorAll('*').forEach(el => {
+      if (el.closest('.lightbox, #fibers, svg, canvas')) return;
+      const cs = getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || cs.position === 'absolute' || cs.position === 'fixed') return;
+      let r = null;
+      if (el.tagName === 'IMG') r = el.getBoundingClientRect();
+      else if ([...el.childNodes].some(n => n.nodeType === 3 && n.textContent.trim())) { const rg = document.createRange(); rg.selectNodeContents(el); r = rg.getBoundingClientRect(); }
+      if (r && r.width > 1 && r.height > 1) out.push({ el, r });
+    });
+    return out;
+  };
+  const bad = s => {
+    const sr = s.getBoundingClientRect(), pr = pager ? pager.getBoundingClientRect() : null;
+    const L = leaves(s), H = sr.height, W = innerWidth;
+    for (const { el, r } of L) {
+      const top = r.top - sr.top, bot = r.bottom - sr.top;
+      if (bot > H - 6 || r.right > W - 6 || r.left < 4) return 'off:' + (el.textContent || el.alt || '').trim().slice(0, 18);
+      if (pr && r.right > pr.left && r.left < pr.right && bot > pr.top - 6 && top < pr.bottom) return 'pager:' + (el.textContent || el.alt || '').trim().slice(0, 18) + '@' + Math.round(bot) + '/' + Math.round(pr.top) + ',' + Math.round(pr.left);
+    }
+    for (let i = 0; i < L.length; i++) for (let j = i + 1; j < L.length; j++) {
+      const a = L[i], b = L[j];
+      if (a.el.contains(b.el) || b.el.contains(a.el)) continue;
+      const x = Math.min(a.r.right, b.r.right) - Math.max(a.r.left, b.r.left);
+      const y = Math.min(a.r.bottom, b.r.bottom) - Math.max(a.r.top, b.r.top);
+      if (x > 3 && y > Math.max(5, .3 * Math.min(a.r.height, b.r.height))) return 'overlap:' + (a.el.textContent || a.el.alt || '').trim().slice(0, 18) + '/' + (b.el.textContent || b.el.alt || '').trim().slice(0, 18);
+    }
+    return false;
+  };
+  const search = (s, set) => {
+    let lo = 110, hi = 900;
+    set(s, lo); if (bad(s)) return -1;
+    let best = lo;
+    while (hi - lo > 4) { const m = (lo + hi) >> 1; set(s, m); if (bad(s)) hi = m; else { lo = m; best = m; } }
+    return best;
+  };
+  const fitSlide = s => {
+    if (s.id === 'cover') return;
+    const set = CFG[s.id] || (() => {}), hasImg = !!CFG[s.id];
+    const sb = q(s, '.sb'), zoom = z => { if (sb) sb.style.zoom = z === 1 ? '' : z; };
+    let pick = null;
+    for (const z of [1, .95, .9, .85, .8]) {
+      zoom(z);
+      const h = search(s, set);
+      if (h < 0) continue;
+      const eff = h * z;
+      if (!pick) { pick = { z, h, eff }; if (!hasImg || z !== 1) break; continue; }
+      /* accept a small zoom only when it makes the screenshots clearly larger, and never below .9 by choice */
+      if (z >= .9 && eff > pick.eff * 1.12) pick = { z, h, eff };
+      if (z < .9) break;
+    }
+    if (!pick) { zoom(.8); set(s, 110); return; }
+    zoom(pick.z); set(s, pick.h);
+  };
+  const run = () => document.querySelectorAll('.slide').forEach(fitSlide);
+  let t; const later = () => { clearTimeout(t); t = setTimeout(run, 120); };
+  const start = () => (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { run(); setTimeout(run, 600); });
+  if (document.readyState === 'complete') start(); else window.addEventListener('load', start);
+  window.addEventListener('resize', later);
+  window.__autoFit = run; window.__afBad = bad; window.__afCfg = CFG;
 })();
 </script>
